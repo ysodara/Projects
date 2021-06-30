@@ -31,7 +31,7 @@ public class Converter {
 			//Get user input
 			teaspoons = scanner.nextDouble();
 			result = md2.teaspoonsToTablespoons(teaspoons);
-			System.out.println("\n"+(int)teaspoons+" Teaspoons is equl to "+ result + " Tablespoons\n");
+			System.out.println("\n"+(int)teaspoons+" Teaspoons is equal to "+ result + " Tablespoons\n");
 			break;
 		}
 		case 2:{
@@ -39,7 +39,7 @@ public class Converter {
 			//Get user input
 			teaspoons = scanner.nextDouble();
 			result= md2.teaspoonsToCups(teaspoons);
-			System.out.println("\n"+(int)teaspoons+" Teaspoons is equl to "+ result + " Cups\n");
+			System.out.println("\n"+(int)teaspoons+" Teaspoons is equal to "+ result + " Cups\n");
 			break;
 		}
 		
@@ -66,14 +66,14 @@ public class Converter {
 			System.out.println("Enter Feet: ");
 			userInput = scanner.nextDouble();
 			result = md2.feetToMeters(userInput);
-			System.out.println("\n"+(int)userInput+" Feet is equl to "+ result + " Meters\n");
+			System.out.println("\n"+(int)userInput+" Feet is equal to "+ result + " Meters\n");
 			break;
 		}
 		case 2:{
 			System.out.println("Enter Miles: ");
 			userInput = scanner.nextDouble();
 			result = md2.milesToKilometers(userInput);
-			System.out.println("\n"+(int)userInput+" Miles is equl to "+ result + " Kilometers\n");
+			System.out.println("\n"+(int)userInput+" Miles is equal to "+ result + " Kilometers\n");
 			break;
 		}
 		}
