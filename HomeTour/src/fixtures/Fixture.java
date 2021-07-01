@@ -5,7 +5,11 @@ public abstract class Fixture {
 	String shortDescription;
 	String longDescription;
 	
-	Fixture(){}
+	Fixture(){
+		this.name = "";
+		this.shortDescription = "";
+		this.longDescription = "";
+	}
 	
 	Fixture(String name){
 		this.name = name;
@@ -21,14 +25,30 @@ public abstract class Fixture {
 		this.shortDescription = shortDescription;
 		this.longDescription = longDescription;
 	}
+	
 	public String getName() {
 		return this.name;
 	}
+	
 	public String getShortDescription() {
 		return this.shortDescription;
 	}
+	
 	public String getLongDescription() {
 		return this.longDescription;
+	}
+	
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
 	}
 	
 }
