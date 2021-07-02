@@ -3,7 +3,7 @@ package game;
 import fixtures.Room;
 
 public class Player {
-	Room currentRoom;
+	private Room currentRoom;
 	
 	Player (){
 		this.currentRoom = new Room();

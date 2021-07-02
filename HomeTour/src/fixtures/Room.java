@@ -1,17 +1,16 @@
 package fixtures;
 
 public class Room extends Fixture {
-	Room[] exits;
-	static String[] direction = {"West","East","South","North"};
+	private Room[] exits;
 	
 	public Room() {
 		super();
-		this.exits = new Room[4];
+		this.exits = new Room[6];
 	}
 	public Room(String name, String shortDescription, String longDescription) {
 		super(name, shortDescription, longDescription);
 		
-		this.exits = new Room[4]; // size is your choice
+		this.exits = new Room[6]; // size of whole house
 	}
 		
 	public Room[] getExits() {
@@ -43,12 +42,11 @@ public class Room extends Fixture {
 			room = this.exits[directionToIndex];
 			break;			
 		}
-	}
+		}
 		return room;	
 	}
 	
 	public void setExits(String direction, Room room){
-		Room empty = new Room();
 		switch (direction) {
 			case "west": {
 				int directionToIndex = 0;
@@ -69,24 +67,7 @@ public class Room extends Fixture {
 				int directionToIndex = 3;
 				this.exits[directionToIndex] = room;
 				break;
-			}
-			
-		}
-		
-		
-	}
-		
-	public void printRoomDetails() {
-		System.out.println(this.name + "\n");
-		System.out.println(this.longDescription + "\n");
-		System.out.println("Exits:");
-		
-		for (int i = 0; i < this.exits.length; i++) {
-			if(this.exits[i] != null) {
-				System.out.print(direction[i] + ": ");
-				System.out.println(this.exits[i].getShortDescription());
-			} 
-			
-		}System.out.println("");		
+			}			
+		}		
 	}
 }

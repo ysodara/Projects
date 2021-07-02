@@ -1,9 +1,9 @@
 package fixtures;
 
 public abstract class Fixture {
-	String name;
-	String shortDescription;
-	String longDescription;
+	private String name;
+	private String shortDescription;
+	private String longDescription;
 	
 	Fixture(){
 		this.name = "";
