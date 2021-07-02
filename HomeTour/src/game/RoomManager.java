@@ -65,9 +65,7 @@ public class RoomManager {
 				+ "To the west is a big living room, where you can relax after a meal.\n"
 				+ "To the south, you can go to the master bedroom.\n");
 		setRooms(dining,5);
-		
-		
-		
+				
 		livingRoom.setExits("west",null);
 		livingRoom.setExits("east",dining);
 		livingRoom.setExits("south",garage);
