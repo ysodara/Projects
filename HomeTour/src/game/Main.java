@@ -64,7 +64,7 @@ public class Main {
 	
 	private static void printRoom(Player player) {
 		System.out.println(player.getCurrentRoom().getName() + "\n");
-		System.out.println(player.getCurrentRoom().getLongDescription() + "\n");
+		System.out.println(player.getCurrentRoom().getLongDescription());
 		System.out.println("Exits:");
 		Room [] tempExits = player.getCurrentRoom().getExits();
 		for (int i = 0; i < tempExits.length; i++) {
