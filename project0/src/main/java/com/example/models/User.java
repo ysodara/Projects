@@ -11,10 +11,10 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
-	private List<Account> accounts;
+	//private List<Account> accounts;
 	
 	public User() {
-		accounts = new ArrayList<Account>();
+		//accounts = new ArrayList<Account>();
 	}
 	
 	public User(int id, String firstName, String lastName, String email, String password) {
@@ -24,7 +24,7 @@ public class User {
 		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 		this.email = email;
 		this.password = password;
-		this.accounts = new ArrayList<Account>();
+		//this.accounts = new ArrayList<Account>();
 	}
 	
 	//For sending to database, no need ID
@@ -34,18 +34,18 @@ public class User {
 		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 		this.email = email;
 		this.password = password;
-		this.accounts = new ArrayList<Account>();
+		//this.accounts = new ArrayList<Account>();
 	}
 	
 	//User to get user info from the database
-	public User(int id, String firstName, String lastName, String username, String email, String password) {
+	public User(int id, String firstName, String lastName, String email, String username, String password) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.accounts = new ArrayList<Account>();
+		//this.accounts = new ArrayList<Account>();
 		}
 
 	public int getId() {
@@ -96,18 +96,11 @@ public class User {
 		this.password = password;
 	}
 
-	public List<Account> getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
-	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-				+ ", email=" + email + ", password=" + password + ", accounts=" + accounts + "]";
+				+ ", email=" + email + ", password=" + password + "]";
 	}
 	
 	
