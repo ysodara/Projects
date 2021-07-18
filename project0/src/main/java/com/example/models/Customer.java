@@ -10,20 +10,20 @@ public class Customer {
 	private List<Account> accounts;
 	
 	public Customer() {
-		accounts = new ArrayList<Account>();
+		//accounts = new ArrayList<Account>();
 	}
 	
 	public Customer(int customer_id, String role, int user_id) {
 		this.customer_id = customer_id;
 		this.user_id = user_id;
 		this.role = role;
-		accounts = new ArrayList<Account>();
+		//accounts = new ArrayList<Account>();
 	}
 	
 	public Customer(String role, int user_id) {
 		this.user_id = user_id;
 		this.role = role;
-		accounts = new ArrayList<Account>();
+		//accounts = new ArrayList<Account>();
 	}
 	
 	

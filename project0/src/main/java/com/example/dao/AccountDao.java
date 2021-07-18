@@ -8,7 +8,7 @@ import com.example.models.Account;
 public interface AccountDao {
 	List<Account> getAllAccounts();
 	
-	Account getAccountByUsername(String username);
+	List<Account> getAccountByUsername(String username);
 	
 	void createAccount(Account a) throws SQLException;
 	

@@ -46,7 +46,7 @@ public class CustomerDaoDB implements CustomerDao{
 		try {
 			Connection con = conUtil.getConnection();
 			
-			String sql = "select * from users u inner join customers c on u.id=c.user_id where u.username ='" + username + "'";
+			String sql = "select c.customer_id, c.\"role\", c.user_id from users u inner join customers c on u.id=c.user_id where u.username ='" + username + "'";
 			
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery(sql);

@@ -40,9 +40,9 @@ public class AccountDaoDB implements AccountDao {
 	}
 
 	@Override
-	public Account getAccountByUsername(String username) {
+	public List<Account> getAccountByUsername(String username) {
 		Account account = new Account();
-		username ="larryking8345";
+		List<Account> accountList = new ArrayList<Account>();
 		try {
 			Connection con = conUtil.getConnection();			
 			Statement s = con.createStatement();			
@@ -51,13 +51,9 @@ public class AccountDaoDB implements AccountDao {
 			ResultSet rs = s.executeQuery(sql);
 			
 			while(rs.next()) {
-				account.setAccount_id(1);
-				account.setName(rs.getString(2));
-				account.setApproval_status(rs.getBoolean(3));
-				account.setCurrent_balance(rs.getDouble(4));
-				account.setCustomer_id(rs.getInt(5));
+				accountList.add(new Account(rs.getInt(1), rs.getString(2), rs.getBoolean(3), rs.getDouble(4), rs.getInt(5)));
 			}
-			return account;
+			return accountList;
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -68,7 +64,7 @@ public class AccountDaoDB implements AccountDao {
 	@Override
 	public void createAccount(Account a) throws SQLException {
 		Connection con = conUtil.getConnection();
-		String sql = "INSERT INTO customers(name, approval_status, current_balance, customer_id) values"
+		String sql = "INSERT INTO accounts(name, approval_status, current_balance, customer_id) values"
 				+ "(?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
@@ -107,7 +103,19 @@ public class AccountDaoDB implements AccountDao {
 
 	@Override
 	public void deleteAccount(Account a) {
-		// TODO Auto-generated method stub
+		try {
+			
+			Connection con = conUtil.getConnection();
+			String sql = "DELETE FROM customers WHERE customer_id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, a.getCustomer_id());
+			
+			ps.execute();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
