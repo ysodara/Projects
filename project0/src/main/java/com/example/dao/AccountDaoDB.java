@@ -106,10 +106,10 @@ public class AccountDaoDB implements AccountDao {
 		try {
 			
 			Connection con = conUtil.getConnection();
-			String sql = "DELETE FROM customers WHERE customer_id = ?";
+			String sql = "DELETE FROM accounts WHERE account_id = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			
-			ps.setInt(1, a.getCustomer_id());
+			ps.setInt(1, a.getAccount_id());
 			
 			ps.execute();
 			

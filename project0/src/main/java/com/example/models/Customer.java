@@ -60,6 +60,7 @@ public class Customer {
 			}
 		} 
 		if (check < 1) {
+			check++;
 			System.out.println("All of your accounts are under reviewing");
 		}
 	}

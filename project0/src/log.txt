@@ -123,3 +123,30 @@
 2021-07-18 22:30:46 INFO  Logging:77 - User was logged in
 2021-07-18 22:31:37 INFO  Logging:77 - User was logged in
 2021-07-18 22:32:01 INFO  Logging:96 - New account has registered
+2021-07-19 09:45:13 INFO  Logging:48 - New user has registered
+2021-07-19 09:45:14 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:14 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:15 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:16 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:17 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:18 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:18 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:19 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:20 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:21 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:22 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:22 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:23 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:24 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:25 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:25 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:45:26 WARN  Logging:52 - Username created that already exists in the database
+2021-07-19 09:52:33 INFO  Logging:48 - New user has registered
+2021-07-19 09:52:50 INFO  Logging:48 - New user has registered
+2021-07-19 09:53:15 INFO  Logging:100 - New account has registered
+2021-07-19 09:53:53 INFO  Logging:77 - User was logged in
+2021-07-19 09:54:09 INFO  Logging:77 - User was logged in
+2021-07-19 09:55:32 INFO  Logging:77 - User was logged in
+2021-07-19 09:56:22 INFO  Logging:77 - User was logged in
+2021-07-19 09:57:15 INFO  Logging:77 - User was logged in
+2021-07-19 10:19:04 INFO  Logging:77 - User was logged in

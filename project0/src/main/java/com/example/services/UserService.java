@@ -88,6 +88,10 @@ public class UserService {
 				check = false;
 			} 
 		}
+		if (user.getCustomer_id() == 0) {
+			check = false;
+			System.out.println("Customer is not in the database");
+		}
 		if (check) {
 		Account a = new Account (accountName, false, startBalance, user.getCustomer_id());
 		
