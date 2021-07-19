@@ -6,24 +6,21 @@ import java.util.List;
 public class Customer {
 	private int customer_id;
 	private int user_id;
-	private String role;
 	private List<Account> accounts;
 	
 	public Customer() {
-		//accounts = new ArrayList<Account>();
+		accounts = new ArrayList<Account>();
 	}
 	
-	public Customer(int customer_id, String role, int user_id) {
+	public Customer(int customer_id, int user_id) {
 		this.customer_id = customer_id;
 		this.user_id = user_id;
-		this.role = role;
-		//accounts = new ArrayList<Account>();
+		accounts = new ArrayList<Account>();
 	}
 	
-	public Customer(String role, int user_id) {
+	public Customer(int user_id) {
 		this.user_id = user_id;
-		this.role = role;
-		//accounts = new ArrayList<Account>();
+		accounts = new ArrayList<Account>();
 	}
 	
 	
@@ -46,14 +43,6 @@ public class Customer {
 	}
 
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public List<Account> getAccounts() {
 		return accounts;
 	}
@@ -62,11 +51,23 @@ public class Customer {
 		this.accounts = accounts;
 	}
 	
+	public void printUserAllAccount() {
+		int check = 0;
+		for (int i = 0; i < this.accounts.size(); i++) {
+			if (accounts.get(i).isApproval_status()) {
+			System.out.println(accounts.get(i));
+			check++;
+			}
+		} 
+		if (check < 1) {
+			System.out.println("All of your accounts are under reviewing");
+		}
+	}
+	
 	
 	@Override
 	public String toString() {
-		return "Customer [customer_id=" + customer_id + ", user_id=" + user_id + ", role=" + role + ", accounts="
-				+ accounts + "]";
+		return ""+accounts;
 	}
 	
 	

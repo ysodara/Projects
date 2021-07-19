@@ -64,8 +64,8 @@ public class Account {
 	}
 	@Override
 	public String toString() {
-		return "Account [account_id=" + account_id + ", name=" + name + ", customer_id=" + customer_id
-				+ ", approval_status=" + approval_status + ", current_balance=" + current_balance + "]";
+		String s = "Account Name: " + name + "\nCurrent Balance: " + current_balance;
+		return s;
 	}
 	
 

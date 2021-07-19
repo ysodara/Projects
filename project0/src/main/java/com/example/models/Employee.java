@@ -3,7 +3,6 @@ package com.example.models;
 public class Employee {
 	private int employee_id;
 	private int user_id;
-	private String role;
 	
 	public Employee () {
 		
@@ -12,13 +11,11 @@ public class Employee {
 	public Employee (int employee_id, String role, int user_id) {
 		this.employee_id = employee_id;
 		this.user_id = user_id;
-		this.role = role;
 		
 	}
 	
 	public Employee ( String role, int user_id) {
 		this.user_id = user_id;
-		this.role = role;
 	}
 
 	public int getEmployee_id() {
@@ -37,13 +34,6 @@ public class Employee {
 		this.user_id = user_id;
 	}
 	
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
 
 	@Override
 	public String toString() {

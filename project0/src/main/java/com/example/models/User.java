@@ -11,40 +11,52 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
+	private String role;
 	//private List<Account> accounts;
 	
 	public User() {
 		//accounts = new ArrayList<Account>();
 	}
 	
-	public User(int id, String firstName, String lastName, String email, String password) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
-		this.email = email;
-		this.password = password;
-		//this.accounts = new ArrayList<Account>();
-	}
+//	public User(int id, String firstName, String lastName, String email, String password, String role) {
+//		this.id = id;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
+//		this.email = email;
+//		this.password = password;
+//		this.role = role;
+//		//this.accounts = new ArrayList<Account>();
+//	}
 	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	//For sending to database, no need ID
-	public User(String firstName, String lastName, String email, String password) {
+	public User(String firstName, String lastName, String email, String password, String role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
 		this.email = email;
 		this.password = password;
+		this.role = role;
 		//this.accounts = new ArrayList<Account>();
 	}
 	
 	//User to get user info from the database
-	public User(int id, String firstName, String lastName, String email, String username, String password) {
+	public User(int id, String firstName, String lastName, String email, String username, String password, String role) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.role = role;
 		//this.accounts = new ArrayList<Account>();
 		}
 
@@ -96,12 +108,14 @@ public class User {
 		this.password = password;
 	}
 
-
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-				+ ", email=" + email + ", password=" + password + "]";
+		String printUserInfo = "Full name: " + firstName + " " + lastName+ "\nUsername: " + username+ "\nEmail: " + email +"\nRole; " +role;
+		return printUserInfo;
 	}
+
+
+
 	
 	
 

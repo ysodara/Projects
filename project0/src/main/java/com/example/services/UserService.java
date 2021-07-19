@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import com.example.dao.AccountDao;
 import com.example.dao.CustomerDao;
+import com.example.dao.EmployeeDao;
 import com.example.dao.UserDao;
 
 import com.example.exceptions.InvalidCredentialsException;
@@ -16,68 +17,122 @@ import com.example.exceptions.UserNameAlreadyExistsException;
 import com.example.logging.Logging;
 import com.example.models.Account;
 import com.example.models.Customer;
+import com.example.models.Employee;
 import com.example.models.User;
 
 public class UserService {
 	private UserDao uDao;
 	private CustomerDao cDao;
 	private AccountDao aDao;
+	private EmployeeDao eDao;
 	
-	public UserService(UserDao u, CustomerDao c, AccountDao a) {
+	public UserService(UserDao u, CustomerDao c, AccountDao a,EmployeeDao e) {
 		this.uDao = u;
 		this.cDao = c;
 		this.aDao = a;
-	}
-	
-	public Customer signUp(String first, String last, String email, String password) throws UserNameAlreadyExistsException{
-		User u = new User(first, last, email, password); 
-		try {
+		this.eDao = e;
+	}	
+	public Customer signUp(String first, String last, String email, String password) throws UserNameAlreadyExistsException{		
+		User u = new User(first, last, email, password, "Customer");
+		//System.out.println(u.getUsername());
+		Customer nullCustomer = null;
+		User temp = uDao.getUserByUsername(u.getUsername());
+		System.out.println(temp.getEmail());		
+			try {
 			uDao.createUser(u);
 			User createdUser = uDao.getUserByUsername(u.getUsername());			
-			Customer c = new Customer("Customer", createdUser.getId());
+			
+			Customer c = new Customer(createdUser.getId());
 			cDao.createCustomer(c);
 			c = cDao.getCustomersByUsername(u.getUsername());
 			Logging.logger.info("New user has registered");
 			return c;
-		} catch(SQLException e) {
+			
+			} catch(SQLException e) {
 			Logging.logger.warn("Username created that already exists in the database");
-			throw new UserNameAlreadyExistsException();
-		}
-		//return null;
+			System.out.println("Email created that already exists in the database");
+			System.out.println("Please choose a different Email.");
+			return nullCustomer;
+			}		
 	}
 	
-	public Customer bankAccoutRegistration(Customer newUser, String accountName, double startBalance) {		
-		Customer newCustomer = newUser;
-		System.out.println(newUser.getCustomer_id());
-		Account a = new Account (accountName, false, startBalance, newUser.getCustomer_id());
-		System.out.println(a);
-		try {
-			aDao.createAccount(a);			
-			Logging.logger.info("New account has registered");
-		} catch(SQLException e) {
-			Logging.logger.warn("Username created that already exists in the database");
-			throw new UserNameAlreadyExistsException();
-		}
-		return newCustomer;		
-	}
-	
-	public Customer signIn(String username, String password) throws UserDoesNotExistException, InvalidCredentialsException{
+	public User getUserbyCustomerId (int cutomerId) {
+		User u = cDao.getCustomersByCustomerId(cutomerId);
 		
-		User u = uDao.getUserByUsername(username);
-		Customer customer = cDao.getCustomersByUsername(username);
+		return u;
+	}
+	public User signIn(String username, String password) throws UserDoesNotExistException, InvalidCredentialsException{
+		User u = uDao.getUserByUsername(username);		
 		if(u.getId() == 0) {
 			Logging.logger.warn("User tried loggging in that does not exist");
 			throw new UserDoesNotExistException();
 		}
+		
 		else if(!u.getPassword().equals(password)) {
 			Logging.logger.warn("User tried to login with invalid credentials");
 			throw new InvalidCredentialsException();
 		}
+		
 		else {
 			Logging.logger.info("User was logged in");
-			return customer;
+			return u;
 		}
+	}	
+	public Customer bankAccoutRegistration(Customer user, String accountName, double startBalance) {		
+		Customer newCustomer = user;
+		User getUserName = getUserbyCustomerId(user.getCustomer_id());
+		user.setAccounts(aDao.getAccountByUsername(getUserName.getUsername()));
+		boolean check = true;
+		for (int i = 0; i < user.getAccounts().size(); i++ ) {
+			if (user.getAccounts().get(i).getName().equals(accountName)) {
+				check = false;
+			} 
+		}
+		if (check) {
+		Account a = new Account (accountName, false, startBalance, user.getCustomer_id());
+		
+			try {
+				aDao.createAccount(a);			
+				Logging.logger.info("New account has registered");
+			} catch(SQLException e) {
+				Logging.logger.warn("Username created that already exists in the database");
+				throw new UserNameAlreadyExistsException();
+			}
+		}else {return newCustomer;	 }
+		return newCustomer;	
+		
 	}
 	
+	public Customer customerSignIn(String username) throws UserDoesNotExistException, InvalidCredentialsException{
+		Customer customer = cDao.getCustomersByUsername(username);
+		return customer;
+		
+	}
+	
+	public Employee employeeSignIn(String username, String code) throws UserDoesNotExistException, InvalidCredentialsException{	
+		Employee employee = eDao.getEmployeeByUsername(username);
+		return employee;
+	}
+//	public Employee signUp(String first, String last, String email, String password, String code) throws UserNameAlreadyExistsException{
+//	
+//	User u = new User(first, last, email, password, "Employee"); 
+//	if (code.equals("RevaturePro")) {
+//		try {
+//		uDao.createUser(u);
+//		User createdUser = uDao.getUserByUsername(u.getUsername());			
+//		Employee e = new Employee("Employee", createdUser.getId());
+//		eDao.createEmployee(e);
+//		e = eDao.getEmployeeByUsername(u.getUsername());
+//		Logging.logger.info("New user has registered");
+//		return e;
+//		} catch(SQLException e) {
+//		Logging.logger.warn("Username created that already exists in the database");
+//		throw new UserNameAlreadyExistsException();
+//		}
+//	}else {
+//		System.out.println("Sorry, wrong code.");
+//		return null;
+//	}
+//}
 	
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.models.Customer;
+import com.example.models.User;
 import com.example.utils.ConnectionUtil;
 
 public class CustomerDaoDB implements CustomerDao{
@@ -28,7 +29,7 @@ public class CustomerDaoDB implements CustomerDao{
 			ResultSet rs = s.executeQuery(sql);
 			
 			while(rs.next()) {
-				customerList.add(new Customer(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+				customerList.add(new Customer(rs.getInt(1), rs.getInt(2)));
 			}
 			
 			return customerList;
@@ -38,7 +39,34 @@ public class CustomerDaoDB implements CustomerDao{
 		}
 		return null;
 	}
-
+	@Override
+	public User getCustomersByCustomerId (int customerId) {
+		User u = new User();
+		
+		try {
+			Connection con = conUtil.getConnection();
+			
+			String sql = "select * from users u inner join customers c on u.id = c.user_id where c.customer_id  ='" + customerId + "'";
+			
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				u.setId(rs.getInt(1));
+				u.setFirstName(rs.getString(2));
+				u.setLastName(rs.getString(3));
+				u.setEmail(rs.getString(4));
+				u.setUsername(rs.getString(5));
+				u.setPassword(rs.getString(6));
+				u.setRole(rs.getString(7));
+			}
+			return u;
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	@Override
 	public Customer getCustomersByUsername(String username) {
 		Customer customer = new Customer();
@@ -46,15 +74,14 @@ public class CustomerDaoDB implements CustomerDao{
 		try {
 			Connection con = conUtil.getConnection();
 			
-			String sql = "select c.customer_id, c.\"role\", c.user_id from users u inner join customers c on u.id=c.user_id where u.username ='" + username + "'";
+			String sql = "select c.customer_id, c.user_id from users u inner join customers c on u.id=c.user_id where u.username ='" + username + "'";
 			
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery(sql);
 			
 			while(rs.next()) {
 				customer.setCustomer_id(rs.getInt(1));
-				customer.setRole(rs.getString(2));
-				customer.setUser_id(rs.getInt(3));
+				customer.setUser_id(rs.getInt(2));
 			}
 			return customer;
 			
@@ -67,12 +94,12 @@ public class CustomerDaoDB implements CustomerDao{
 	@Override
 	public void createCustomer(Customer c) throws SQLException {
 		Connection con = conUtil.getConnection();
-		String sql = "INSERT INTO customers(role, user_id) values"
-				+ "(?,?)";
+		String sql = "INSERT INTO customers(user_id) values"
+				+ "(?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
-		ps.setString(1, c.getRole());
-		ps.setInt(2, c.getUser_id());
+		
+		ps.setInt(1, c.getUser_id());
 		
 		ps.execute();
 		
@@ -83,12 +110,13 @@ public class CustomerDaoDB implements CustomerDao{
 	public void updateCustomer(Customer c) {
 		try {
 			Connection con = conUtil.getConnection();
-			String sql = "UPDATE customers SET role = ?"
+			String sql = "UPDATE customers SET user_id = ?"
 					+ " WHERE customer_id = ?";
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			
-			ps.setString(1, c.getRole());
+			
+			ps.setInt(1, c.getUser_id());
 			ps.setInt(2, c.getCustomer_id());
 
 			
