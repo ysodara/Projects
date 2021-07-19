@@ -62,9 +62,12 @@ public class Account {
 	public void setApproval_status(boolean approval_status) {
 		this.approval_status = approval_status;
 	}
+	public void printAccountInfo() {
+		System.out.println("Account Name: " + name + "\nCurrent Balance: " + current_balance);
+	}
 	@Override
 	public String toString() {
-		String s = "Account Name: " + name + "\nCurrent Balance: " + current_balance;
+		String s = name;
 		return s;
 	}
 	

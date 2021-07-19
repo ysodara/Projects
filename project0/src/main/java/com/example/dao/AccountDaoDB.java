@@ -78,7 +78,7 @@ public class AccountDaoDB implements AccountDao {
 	}
 
 	@Override
-	public void updateAccount(Account a) {
+	public boolean updateAccount(Account a) {
 		try {
 			Connection con = conUtil.getConnection();
 			String sql = "UPDATE accounts SET name = ? , approval_status = ?, current_balance = ?, customer_id = ?"
@@ -94,10 +94,12 @@ public class AccountDaoDB implements AccountDao {
 
 			
 			ps.execute();
+			return true;
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
+		return true;
 		
 	}
 

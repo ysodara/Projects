@@ -46,6 +46,16 @@ public class Customer {
 	public List<Account> getAccounts() {
 		return accounts;
 	}
+	
+	public List<Account> getActiveAccounts() {
+		List<Account> temp = new ArrayList<Account>();
+		for (int i = 0 ; i < accounts.size() ; i++) {
+			if (accounts.get(i).isApproval_status()) {
+				temp.add(accounts.get(i));
+			}
+		}
+		return temp;
+	}
 
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
@@ -55,7 +65,7 @@ public class Customer {
 		int check = 0;
 		for (int i = 0; i < this.accounts.size(); i++) {
 			if (accounts.get(i).isApproval_status()) {
-			System.out.println(accounts.get(i));
+			System.out.println((i+1)+ ": "+accounts.get(i));
 			check++;
 			}
 		} 

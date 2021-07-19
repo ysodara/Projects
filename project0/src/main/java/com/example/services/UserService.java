@@ -1,6 +1,7 @@
 package com.example.services;
 
 import java.io.FileNotFoundException;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,8 @@ import com.example.dao.AccountDao;
 import com.example.dao.CustomerDao;
 import com.example.dao.EmployeeDao;
 import com.example.dao.UserDao;
-
+import com.example.dao.TransactionDao;
+import com.example.dao.TransactionDaoDB;
 import com.example.exceptions.InvalidCredentialsException;
 import com.example.exceptions.UserDoesNotExistException;
 import com.example.exceptions.UserNameAlreadyExistsException;
@@ -18,6 +20,7 @@ import com.example.logging.Logging;
 import com.example.models.Account;
 import com.example.models.Customer;
 import com.example.models.Employee;
+import com.example.models.Transaction;
 import com.example.models.User;
 
 public class UserService {
@@ -84,7 +87,7 @@ public class UserService {
 		user.setAccounts(aDao.getAccountByUsername(getUserName.getUsername()));
 		boolean check = true;
 		for (int i = 0; i < user.getAccounts().size(); i++ ) {
-			if (user.getAccounts().get(i).getName().equals(accountName)) {
+			if (user.getAccounts().get(i).getName().equals(accountName) | user.getAccounts().get(i).getName()==accountName) {
 				check = false;
 			} 
 		}
@@ -102,7 +105,11 @@ public class UserService {
 				Logging.logger.warn("Username created that already exists in the database");
 				throw new UserNameAlreadyExistsException();
 			}
-		}else {return newCustomer;	 }
+		}else {
+			System.out.println("Account name is already exists in your account."
+					+ "\nPlease choose different name."); 
+			return newCustomer;	 
+			}
 		return newCustomer;	
 		
 	}
@@ -116,6 +123,19 @@ public class UserService {
 	public Employee employeeSignIn(String username, String code) throws UserDoesNotExistException, InvalidCredentialsException{	
 		Employee employee = eDao.getEmployeeByUsername(username);
 		return employee;
+	}
+	
+	public void uploadTransaction(double amountToDepost, String typeOfTransaction , Customer c, int account_id) {
+		TransactionDao tDao = new TransactionDaoDB();
+		Transaction t = new Transaction("No description", typeOfTransaction, amountToDepost, c.getCustomer_id() , account_id);
+		try {
+			tDao.createTransaction(t);			
+			Logging.logger.info("New Transaction has registered");
+		} catch(SQLException e) {
+			Logging.logger.warn("Transaction already exists in the database");
+			throw new UserNameAlreadyExistsException();
+		}
+		
 	}
 //	public Employee signUp(String first, String last, String email, String password, String code) throws UserNameAlreadyExistsException{
 //	

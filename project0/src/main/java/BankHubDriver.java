@@ -9,6 +9,8 @@ import com.example.dao.CustomerDao;
 import com.example.dao.CustomerDaoDB;
 import com.example.dao.EmployeeDao;
 import com.example.dao.EmployeeDaoDB;
+import com.example.dao.TransactionDao;
+import com.example.dao.TransactionDaoDB;
 import com.example.dao.UserDao;
 import com.example.dao.UserDaoDB;
 import com.example.exceptions.UserNameAlreadyExistsException;
@@ -16,6 +18,7 @@ import com.example.logging.Logging;
 import com.example.models.Account;
 import com.example.models.Customer;
 import com.example.models.Employee;
+import com.example.models.Transaction;
 import com.example.models.User;
 import com.example.services.UserService;
 
@@ -119,25 +122,38 @@ public class BankHubDriver {
 	//						post a money transfer
 	//						accept a money transfer from another account "Maybe other users"
 							while(customerActionCheck) {
+								
+								System.out.println("Available Options");
+								System.out.println("1. Apply for an account");
+								System.out.println("2. View account");
+								System.out.println("3. Withdrawl");
+								System.out.println("4. Deposit");
+								System.out.println("5. Send money");
+								System.out.println("6. View pending incoming transfer");
+								System.out.println("7. Log out");
 								System.out.print("Go To: ");
-								System.out.print("");
 								int actionChoice = input.nextInt();
 								
 								switch(actionChoice) {
 								case 1: {
 									System.out.println("1");
+									customer = applyForAccount(customer);
 									break;
 								}
 								case 2:	{
 									System.out.println("2");
+									printCustomerAccount(customer);
 									break;
 								}
 								case 3:	{
 									System.out.println("3");
+									customer = withdrawl (customer, aDao, u,uServ);
+									
 									break;
 								}
 								case 4:	{
 									System.out.println("4");
+									customer = deposit (customer, aDao, u,uServ);
 									break;
 								}
 								case 5:	{
@@ -145,8 +161,12 @@ public class BankHubDriver {
 									break;
 								}
 								case 6:	{
+									
+									break;
+								}
+								case 7:{
 									customerActionCheck = false;
-									System.out.println("6");
+									System.out.println("logged out");
 									break;
 								}
 								default: {
@@ -172,10 +192,114 @@ public class BankHubDriver {
 			}
 
 		}
+			
+	}
+	
+	public static void printActiveAccount (Customer c) {
+		for (int i = 0 ; i < c.getActiveAccounts().size(); i++) {
+			int label = i + 1;
+			System.out.println("Account "+ (i+1) +": "+c.getActiveAccounts().get(i).getName());	
+		}
+	}
+	public static Customer withdrawl (Customer c, AccountDao aDao, User u, UserService uServ) {
+		//when succedd -> c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
+		printActiveAccount(c);
+		Scanner input = new Scanner(System.in);
+		System.out.print("Choose account to withdrawl: ");
+		int choice = input.nextInt();
 		
+		if (choice < 0 | choice > c.getActiveAccounts().size()){
+			System.out.println("Input does not match any account in the System.");
+		} else {
+			double currentBalance = c.getAccounts().get(choice).getCurrent_balance();
+			System.out.print("Enter Amount: ");
+			double amountToWithdrawl = input.nextDouble();
+			
+			if ((currentBalance - amountToWithdrawl) < 0) {
+				System.out.println("Insufficient Balance!");
+			}
+			
+			else {
+				double updateBalance = currentBalance  - amountToWithdrawl;
+				Account accountToUpdate = c.getAccounts().get(choice);
+				accountToUpdate.setCurrent_balance(updateBalance);
+				boolean succeed = aDao.updateAccount(accountToUpdate);
+				
+				if (succeed) {
+					System.out.println("Withdrawl Amount: "+amountToWithdrawl);
+					System.out.println("Your Current balance: "+updateBalance);
+					c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
+					uServ.uploadTransaction(amountToWithdrawl, "Withdrawl", c,c.getAccounts().get(choice).getAccount_id());
+					
+				} else {
+					System.out.println("Update failed");
+				}
+				
+				
+			}
+			
+		}
+		return c;
+	}
+	
+	public static Customer deposit (Customer c, AccountDao aDao, User u, UserService uServ) {
+		//when succedd -> c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
+		printActiveAccount(c);
+		Scanner input = new Scanner(System.in);
+		System.out.print("Choose account to deposit: ");
+		int choice = input.nextInt();
+		
+		if (choice < 0 | choice > c.getActiveAccounts().size()){
+			System.out.println("Input does not match any account in the System.");
+		} else {
+			double currentBalance = c.getAccounts().get(choice).getCurrent_balance();
+			System.out.print("Enter Amount: ");
+			double amountToDepost= input.nextDouble();
+			
+			if ((amountToDepost) < 0) {
+				System.out.println("Invalid Deposit amount!");
+			}
+			
+			else {
+				double updateBalance = currentBalance  + amountToDepost;
+				Account accountToUpdate = c.getAccounts().get(choice);
+				accountToUpdate.setCurrent_balance(updateBalance);
+				boolean succeed = aDao.updateAccount(accountToUpdate);
+				
+				if (succeed) {
+					System.out.println("Deposit Amount: "+amountToDepost);
+					System.out.println("Your Current balance: "+updateBalance);
+					c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
+					uServ.uploadTransaction(amountToDepost, "Deposit", c , c.getAccounts().get(choice).getAccount_id());
+					
+				} else {
+					System.out.println("Update failed");
+				}
+				
+				
+			}
+			
+		}
+		return c;
+	}
+	public static void printCustomerAccount(Customer c) {
+		printActiveAccount(c);
+		Scanner input = new Scanner(System.in);
+		System.out.print("Choose account to view: ");
+		int choice = input.nextInt();
+
+		System.out.println();
+		System.out.println();
+		if (choice < 0 | choice > c.getActiveAccounts().size()){
+			System.out.println("Input does not match any account in the System.");
+		} else {
+			System.out.println("Account Name: "+c.getActiveAccounts().get(choice-1).getName() + "\nBalance: " + c.getActiveAccounts().get(choice-1).getCurrent_balance());
+		}
+		
+		
+		System.out.println("Now back at main menu");
 		
 	}
-
 	public static Customer applyForAccount (Customer c) {
 		UserDao uDao = new UserDaoDB();
 		CustomerDao cDao = new CustomerDaoDB();

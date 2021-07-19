@@ -12,7 +12,7 @@ public interface AccountDao {
 	
 	void createAccount(Account a) throws SQLException;
 	
-	void updateAccount(Account a);
+	boolean updateAccount(Account a);
 	
 	void deleteAccount(Account a);
 }
