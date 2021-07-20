@@ -75,6 +75,16 @@ public class Customer {
 		}
 	}
 	
+	public boolean checkActiveAccounts() {
+		boolean check = false;
+		
+		for (int i = 0 ; i < accounts.size() ; i++) {
+			if (accounts.get(i).isApproval_status()) {
+				check = true;
+			}
+		}
+		return check;
+	}
 	
 	@Override
 	public String toString() {

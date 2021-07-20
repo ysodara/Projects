@@ -11,7 +11,7 @@ public class SendMoney {
 	public SendMoney() {
 		
 	}
-	public SendMoney(String description, boolean status, double amount,int sender_customer_id,int reviever_customer_id) {
+	public SendMoney(String description, boolean status, double amount, int sender_customer_id, int reviever_customer_id) {
 	this.description = 	description;
 	this.status = status;
 	this.amount = amount;

@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import com.example.dao.AccountDao;
 import com.example.dao.CustomerDao;
 import com.example.dao.EmployeeDao;
+import com.example.dao.SendMoneyDao;
+import com.example.dao.SendMoneyDaoDB;
 import com.example.dao.UserDao;
 import com.example.dao.TransactionDao;
 import com.example.dao.TransactionDaoDB;
@@ -20,6 +22,7 @@ import com.example.logging.Logging;
 import com.example.models.Account;
 import com.example.models.Customer;
 import com.example.models.Employee;
+import com.example.models.SendMoney;
 import com.example.models.Transaction;
 import com.example.models.User;
 
@@ -81,6 +84,50 @@ public class UserService {
 			return u;
 		}
 	}	
+	public void printSendingMoney() {
+		SendMoneyDao sDao = new SendMoneyDaoDB();
+		List<SendMoney> list = sDao.getAllIncomingMoneyByCustomerID(1);
+		for (int i = 0 ; i < list.size() ; i ++) {
+			System.out.println(list.get(i).getAmount());
+		}
+	}
+	public Customer sendMoney (Customer c, double currentBalance, String recieverUsername, double amountToSend, int choice) {
+		//Check customer
+		//check username
+		//check amount
+		
+		Customer recieverCustomer = cDao.getCustomersByUsername(recieverUsername);
+		SendMoneyDao sDao = new SendMoneyDaoDB();
+		SendMoney moneyToSend =  new SendMoney("None", false, amountToSend, c.getCustomer_id(), recieverCustomer.getCustomer_id());
+		
+		double updateBalance = currentBalance  - amountToSend;
+		Account accountToUpdate = c.getAccounts().get(choice);
+		accountToUpdate.setCurrent_balance(updateBalance);
+		
+		try {
+			sDao.createSendMoney(moneyToSend);
+			uploadTransaction(amountToSend, "Send Out", c, c.getAccounts().get(choice).getAccount_id());
+			boolean succeed = aDao.updateAccount(accountToUpdate);
+			Logging.logger.info("New SendMoney has registered");
+		} catch(SQLException e) {
+			Logging.logger.warn("SendMoney already exists in the database");
+			throw new UserNameAlreadyExistsException();
+		}
+		
+		return null;
+	}
+	public void uploadTransaction(double amount, String typeOfTransaction , Customer c, int account_id) {
+		TransactionDao tDao = new TransactionDaoDB();
+		Transaction t = new Transaction("No description", typeOfTransaction, amount, c.getCustomer_id() , account_id);
+		try {
+			tDao.createTransaction(t);			
+			Logging.logger.info("New Transaction has registered");
+		} catch(SQLException e) {
+			Logging.logger.warn("Transaction already exists in the database");
+			throw new UserNameAlreadyExistsException();
+		}
+		
+	}
 	public Customer bankAccoutRegistration(Customer user, String accountName, double startBalance) {		
 		Customer newCustomer = user;
 		User getUserName = getUserbyCustomerId(user.getCustomer_id());
@@ -125,18 +172,7 @@ public class UserService {
 		return employee;
 	}
 	
-	public void uploadTransaction(double amountToDepost, String typeOfTransaction , Customer c, int account_id) {
-		TransactionDao tDao = new TransactionDaoDB();
-		Transaction t = new Transaction("No description", typeOfTransaction, amountToDepost, c.getCustomer_id() , account_id);
-		try {
-			tDao.createTransaction(t);			
-			Logging.logger.info("New Transaction has registered");
-		} catch(SQLException e) {
-			Logging.logger.warn("Transaction already exists in the database");
-			throw new UserNameAlreadyExistsException();
-		}
-		
-	}
+	
 //	public Employee signUp(String first, String last, String email, String password, String code) throws UserNameAlreadyExistsException{
 //	
 //	User u = new User(first, last, email, password, "Employee"); 

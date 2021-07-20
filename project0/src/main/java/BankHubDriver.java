@@ -62,7 +62,7 @@ public class BankHubDriver {
 						newCustomer = uServ.signUp(firstName, lastName, email, password);
 						 */
 
-						customer = uServ.signUp("Hammus", "Stoick", "ysodara1211", "passwrod");
+						customer = uServ.signUp("Hammus", "Stoick", "ysodara@#$", "passwrod");
 						System.out.println("Your registration has completed successfully");	
 						u = cDao.getCustomersByCustomerId(customer.getCustomer_id());
 						System.out.println(u.getUsername());
@@ -109,73 +109,70 @@ public class BankHubDriver {
 						//Customer has an account 
 						//Need to show all available user action of the program
 						else {
+							
 							customer.printUserAllAccount();
+							boolean check = false;
+							check = customer.checkActiveAccounts();
+							if (check) {
 							run = false;
 							boolean customerActionCheck = true;
 							input = new Scanner(System.in);
-							
 
-							//Customer methods
-	//						view specific my own bank account
-	//						withDraw or deposit to a specific account
-	//						System check for transacation validation
-	//						post a money transfer
-	//						accept a money transfer from another account "Maybe other users"
-							while(customerActionCheck) {
-								
-								System.out.println("Available Options");
-								System.out.println("1. Apply for an account");
-								System.out.println("2. View account");
-								System.out.println("3. Withdrawl");
-								System.out.println("4. Deposit");
-								System.out.println("5. Send money");
-								System.out.println("6. View pending incoming transfer");
-								System.out.println("7. Log out");
-								System.out.print("Go To: ");
-								int actionChoice = input.nextInt();
-								
-								switch(actionChoice) {
-								case 1: {
-									System.out.println("1");
-									customer = applyForAccount(customer);
-									break;
-								}
-								case 2:	{
-									System.out.println("2");
-									printCustomerAccount(customer);
-									break;
-								}
-								case 3:	{
-									System.out.println("3");
-									customer = withdrawl (customer, aDao, u,uServ);
+								while(customerActionCheck) {
 									
-									break;
-								}
-								case 4:	{
-									System.out.println("4");
-									customer = deposit (customer, aDao, u,uServ);
-									break;
-								}
-								case 5:	{
-									System.out.println("5");
-									break;
-								}
-								case 6:	{
+									System.out.println("Available Options");
+									System.out.println("1. Apply for an account");
+									System.out.println("2. View account");
+									System.out.println("3. Withdrawl");
+									System.out.println("4. Deposit");
+									System.out.println("5. Send money");
+									System.out.println("6. View pending incoming transfer");
+									System.out.println("7. Log out");
+									System.out.print("Go To: ");
+									int actionChoice = input.nextInt();
 									
-									break;
+									switch(actionChoice) {
+									case 1: {
+										customer = applyForAccount(customer);
+										break;
+									}
+									case 2:	{
+										printCustomerAccount(customer);
+										break;
+									}
+									case 3:	{
+										customer = withdrawl (customer, aDao, u,uServ);
+										
+										break;
+									}
+									case 4:	{
+										customer = deposit (customer, aDao, u,uServ);
+										break;
+									}
+									case 5:	{
+										sendMoney(customer,uServ);
+										break;
+									}
+									case 6:	{
+										uServ.printSendingMoney();
+										break;
+									}
+									case 7:{
+										customerActionCheck = false;
+										System.out.println("logged out");
+										break;
+									}
+									default: {
+										System.out.println("Action Coming soon!");
+										break;
+									}
+									
+									}
+									
 								}
-								case 7:{
-									customerActionCheck = false;
-									System.out.println("logged out");
-									break;
-								}
-								default: {
-									System.out.println("Action Coming soon!");
-									break;
-								}
-								
-								}
-								
+							} //No active account
+							else {
+								run = false;
 							}
 						}										
 					
@@ -192,7 +189,37 @@ public class BankHubDriver {
 			}
 
 		}
+		
+		input.close();
 			
+	}
+	public static void sendMoney (Customer sender, UserService uServ) {
+		printActiveAccount(sender);
+		String recieverUsername = "";
+		Scanner input = new Scanner(System.in);
+		System.out.print("Choose account to send: ");
+		int choice = input.nextInt();
+		if (choice < 0 | choice > sender.getActiveAccounts().size()){
+			System.out.println("Input does not match any account in the System.");
+		} else {
+			Scanner input2 = new Scanner(System.in);
+			double currentBalance = sender.getAccounts().get(choice).getCurrent_balance();
+			System.out.println("Balance available to send: " + currentBalance);
+			
+			System.out.print("Enter Username to send: ");
+			recieverUsername = input2.nextLine();
+			
+			System.out.print("Enter amount: ");
+			double amountToSend = input2.nextDouble();
+			if (currentBalance - amountToSend <0) {
+				System.out.println("Insufficient Balance!");
+			}else {
+			
+				uServ.sendMoney(sender, currentBalance, recieverUsername, amountToSend, choice);
+			}
+			
+		}
+		
 	}
 	
 	public static void printActiveAccount (Customer c) {
@@ -201,6 +228,7 @@ public class BankHubDriver {
 			System.out.println("Account "+ (i+1) +": "+c.getActiveAccounts().get(i).getName());	
 		}
 	}
+	
 	public static Customer withdrawl (Customer c, AccountDao aDao, User u, UserService uServ) {
 		//when succedd -> c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
 		printActiveAccount(c);
@@ -229,7 +257,7 @@ public class BankHubDriver {
 					System.out.println("Withdrawl Amount: "+amountToWithdrawl);
 					System.out.println("Your Current balance: "+updateBalance);
 					c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
-					uServ.uploadTransaction(amountToWithdrawl, "Withdrawl", c,c.getAccounts().get(choice).getAccount_id());
+					uServ.uploadTransaction(amountToWithdrawl, "Withdrawl", c, c.getAccounts().get(choice).getAccount_id());
 					
 				} else {
 					System.out.println("Update failed");
