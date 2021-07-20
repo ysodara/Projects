@@ -84,12 +84,33 @@ public class UserService {
 			return u;
 		}
 	}	
-	public void printSendingMoney() {
+	public List<SendMoney> acceptMoney(int customerID) {
 		SendMoneyDao sDao = new SendMoneyDaoDB();
-		List<SendMoney> list = sDao.getAllIncomingMoneyByCustomerID(1);
-		for (int i = 0 ; i < list.size() ; i ++) {
-			System.out.println(list.get(i).getAmount());
+		
+		List<SendMoney> list = sDao.getAllIncomingMoneyByCustomerID(customerID);
+		
+		List<SendMoney> validList = new ArrayList<>();
+		
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).isStatus()) {
+				
+			} else {
+				validList.add(list.get(i));
+			}
 		}
+
+		
+		return validList;
+		
+	}
+	public void acceptMoney(Customer c, int accountID, double amount) {
+		SendMoneyDao sDao = new SendMoneyDaoDB();
+		
+		
+
+		
+		
+		
 	}
 	public Customer sendMoney (Customer c, double currentBalance, String recieverUsername, double amountToSend, int choice) {
 		//Check customer

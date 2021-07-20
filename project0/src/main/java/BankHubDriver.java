@@ -9,6 +9,8 @@ import com.example.dao.CustomerDao;
 import com.example.dao.CustomerDaoDB;
 import com.example.dao.EmployeeDao;
 import com.example.dao.EmployeeDaoDB;
+import com.example.dao.SendMoneyDao;
+import com.example.dao.SendMoneyDaoDB;
 import com.example.dao.TransactionDao;
 import com.example.dao.TransactionDaoDB;
 import com.example.dao.UserDao;
@@ -18,6 +20,7 @@ import com.example.logging.Logging;
 import com.example.models.Account;
 import com.example.models.Customer;
 import com.example.models.Employee;
+import com.example.models.SendMoney;
 import com.example.models.Transaction;
 import com.example.models.User;
 import com.example.services.UserService;
@@ -62,10 +65,10 @@ public class BankHubDriver {
 						newCustomer = uServ.signUp(firstName, lastName, email, password);
 						 */
 
-						customer = uServ.signUp("Hammus", "Stoick", "ysodara@#$", "passwrod");
-						System.out.println("Your registration has completed successfully");	
-						u = cDao.getCustomersByCustomerId(customer.getCustomer_id());
-						System.out.println(u.getUsername());
+//						customer = uServ.signUp("danny", "Stk", "danny99", "passwrod");
+//						System.out.println("Your registration has completed successfully");	
+//						u = cDao.getCustomersByCustomerId(customer.getCustomer_id());
+//						System.out.println(u.getUsername());
 						
 					}
 					else if (choice.equals("2") || choice.equals("log in") || choice.equals("login")) {
@@ -75,7 +78,7 @@ public class BankHubDriver {
 //						String password = input.nextLine();
 //						u = uServ.signIn(username, password);
 						
-						u = uServ.signIn("HammusStoick6919", "passwrod");
+						u = uServ.signIn("HammusStoick1823", "passwrod");
 						customer = cDao.getCustomersByUsername(u.getUsername());						
 					}
 				}
@@ -154,7 +157,7 @@ public class BankHubDriver {
 										break;
 									}
 									case 6:	{
-										uServ.printSendingMoney();
+										acceptMoney(customer, aDao, u,uServ);
 										break;
 									}
 									case 7:{
@@ -193,6 +196,111 @@ public class BankHubDriver {
 		input.close();
 			
 	}
+	public static void printAllAcceptMoney(List<SendMoney> list) {
+		for (int i = 0 ; i < list.size() ; i ++) {
+		System.out.println(list.get(i));
+	}
+	} 
+	public static void acceptMoney (Customer c, AccountDao aDao, User u, UserService uServ) {
+		SendMoneyDao sDao = new SendMoneyDaoDB();
+		List<SendMoney> pendingMoney = uServ.acceptMoney(c.getCustomer_id());
+		int size = pendingMoney.size();
+		Scanner in = new Scanner(System.in);
+		if (size <=0) {
+			System.out.println("You have no incoming transfer");
+		} else {
+			printAllAcceptMoney(pendingMoney);
+			System.out.println("You have some incoming transfer");
+			System.out.print("Choose transfer to accept: ");
+			int choice = in.nextInt();
+			if (choice < 0 | choice > size){
+				System.out.println("Input does not match any account in the System.");
+			} else {
+				choice = choice - 1;
+				double amountToDeposit = pendingMoney.get(choice).getAmount();
+				
+				printActiveAccount(c);
+				System.out.print("Choose account to deposit: ");
+				int choiceAccount = in.nextInt();
+				
+				if (choiceAccount < 0 | choiceAccount > c.getActiveAccounts().size()){
+					System.out.println("Input does not match any account in the System.");
+				} else {
+					choiceAccount = choiceAccount - 1;
+					double currentBalance = c.getAccounts().get(choiceAccount).getCurrent_balance();
+					
+					double updateBalance = currentBalance  + amountToDeposit;
+					Account accountToUpdate = c.getAccounts().get(choice);
+					accountToUpdate.setCurrent_balance(updateBalance);
+					
+					boolean succeed = aDao.updateAccount(accountToUpdate);
+					
+					if (succeed) {
+						System.out.println("Deposit Amount: "+amountToDeposit);
+						System.out.println("Your Current balance: "+updateBalance);
+						c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
+						
+						uServ.uploadTransaction(amountToDeposit, "Deposit", c , c.getAccounts().get(choiceAccount).getAccount_id());
+						pendingMoney.get(choice).setStatus(true);
+						SendMoney s = pendingMoney.get(choice);
+						sDao.updateSendMoney(s);
+						
+					} else {
+						System.out.println("Update failed");
+					}
+					
+					
+				}
+				
+				
+			}
+		}
+		
+		
+		
+		
+	}
+	public static Customer deposit (Customer c, AccountDao aDao, User u, UserService uServ) {
+		//when succedd -> c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
+		printActiveAccount(c);
+		Scanner input = new Scanner(System.in);
+		System.out.print("Choose account to deposit: ");
+		int choice = input.nextInt();
+		
+		if (choice < 0 | choice > c.getActiveAccounts().size()){
+			System.out.println("Input does not match any account in the System.");
+		} else {
+			choice = choice -1;
+			double currentBalance = c.getAccounts().get(choice).getCurrent_balance();
+			System.out.print("Enter Amount: ");
+			double amountToDeposit= input.nextDouble();
+			
+			if ((amountToDeposit) < 0) {
+				System.out.println("Invalid Deposit amount!");
+			}
+			
+			else {
+				double updateBalance = currentBalance  + amountToDeposit;
+				Account accountToUpdate = c.getAccounts().get(choice);
+				accountToUpdate.setCurrent_balance(updateBalance);
+				boolean succeed = aDao.updateAccount(accountToUpdate);
+				
+				if (succeed) {
+					System.out.println("Deposit Amount: "+amountToDeposit);
+					System.out.println("Your Current balance: "+updateBalance);
+					c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
+					uServ.uploadTransaction(amountToDeposit, "Deposit", c , c.getAccounts().get(choice).getAccount_id());
+					
+				} else {
+					System.out.println("Update failed");
+				}
+				
+				
+			}
+			
+		}
+		return c;
+	}
 	public static void sendMoney (Customer sender, UserService uServ) {
 		printActiveAccount(sender);
 		String recieverUsername = "";
@@ -202,6 +310,7 @@ public class BankHubDriver {
 		if (choice < 0 | choice > sender.getActiveAccounts().size()){
 			System.out.println("Input does not match any account in the System.");
 		} else {
+			choice = choice -1;
 			Scanner input2 = new Scanner(System.in);
 			double currentBalance = sender.getAccounts().get(choice).getCurrent_balance();
 			System.out.println("Balance available to send: " + currentBalance);
@@ -216,6 +325,7 @@ public class BankHubDriver {
 			}else {
 			
 				uServ.sendMoney(sender, currentBalance, recieverUsername, amountToSend, choice);
+				
 			}
 			
 		}
@@ -239,6 +349,7 @@ public class BankHubDriver {
 		if (choice < 0 | choice > c.getActiveAccounts().size()){
 			System.out.println("Input does not match any account in the System.");
 		} else {
+			choice = choice - 1;
 			double currentBalance = c.getAccounts().get(choice).getCurrent_balance();
 			System.out.print("Enter Amount: ");
 			double amountToWithdrawl = input.nextDouble();
@@ -248,6 +359,7 @@ public class BankHubDriver {
 			}
 			
 			else {
+				
 				double updateBalance = currentBalance  - amountToWithdrawl;
 				Account accountToUpdate = c.getAccounts().get(choice);
 				accountToUpdate.setCurrent_balance(updateBalance);
@@ -270,46 +382,7 @@ public class BankHubDriver {
 		return c;
 	}
 	
-	public static Customer deposit (Customer c, AccountDao aDao, User u, UserService uServ) {
-		//when succedd -> c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
-		printActiveAccount(c);
-		Scanner input = new Scanner(System.in);
-		System.out.print("Choose account to deposit: ");
-		int choice = input.nextInt();
-		
-		if (choice < 0 | choice > c.getActiveAccounts().size()){
-			System.out.println("Input does not match any account in the System.");
-		} else {
-			double currentBalance = c.getAccounts().get(choice).getCurrent_balance();
-			System.out.print("Enter Amount: ");
-			double amountToDepost= input.nextDouble();
-			
-			if ((amountToDepost) < 0) {
-				System.out.println("Invalid Deposit amount!");
-			}
-			
-			else {
-				double updateBalance = currentBalance  + amountToDepost;
-				Account accountToUpdate = c.getAccounts().get(choice);
-				accountToUpdate.setCurrent_balance(updateBalance);
-				boolean succeed = aDao.updateAccount(accountToUpdate);
-				
-				if (succeed) {
-					System.out.println("Deposit Amount: "+amountToDepost);
-					System.out.println("Your Current balance: "+updateBalance);
-					c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
-					uServ.uploadTransaction(amountToDepost, "Deposit", c , c.getAccounts().get(choice).getAccount_id());
-					
-				} else {
-					System.out.println("Update failed");
-				}
-				
-				
-			}
-			
-		}
-		return c;
-	}
+
 	public static void printCustomerAccount(Customer c) {
 		printActiveAccount(c);
 		Scanner input = new Scanner(System.in);
