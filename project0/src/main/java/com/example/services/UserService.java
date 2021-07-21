@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import com.example.dao.AccountDao;
 import com.example.dao.CustomerDao;
+import com.example.dao.CustomerDaoDB;
 import com.example.dao.EmployeeDao;
 import com.example.dao.SendMoneyDao;
 import com.example.dao.SendMoneyDaoDB;
@@ -32,19 +33,22 @@ public class UserService {
 	private CustomerDao cDao;
 	private AccountDao aDao;
 	private EmployeeDao eDao;
+	private SendMoneyDao sDao;
 	
-	public UserService(UserDao u, CustomerDao c, AccountDao a,EmployeeDao e) {
+	public UserService(UserDao u, CustomerDao c, AccountDao a,EmployeeDao e,SendMoneyDao sDao) {
 		this.uDao = u;
 		this.cDao = c;
 		this.aDao = a;
 		this.eDao = e;
+		this.sDao = sDao;
 	}	
-	public Customer signUp(String first, String last, String email, String password) throws UserNameAlreadyExistsException{		
+	public Customer signUp(String first, String last, String email, String password) throws UserNameAlreadyExistsException{
+		Customer c1 = new Customer();
 		User u = new User(first, last, email, password, "Customer");
 		//System.out.println(u.getUsername());
 		Customer nullCustomer = null;
 		User temp = uDao.getUserByUsername(u.getUsername());
-		System.out.println(temp.getEmail());		
+		//System.out.println(temp.getEmail());		
 			try {
 			uDao.createUser(u);
 			User createdUser = uDao.getUserByUsername(u.getUsername());			
@@ -79,7 +83,13 @@ public class UserService {
 		TransactionDao tDao = new TransactionDaoDB();
 		List<Transaction> lists = tDao.getAllTransaction();
 		String list = lists.toString().replace("[", "").replace("]", "").replace(", ", "");
-		System.out.println(list);
+		if (list.length() > 0) {
+			System.out.println(list);
+		}
+		else {
+			System.out.println("There is no transaction.");
+		}
+		
 	}
 	
 	public List<AllUserAccount> getAllAccounts () {
@@ -150,7 +160,7 @@ public class UserService {
 		//check amount
 		
 		Customer recieverCustomer = cDao.getCustomersByUsername(recieverUsername);
-		if (recieverCustomer == null) {
+		if (recieverCustomer.getCustomer_id() != 0) {
 			SendMoneyDao sDao = new SendMoneyDaoDB();
 			SendMoney moneyToSend =  new SendMoney("None", false, amountToSend, c.getCustomer_id(), recieverCustomer.getCustomer_id());
 			
@@ -185,7 +195,8 @@ public class UserService {
 		}
 		
 	}
-	public Customer bankAccoutRegistration(Customer user, String accountName, double startBalance) {		
+	public Customer bankAccoutRegistration(Customer user, String accountName, double startBalance) {
+		TransactionDao tDao = new TransactionDaoDB();
 		Customer newCustomer = user;
 		User getUserName = getUserbyCustomerId(user.getCustomer_id());
 		user.setAccounts(aDao.getAccountByUsername(getUserName.getUsername()));
@@ -201,9 +212,11 @@ public class UserService {
 		}
 		if (check) {
 		Account a = new Account (accountName, false, startBalance, user.getCustomer_id());
-		
+		 //List<Account> getAccountByUsername(String username)
 			try {
-				aDao.createAccount(a);			
+				aDao.createAccount(a);
+				
+				
 				Logging.logger.info("New account has registered");
 			} catch(SQLException e) {
 				Logging.logger.warn("Username created that already exists in the database");
@@ -214,6 +227,14 @@ public class UserService {
 					+ "\nPlease choose different name."); 
 			return newCustomer;	 
 			}
+		List<Account> a1 = new ArrayList<>();
+		a1 = aDao.getAccountByUsername(getUserName.getUsername());
+		for (int i = 0 ; i < a1.size() ; i++) {
+			if (a1.get(i).getName().equals(accountName)) {
+				uploadTransaction(startBalance, "Deposit", user, a1.get(i).getAccount_id());
+				}
+		
+		}
 		return newCustomer;	
 		
 	}

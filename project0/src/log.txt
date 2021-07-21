@@ -324,3 +324,80 @@
 2021-07-20 17:20:23 INFO  Logging:121 - User was logged in
 2021-07-20 17:21:52 INFO  Logging:121 - User was logged in
 2021-07-20 17:25:52 INFO  Logging:121 - User was logged in
+2021-07-20 19:00:46 WARN  Logging:111 - User tried loggging in that does not exist
+2021-07-20 19:04:24 INFO  Logging:121 - User was logged in
+2021-07-20 19:17:53 WARN  Logging:111 - User tried loggging in that does not exist
+2021-07-20 19:27:00 WARN  Logging:116 - User tried to login with invalid credentials
+2021-07-20 19:37:38 INFO  Logging:121 - User was logged in
+2021-07-20 19:40:20 INFO  Logging:123 - User was logged in
+2021-07-20 19:40:21 WARN  Logging:61 - Username created that already exists in the database
+2021-07-20 20:23:06 INFO  Logging:123 - User was logged in
+2021-07-20 20:25:45 INFO  Logging:123 - User was logged in
+2021-07-20 20:28:15 INFO  Logging:123 - User was logged in
+2021-07-20 20:29:14 INFO  Logging:123 - User was logged in
+2021-07-20 20:56:19 INFO  Logging:123 - User was logged in
+2021-07-20 20:57:09 INFO  Logging:123 - User was logged in
+2021-07-20 20:57:39 INFO  Logging:123 - User was logged in
+2021-07-20 20:59:52 INFO  Logging:123 - User was logged in
+2021-07-20 21:03:40 INFO  Logging:123 - User was logged in
+2021-07-20 21:06:49 INFO  Logging:123 - User was logged in
+2021-07-20 21:09:52 INFO  Logging:123 - User was logged in
+2021-07-20 21:10:45 INFO  Logging:123 - User was logged in
+2021-07-20 21:22:32 INFO  Logging:123 - User was logged in
+2021-07-20 21:24:32 INFO  Logging:123 - User was logged in
+2021-07-20 21:25:24 INFO  Logging:123 - User was logged in
+2021-07-20 21:29:55 INFO  Logging:123 - User was logged in
+2021-07-20 21:32:06 INFO  Logging:125 - User was logged in
+2021-07-20 21:35:35 INFO  Logging:125 - User was logged in
+2021-07-20 21:35:49 WARN  Logging:172 - SendMoney already exists in the database
+2021-07-20 21:37:40 INFO  Logging:125 - User was logged in
+2021-07-20 21:37:50 WARN  Logging:172 - SendMoney already exists in the database
+2021-07-20 21:39:00 INFO  Logging:125 - User was logged in
+2021-07-20 21:50:38 INFO  Logging:59 - New user has registered
+2021-07-20 21:51:07 INFO  Logging:211 - New account has registered
+2021-07-20 21:51:55 INFO  Logging:59 - New user has registered
+2021-07-20 21:52:18 INFO  Logging:59 - New user has registered
+2021-07-20 21:52:23 WARN  Logging:63 - Username created that already exists in the database
+2021-07-20 21:55:13 WARN  Logging:63 - Username created that already exists in the database
+2021-07-20 21:56:14 WARN  Logging:63 - Username created that already exists in the database
+2021-07-20 22:03:47 INFO  Logging:59 - New user has registered
+2021-07-20 22:04:05 INFO  Logging:211 - New account has registered
+2021-07-20 22:07:02 INFO  Logging:125 - User was logged in
+2021-07-20 22:13:16 INFO  Logging:125 - User was logged in
+2021-07-20 22:14:20 INFO  Logging:125 - User was logged in
+2021-07-20 22:20:36 INFO  Logging:125 - User was logged in
+2021-07-20 22:24:13 INFO  Logging:131 - User was logged in
+2021-07-20 22:37:31 INFO  Logging:131 - User was logged in
+2021-07-20 22:41:17 INFO  Logging:131 - User was logged in
+2021-07-20 22:41:54 INFO  Logging:131 - User was logged in
+2021-07-20 22:42:23 INFO  Logging:191 - New Transaction has registered
+2021-07-20 22:42:23 INFO  Logging:219 - New account has registered
+2021-07-20 22:42:57 INFO  Logging:131 - User was logged in
+2021-07-20 22:44:06 INFO  Logging:131 - User was logged in
+2021-07-20 22:44:57 INFO  Logging:131 - User was logged in
+2021-07-20 22:45:19 INFO  Logging:191 - New Transaction has registered
+2021-07-20 22:45:19 INFO  Logging:219 - New account has registered
+2021-07-20 22:45:32 INFO  Logging:191 - New Transaction has registered
+2021-07-20 22:56:20 INFO  Logging:131 - User was logged in
+2021-07-20 22:56:31 INFO  Logging:220 - New account has registered
+2021-07-20 22:56:32 INFO  Logging:191 - New Transaction has registered
+2021-07-20 22:56:51 INFO  Logging:131 - User was logged in
+2021-07-20 23:01:52 INFO  Logging:131 - User was logged in
+2021-07-20 23:03:57 INFO  Logging:191 - New Transaction has registered
+2021-07-20 23:04:46 INFO  Logging:191 - New Transaction has registered
+2021-07-20 23:05:44 INFO  Logging:59 - New user has registered
+2021-07-20 23:06:30 INFO  Logging:220 - New account has registered
+2021-07-20 23:06:32 INFO  Logging:191 - New Transaction has registered
+2021-07-20 23:06:50 INFO  Logging:131 - User was logged in
+2021-07-20 23:08:21 WARN  Logging:121 - User tried loggging in that does not exist
+2021-07-20 23:08:46 WARN  Logging:121 - User tried loggging in that does not exist
+2021-07-20 23:11:00 INFO  Logging:131 - User was logged in
+2021-07-20 23:11:27 INFO  Logging:191 - New Transaction has registered
+2021-07-20 23:11:27 INFO  Logging:175 - New SendMoney has registered
+2021-07-20 23:13:53 INFO  Logging:131 - User was logged in
+2021-07-20 23:14:36 INFO  Logging:191 - New Transaction has registered
+2021-07-20 23:27:23 INFO  Logging:131 - User was logged in
+2021-07-20 23:27:42 INFO  Logging:191 - New Transaction has registered
+2021-07-20 23:27:43 INFO  Logging:175 - New SendMoney has registered
+2021-07-20 23:27:58 INFO  Logging:131 - User was logged in
+2021-07-20 23:28:55 INFO  Logging:131 - User was logged in

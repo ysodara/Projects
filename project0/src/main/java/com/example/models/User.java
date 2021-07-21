@@ -48,6 +48,8 @@ public class User {
 		//this.accounts = new ArrayList<Account>();
 	}
 	
+	
+	
 	//User to get user info from the database
 	public User(int id, String firstName, String lastName, String email, String username, String password, String role) {
 		this.id = id;
@@ -57,7 +59,6 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.role = role;
-		//this.accounts = new ArrayList<Account>();
 		}
 
 	public int getId() {
@@ -110,7 +111,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		String printUserInfo = "Full name: " + firstName + " " + lastName+ "\nUsername: " + username+ "\nEmail: " + email +"\nRole; " +role;
+		String printUserInfo = "Full name: " + firstName + " " + lastName+ "\nUsername: " + username+ "\nEmail: " + email;
 		return printUserInfo;
 	}
 
