@@ -2,10 +2,14 @@ package com.example.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.models.Transaction;
+import com.example.models.User;
 import com.example.utils.ConnectionUtil;
 
 public class TransactionDaoDB implements TransactionDao {
@@ -29,5 +33,27 @@ public class TransactionDaoDB implements TransactionDao {
 		ps.execute();
 		
 		
+	}
+
+	@Override
+	public List<Transaction> getAllTransaction() {
+		List<Transaction> lists = new ArrayList<>();
+		try {
+			Connection con = conUtil.getConnection();
+			
+			String sql = "SELECT * FROM transactions";
+			
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			while (rs.next()) {
+				lists.add(new Transaction(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6)));
+			}
+			return lists;
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

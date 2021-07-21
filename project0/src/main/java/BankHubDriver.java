@@ -18,6 +18,7 @@ import com.example.dao.UserDaoDB;
 import com.example.exceptions.UserNameAlreadyExistsException;
 import com.example.logging.Logging;
 import com.example.models.Account;
+import com.example.models.AllUserAccount;
 import com.example.models.Customer;
 import com.example.models.Employee;
 import com.example.models.SendMoney;
@@ -39,6 +40,7 @@ public class BankHubDriver {
 		
 		User u = null;
 		Customer customer = new Customer();
+		Employee employee = new Employee();
 		UserService uServ = new UserService(uDao, cDao, aDao, eDao);
 		//boolean signUp = false;
 		boolean run = true;
@@ -71,15 +73,40 @@ public class BankHubDriver {
 //						System.out.println(u.getUsername());
 						
 					}
+					
 					else if (choice.equals("2") || choice.equals("log in") || choice.equals("login")) {
-//						System.out.println("Enter UserName: ");
-//						String username = input.nextLine();					
-//						System.out.println("Enter Password: ");
-//						String password = input.nextLine();
-//						u = uServ.signIn(username, password);
-						
-						u = uServ.signIn("HammusStoick1823", "passwrod");
-						customer = cDao.getCustomersByUsername(u.getUsername());						
+						boolean succeed = false;
+						while (!succeed) {
+							
+//							System.out.println("Enter UserName: ");
+//							String username = input.nextLine();					
+	//						System.out.println("Enter Password: ");
+	//						String password = input.nextLine();
+	//						u = uServ.signIn(username, password);
+							
+							
+							User temp = uServ.signIn("dannyStk6150", "passwrod");
+							
+							boolean check = checkUser(temp);
+							
+							if (check) {
+								succeed = true;
+								u = temp;
+							} else {
+								System.out.println("Invalid Credentials");
+								System.out.println("Retry?");
+								String retry = input.nextLine();
+								retry = retry.toLowerCase();
+								if (retry.equals("1") || retry.equals("y") || retry.equals("yes")) {
+									succeed = false;
+								}
+								else {
+								succeed = true;
+								}
+								
+							}
+						}
+											
 					}
 				}
 				else {
@@ -87,7 +114,9 @@ public class BankHubDriver {
 				}
 			
 			} else {
+				//Start Role of Cusomer
 				if (u.getRole().equals("Customer")){
+					customer = cDao.getCustomersByUsername(u.getUsername());
 					System.out.println(u);
 					//Load account from database to customer object
 					customer.setAccounts(aDao.getAccountByUsername(u.getUsername()));
@@ -171,29 +200,139 @@ public class BankHubDriver {
 									}
 									
 									}
-									
+									  
 								}
 							} //No active account
 							else {
 								run = false;
 							}
-						}										
-					
-					System.out.println();
-				}
-				else {
+						}											
+				} // End Role of Cusomer
+				
+				//Start Role of Employee
+				else if (u.getRole().equals("Employee"))
+				{
+					run = false;
+					System.out.println(u);
+					employee = eDao.getEmployeeByUsername(u.getUsername());
+					boolean employeeActionCheck = true;
+					Scanner employeeInput = new Scanner(System.in);
+					while (employeeActionCheck) {
+						System.out.println("Available Options");
+						System.out.println("1. Approve or Reject Account");
+						System.out.println("2. View a Customer's bank accounts");
+						System.out.println("3. View Log of all Transaction");
+						System.out.println("4. Exit");
+						int actionChoice = employeeInput.nextInt();
+						
+							switch(actionChoice) {
+							case 1: {
+								modifyCustomerAccount(uServ);
+								
+								
+								break;
+							}
+							case 2:	{
+								ViewCustomerAccounts(uServ,cDao, aDao);
+								break;
+							}
+							case 3:	{
+								
+								uServ.printAllTractions();
+								//View log all transaction
+								
+								break;
+							}
+							case 4:	{
+								employeeActionCheck = false;
+								break;
+							}
+							}
+						
+						
+						
+					}
 					//Employee
 					//Approve or reject an account
-					//View customer bank account
-					//View log all transaction
+					
+					
 					//employee
 				}
 				//user is logged in
+				else {
+					System.out.println("Unknown role, break now");
+					run = false;
+				}
 			}
 
 		}
 		
 		input.close();
+			
+	}
+	public static void ViewCustomerAccounts(UserService uServ, CustomerDao cDao, AccountDao aDao) {
+		//CustomerDao cDao = new CustomerDaoDB();
+		List<User> users = uServ.getAllUsers();
+		printAllCustomerHelper(users);
+		System.out.println();
+		
+		Scanner employeeInput = new Scanner(System.in);
+		System.out.print("Select User to View: ");
+		int actionChoice = employeeInput.nextInt();
+		
+		if(actionChoice <1 | actionChoice > users.size()) {
+			System.out.println("Invalid choice");
+		}
+		else {
+			actionChoice = actionChoice -1;
+			List<Account> accountList = uServ.getAccountByUsername(users.get(actionChoice).getUsername());
+			for (int i = 0; i < accountList.size(); i++) {
+				//System.out.println(i+1+".Customer Name: " + accountList.get(i).getFirstName() + " " +accountList.get(i).getLastName());
+				if (accountList.get(i).isApproval_status())
+				System.out.println(i+1+".Account Name: " + accountList.get(i).getName() + ", Status: ACTIVE" + ", Balance: " +accountList.get(i).getCurrent_balance() );
+				else {
+					System.out.println(i+1+".Account Name: " + accountList.get(i).getName() + ", Status: Under Review" + ", Balance: " +accountList.get(i).getCurrent_balance() );
+				}
+			}
+			
+		}
+	}
+	
+	public static void printAllCustomerHelper(List<User> users) {
+		System.out.println("\nAll Customers:\n");
+		for (int i = 0 ; i< users.size(); i++) {
+			System.out.println((i+1)+ ".Customer Name: " +users.get(i).getFirstName() + users.get(i).getLastName() );
+			System.out.println("  Username: " +users.get(i).getUsername());
+			System.out.println("  Email: " +users.get(i).getEmail());
+		}
+	}
+	public static void modifyCustomerAccount (UserService uServ) {
+		List<AllUserAccount> allAccountList = uServ.getAllAccounts();
+		uServ.printAllAccounts(allAccountList);
+		
+		Scanner employeeInput = new Scanner(System.in);
+		System.out.print("Enter Account to Modify: ");
+		int actionChoice = employeeInput.nextInt();
+		System.out.print("Enter Status: ");
+		boolean status = employeeInput.nextBoolean();
+		if (actionChoice < 1 | actionChoice > allAccountList.size()) {
+			System.out.println("Invalid");
+		} else {
+			actionChoice = actionChoice - 1;
+			uServ.modifyCustomerAccount(allAccountList, actionChoice ,status);
+		}
+		
+		
+		
+		
+		
+	}
+	public static boolean checkUser(User u) {
+		if (u == null) {
+			return false;
+		} else {
+			return true;
+		}
 			
 	}
 	public static void printAllAcceptMoney(List<SendMoney> list) {
@@ -213,7 +352,7 @@ public class BankHubDriver {
 			System.out.println("You have some incoming transfer");
 			System.out.print("Choose transfer to accept: ");
 			int choice = in.nextInt();
-			if (choice < 0 | choice > size){
+			if (choice < 1 | choice > size){
 				System.out.println("Input does not match any account in the System.");
 			} else {
 				choice = choice - 1;
@@ -223,7 +362,7 @@ public class BankHubDriver {
 				System.out.print("Choose account to deposit: ");
 				int choiceAccount = in.nextInt();
 				
-				if (choiceAccount < 0 | choiceAccount > c.getActiveAccounts().size()){
+				if (choiceAccount < 1 | choiceAccount > c.getActiveAccounts().size()){
 					System.out.println("Input does not match any account in the System.");
 				} else {
 					choiceAccount = choiceAccount - 1;
@@ -240,7 +379,7 @@ public class BankHubDriver {
 						System.out.println("Your Current balance: "+updateBalance);
 						c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
 						
-						uServ.uploadTransaction(amountToDeposit, "Deposit", c , c.getAccounts().get(choiceAccount).getAccount_id());
+						uServ.uploadTransaction(amountToDeposit, "Accepted", c , c.getAccounts().get(choiceAccount).getAccount_id());
 						pendingMoney.get(choice).setStatus(true);
 						SendMoney s = pendingMoney.get(choice);
 						sDao.updateSendMoney(s);
@@ -267,7 +406,7 @@ public class BankHubDriver {
 		System.out.print("Choose account to deposit: ");
 		int choice = input.nextInt();
 		
-		if (choice < 0 | choice > c.getActiveAccounts().size()){
+		if (choice < 1 | choice > c.getActiveAccounts().size()){
 			System.out.println("Input does not match any account in the System.");
 		} else {
 			choice = choice -1;
@@ -307,7 +446,7 @@ public class BankHubDriver {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Choose account to send: ");
 		int choice = input.nextInt();
-		if (choice < 0 | choice > sender.getActiveAccounts().size()){
+		if (choice < 1 | choice > sender.getActiveAccounts().size()){
 			System.out.println("Input does not match any account in the System.");
 		} else {
 			choice = choice -1;
@@ -346,7 +485,7 @@ public class BankHubDriver {
 		System.out.print("Choose account to withdrawl: ");
 		int choice = input.nextInt();
 		
-		if (choice < 0 | choice > c.getActiveAccounts().size()){
+		if (choice < 1 | choice > c.getActiveAccounts().size()){
 			System.out.println("Input does not match any account in the System.");
 		} else {
 			choice = choice - 1;
@@ -396,9 +535,7 @@ public class BankHubDriver {
 		} else {
 			System.out.println("Account Name: "+c.getActiveAccounts().get(choice-1).getName() + "\nBalance: " + c.getActiveAccounts().get(choice-1).getCurrent_balance());
 		}
-		
-		
-		System.out.println("Now back at main menu");
+
 		
 	}
 	public static Customer applyForAccount (Customer c) {

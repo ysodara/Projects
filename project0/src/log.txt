@@ -230,3 +230,97 @@
 2021-07-20 09:49:32 INFO  Logging:135 - New Transaction has registered
 2021-07-20 09:59:19 INFO  Logging:83 - User was logged in
 2021-07-20 10:00:30 INFO  Logging:83 - User was logged in
+2021-07-20 10:43:50 INFO  Logging:83 - User was logged in
+2021-07-20 10:44:03 INFO  Logging:83 - User was logged in
+2021-07-20 10:55:24 WARN  Logging:78 - User tried to login with invalid credentials
+2021-07-20 10:55:45 INFO  Logging:83 - User was logged in
+2021-07-20 10:56:36 INFO  Logging:83 - User was logged in
+2021-07-20 10:57:03 INFO  Logging:83 - User was logged in
+2021-07-20 10:57:14 WARN  Logging:78 - User tried to login with invalid credentials
+2021-07-20 10:58:21 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:50 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:50 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:50 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:51 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:51 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:52 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:52 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:53 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:53 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:54 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:54 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:55 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:55 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:55 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:56 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:56 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:57 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:57 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:57 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:58 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:58 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:59 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:20:59 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:21:00 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:21:00 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:21:01 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:21:59 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:22:38 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:28:35 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:28:55 INFO  Logging:84 - User was logged in
+2021-07-20 11:30:24 INFO  Logging:84 - User was logged in
+2021-07-20 11:30:29 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:29 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:30 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:30 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:31 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:31 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:31 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:32 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:32 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:33 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:33 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:33 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:34 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:34 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:34 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:35 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:35 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:36 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 11:30:36 WARN  Logging:74 - User tried loggging in that does not exist
+2021-07-20 12:24:23 INFO  Logging:84 - User was logged in
+2021-07-20 12:43:32 INFO  Logging:92 - User was logged in
+2021-07-20 13:46:29 INFO  Logging:100 - User was logged in
+2021-07-20 14:01:13 INFO  Logging:97 - User was logged in
+2021-07-20 14:04:54 INFO  Logging:97 - User was logged in
+2021-07-20 14:07:22 INFO  Logging:97 - User was logged in
+2021-07-20 14:11:29 INFO  Logging:97 - User was logged in
+2021-07-20 14:38:01 INFO  Logging:100 - User was logged in
+2021-07-20 14:38:32 INFO  Logging:100 - User was logged in
+2021-07-20 15:00:46 INFO  Logging:107 - User was logged in
+2021-07-20 15:07:07 INFO  Logging:107 - User was logged in
+2021-07-20 15:18:25 INFO  Logging:113 - User was logged in
+2021-07-20 15:22:09 INFO  Logging:114 - User was logged in
+2021-07-20 15:23:15 INFO  Logging:114 - User was logged in
+2021-07-20 15:25:29 INFO  Logging:114 - User was logged in
+2021-07-20 15:26:19 INFO  Logging:114 - User was logged in
+2021-07-20 15:27:11 INFO  Logging:114 - User was logged in
+2021-07-20 15:42:48 INFO  Logging:118 - User was logged in
+2021-07-20 15:44:25 INFO  Logging:118 - User was logged in
+2021-07-20 15:51:29 INFO  Logging:118 - User was logged in
+2021-07-20 15:51:56 INFO  Logging:118 - User was logged in
+2021-07-20 15:52:48 INFO  Logging:118 - User was logged in
+2021-07-20 16:12:02 INFO  Logging:118 - User was logged in
+2021-07-20 16:14:14 INFO  Logging:118 - User was logged in
+2021-07-20 16:22:56 INFO  Logging:121 - User was logged in
+2021-07-20 16:23:33 INFO  Logging:121 - User was logged in
+2021-07-20 17:05:28 WARN  Logging:111 - User tried loggging in that does not exist
+2021-07-20 17:05:33 WARN  Logging:111 - User tried loggging in that does not exist
+2021-07-20 17:05:38 WARN  Logging:111 - User tried loggging in that does not exist
+2021-07-20 17:12:08 INFO  Logging:121 - User was logged in
+2021-07-20 17:14:24 INFO  Logging:121 - User was logged in
+2021-07-20 17:14:46 INFO  Logging:177 - New Transaction has registered
+2021-07-20 17:16:13 WARN  Logging:166 - SendMoney already exists in the database
+2021-07-20 17:20:23 INFO  Logging:121 - User was logged in
+2021-07-20 17:21:52 INFO  Logging:121 - User was logged in
+2021-07-20 17:25:52 INFO  Logging:121 - User was logged in

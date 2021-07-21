@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.models.Account;
+import com.example.models.AllUserAccount;
 import com.example.models.Customer;
 import com.example.utils.ConnectionUtil;
 
@@ -29,6 +30,30 @@ public class AccountDaoDB implements AccountDao {
 			
 			while(rs.next()) {
 				accountList.add(new Account(rs.getInt(1), rs.getString(2), rs.getBoolean(3), rs.getDouble(4), rs.getInt(5)));
+			}
+			
+			return accountList;
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<AllUserAccount> getAllUserAccounts() {
+		List<AllUserAccount> accountList = new ArrayList<AllUserAccount>();
+		
+		try {
+			Connection con = conUtil.getConnection();
+			//To create a simple statment we write our query as a string
+			String sql = "select u.first_name, u.last_name, u.username, a.account_id ,a.\"name\", a.approval_status from users u inner join customers c on u.id = c.user_id inner join accounts a on a.customer_id = c.customer_id order by a.account_id ;";
+			
+			//We need to create a statement with this sql string
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				accountList.add(new AllUserAccount(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getBoolean(6)));
 			}
 			
 			return accountList;
@@ -91,6 +116,31 @@ public class AccountDaoDB implements AccountDao {
 			ps.setDouble(3, a.getCurrent_balance());
 			ps.setInt(4, a.getCustomer_id());
 			ps.setInt(5, a.getAccount_id());
+
+			
+			ps.execute();
+			return true;
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+		
+	}
+	
+	@Override
+	public boolean ModifyStatus(boolean status, int id) {
+		try {
+			Connection con = conUtil.getConnection();
+			String sql = "UPDATE accounts SET approval_status = ?"
+					+ " WHERE account_id = ?";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+
+			ps.setBoolean(1, status);
+			
+			ps.setInt(2, id);
 
 			
 			ps.execute();

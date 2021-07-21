@@ -20,7 +20,7 @@ public class UserDaoDB implements UserDao {
 		try {
 			Connection con = conUtil.getConnection();
 			
-			String sql = "SELECT * FROM users";
+			String sql = "SELECT * FROM users where role = 'Customer'";
 			
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery(sql);
