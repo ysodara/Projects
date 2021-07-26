@@ -11,13 +11,13 @@ public class ReimBDriver {
 		
 		UserRole userRole = new UserRole();
 		
-		userRole.setUserRole(4);
+		userRole.setUserRole(2);
 		
 		userRole.roleIsWho();
 		
 		ReimBType rbType = new ReimBType();
 		
-		rbType.setReimBtype(6);
+		rbType.setReimBtype(2);
 		
 		rbType.printReimBType();
 		
