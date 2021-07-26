@@ -110,6 +110,10 @@ public class BankHubDriver {
 						}
 											
 					}
+					else {
+						System.out.println("Exited.");
+						run = false;
+					}
 				}
 				else {
 					System.out.println("Invalid input- Not log ing or Sign up");
@@ -127,7 +131,7 @@ public class BankHubDriver {
 							if (customer != null) {						
 								u = uServ.getUserbyCustomerId(customer.getCustomer_id());																
 								System.out.println("You have no active account with us");
-								System.out.println("Are you ready to apply?");
+								System.out.println("Are you ready to apply? Y|N");
 								String choiceApply = input.nextLine();
 								choiceApply = choiceApply.toLowerCase();
 								
@@ -372,7 +376,7 @@ public class BankHubDriver {
 			System.out.print("Choose transfer to accept: ");
 			int choice = in.nextInt();
 			if (choice < 1 | choice > size){
-				System.out.println("Input does not match any account in the System.");
+				System.out.println("Input does not match any transfer in the System.");
 			} else {
 				choice = choice - 1;
 				double amountToDeposit = pendingMoney.get(choice).getAmount();
@@ -412,11 +416,7 @@ public class BankHubDriver {
 				
 				
 			}
-		}
-		
-		
-		
-		
+		}	
 	}
 	public static Customer deposit (Customer c, AccountDao aDao, User u, UserService uServ) {
 		//when succedd -> c.setAccounts(aDao.getAccountByUsername(u.getUsername()));
@@ -433,7 +433,7 @@ public class BankHubDriver {
 			System.out.print("Enter Amount: ");
 			double amountToDeposit= input.nextDouble();
 			
-			if ((amountToDeposit) < 0) {
+			if ((amountToDeposit) <= 0) {
 				System.out.println("Invalid Deposit amount!");
 			}
 			
@@ -480,7 +480,10 @@ public class BankHubDriver {
 			double amountToSend = input2.nextDouble();
 			if (currentBalance - amountToSend <0) {
 				System.out.println("Insufficient Balance!");
-			}else {
+			}else if(amountToSend<=0) {
+				System.out.println("Amount cannot be negative or zero!");
+				}
+			else {
 			
 				uServ.sendMoney(sender, currentBalance, recieverUsername, amountToSend, choice);
 				
@@ -514,7 +517,9 @@ public class BankHubDriver {
 			
 			if ((currentBalance - amountToWithdrawl) < 0) {
 				System.out.println("Insufficient Balance!");
-			}
+			} else if(amountToWithdrawl<=0) {
+				System.out.println("Amount cannot be negative or zero!");
+				}
 			
 			else {
 				
@@ -568,9 +573,15 @@ public class BankHubDriver {
 		System.out.println("Enter Account Name: ");
 		String accountName = input.nextLine();
 		System.out.println("Enter Starting balance: ");
-		double sBalance = input.nextDouble();		
+		double sBalance = input.nextDouble();
+		if(sBalance < 0) {
+			System.out.println("Amount cannot be negative.");
+			return c;
+		}
+		else {
 		c = uServ.bankAccoutRegistration(c, accountName, sBalance);
 		return c;
+		}
 	}
 
 	
