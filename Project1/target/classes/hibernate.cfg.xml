@@ -23,13 +23,15 @@
 	-->
 
 	<property name="hibernate.connection.pool_size">10</property>
-	<property name="hibernate.hbm2ddl.auto">create</property>	
+	<property name="hibernate.hbm2ddl.auto">validate</property>	
+	
 	 
 	<mapping class="com.example.models.ReimBStatus"/>
 	<mapping class="com.example.models.ReimBType"/>
 	<mapping class="com.example.models.UserRole"/>
-	 
+	
 	<mapping class="com.example.models.User"/>
+	<mapping class="com.example.models.Reimburstment"/>
 	
 	</session-factory>
 

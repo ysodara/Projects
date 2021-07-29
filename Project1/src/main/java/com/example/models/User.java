@@ -21,7 +21,7 @@ public class User {
 	
 	@Id
 	@Column(name="user_id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name="first_name", nullable =false)
@@ -30,19 +30,23 @@ public class User {
 	@Column(name="last_name", nullable =false)
 	private String lastName;
 	
-	@Column(name="username", nullable =false)
+	@Column(name="username", unique=true, nullable =false)
 	private String username;
 	
-	@Column(name="email", nullable =false)
+	@Column(name="email", unique=true, nullable =false)
 	private String email;
 	
 	@Column(name="password", nullable =false)
 	private String password;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="UserRole_FK")
+	@JoinColumn(name="user_role_FK")
 	private UserRole userRole;
 	
+	
+	public User() {
+		
+	}
 	public User(int id, String firstName, String lastName, String email, String password, UserRole userRole) {
 		this.id = id;
 		this.firstName = firstName;
@@ -54,7 +58,7 @@ public class User {
 	}
 	
 	//Used to send user info to the database because the db auto generates the id
-	public User(String firstName, String lastName, String email, String password,UserRole userRole) {
+	public User(String firstName, String lastName, String email, String password, UserRole userRole) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = firstName + lastName + (new Random().nextInt(9000) + 1000);
@@ -75,6 +79,8 @@ public class User {
 		this.userRole = userRole;
 		
 	}
+
+	
 
 	public int getId() {
 		return id;
