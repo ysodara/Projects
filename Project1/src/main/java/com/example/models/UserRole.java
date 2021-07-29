@@ -1,57 +1,36 @@
 package com.example.models;
 
-enum Role
-{
-    EMPLOYEE, MANAGER;
-}
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="user_roles")
 public class UserRole {
+	@Id
+	@Column(name="user_role_id")
+	private int userRoleId;
 	
-	private Role userRole;
+	@Column(name="user_role", unique=true, nullable=false)
+	private String userRole;
 	
-	public UserRole () {
-		
+	public UserRole () {		
 	}
-	
-	public UserRole (Role role) {
-		this.userRole = role;
+
+	public int getUserRoleId() {
+		return userRoleId;
 	}
-	
-	public Role getUserRole() {
+
+	public void setUserRoleId(int userRoleId) {
+		this.userRoleId = userRoleId;
+	}
+
+	public String getUserRole() {
 		return userRole;
 	}
-	
-	public void setUserRole(int roleID) {
-		switch(roleID) {
-		case 1:
-			this.userRole = Role.EMPLOYEE;
-			break;
-		case 2:
-			this.userRole = Role.MANAGER;
-			break;
-		}
-		
-	}
-	
-	public void roleIsWho() {
-		if (userRole!=null) {
-			switch (userRole) {
-				case EMPLOYEE: {
-					System.out.println("They are an Employee");
-					break;
-				}
-				case MANAGER: {
-					System.out.println("They are a Manager");
-					break;
-				}
-			}
-		}
-		else {
-			System.out.println("This user role is NULL.");
-		}
-		
-	}
-	
-	
-	
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}	
 }

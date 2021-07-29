@@ -1,58 +1,41 @@
 package com.example.models;
 
-enum Type {
-	LODGING, TRAVEL, FOOD, OTHER;
-}
-public class ReimBType {
-	private Type reimBType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	public Type getReimBtype() {
+@Entity
+@Table(name="reimburstment_types")
+public class ReimBType {
+	
+	@Id
+	@Column(name="reimb_type_id")
+	private int reimBTypeId;
+	
+	@Column(name="reimb_type", unique=true, nullable=false)
+	private String reimBType;
+	
+	public ReimBType() {		
+	}
+	
+	public ReimBType(String type) {
+		this.reimBType=type;
+	}
+	
+	public int getReimBTypeId() {
+		return reimBTypeId;
+	}
+	
+	public void setReimBTypeId(int reimBTypeId) {
+		this.reimBTypeId = reimBTypeId;
+	}
+	
+	public String getReimBType() {
 		return reimBType;
 	}
-
-	public void setReimBtype(int reimBId) {
-		switch(reimBId) {
-		case 1:
-			this.reimBType = Type.LODGING;
-			break;
-		case 2:
-			this.reimBType = Type.TRAVEL;
-			break;
-		case 3:
-			this.reimBType = Type.FOOD;
-			break;
-		case 4:
-			this.reimBType = Type.OTHER;
-			break;
-		}
-	}
 	
-	public void printReimBType() {
-		if (reimBType!=null) {
-			switch (reimBType) {
-				case LODGING: {
-					System.out.println("Reimburstment type is Lodging");
-					break;
-				}
-				case TRAVEL: {
-					System.out.println("Reimburstment type is Travel");
-					break;
-				}
-				case FOOD: {
-					System.out.println("Reimburstment type is Food");
-					break;
-				}
-				case OTHER: {
-					System.out.println("Reimburstment type is Other");
-					break;
-				}
-			}
-		}
-		else {
-			System.out.println("This Reimburstment type is NULL.");
-		}
-		
-	}
-	
-	
+	public void setReimBType(String reimBType) {
+		this.reimBType = reimBType;
+	}	
 }

@@ -6,9 +6,9 @@
 <hibernate-configuration>
 	<!-- Connection Information -->
 	<session-factory>
-	<property name="hibernate.connection.username"></property>
-	<property name="hibernate.connection.password"></property>
-	<property name="hibernate.connection.url">jdbc:postgresql://java-uta-sy.cbl5il2pac4q.us-east-2.rds.amazonaws.com:5432/</property>
+	<property name="hibernate.connection.username">expense</property>
+	<property name="hibernate.connection.password">password</property>
+	<property name="hibernate.connection.url">jdbc:postgresql://java-uta-sy.cbl5il2pac4q.us-east-2.rds.amazonaws.com:5432/expensehibernate</property>
 	<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 	<property name="hibernate.connection.dialect">org.hibernate.PostgreSQLDialect</property>
 	<property name="hibernate.show_sql">true</property>
@@ -24,6 +24,12 @@
 
 	<property name="hibernate.connection.pool_size">10</property>
 	<property name="hibernate.hbm2ddl.auto">create</property>	
+	 
+	<mapping class="com.example.models.ReimBStatus"/>
+	<mapping class="com.example.models.ReimBType"/>
+	<mapping class="com.example.models.UserRole"/>
+	 
+	<mapping class="com.example.models.User"/>
 	
 	</session-factory>
 
