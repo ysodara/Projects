@@ -1,5 +1,7 @@
 package com.example.models;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +18,7 @@ import javax.persistence.Table;
 public class Reimburstment {
 	
 	@Id
-	@Column(name="user_id")
+	@Column(name="reimb_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int reimbId;
 	
@@ -29,13 +31,19 @@ public class Reimburstment {
 	@Column(name="reciept", nullable =true)
 	private String reciept;
 	
+	@Column(name="submitted", nullable =true)
+	private LocalDateTime submitted;
+	
+	@Column(name="resovled", nullable =true)
+	private LocalDateTime resovled;
+	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="employee_submit_FK")
-	private User submitted;
+	private User submittedBy;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="manager_resovle_FK")
-	private User resovled;
+	private User resovledBy;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="type_FK")
@@ -48,35 +56,45 @@ public class Reimburstment {
 	public Reimburstment () {
 		
 	}
-	//For setting for Employee to database
-	public Reimburstment (double amount, String description, String reciept, User submitted, ReimBType type, ReimBStatus status) {
+	//For setting for Reimburstment to database by Employee
+	public Reimburstment (double amount, String description, String reciept, User submittedBy, ReimBType type, LocalDateTime submitted,  ReimBStatus status) {
 		this.amount = amount;
-		this.submitted = submitted;
+		this.submittedBy = submittedBy;
 		this.description = description;
 		this.reciept = reciept;
 		this.type = type;
 		this.status = status;
-		this.resovled = new User();
-	}
-	
-	
-	public void setReiemburstmentEmployee (int reimId, double amount, User submitted, String description, String reciept) {
-		this.reimbId = reimId;
-		this.amount = amount;
 		this.submitted = submitted;
-		this.description = description;
-		this.reciept = reciept;
 	}
 	
-	public void setReiemburstmentManager (int reimId, double amount, User resovled, String description, String reciept) {
+	public Reimburstment (int reimId, double amount, String description, String reciept, User submittedBy, ReimBType type, LocalDateTime submitted,  ReimBStatus status) {
 		this.reimbId = reimId;
 		this.amount = amount;
-		this.resovled = resovled;
+		this.submittedBy = submittedBy;
+		this.description = description;
+		this.reciept = reciept;
+		this.type = type;
+		this.status = status;
+		this.resovledBy = new User();
+		this.submitted = submitted;
+	}
+	
+	
+	public void setReiemburstmentEmployee (int reimId, double amount, User submittedBy, String description, String reciept, ReimBType type, LocalDateTime submitted,  ReimBStatus status) {
+		this.reimbId = reimId;
+		this.amount = amount;
+		this.submittedBy = submittedBy;
 		this.description = description;
 		this.reciept = reciept;
 	}
 	
-	
+	public void setReiemburstmentManager (int reimId, double amount, User resovledBy, String description, String reciept, ReimBType type, LocalDateTime submitted,  ReimBStatus status) {
+		this.reimbId = reimId;
+		this.amount = amount;
+		this.resovledBy = resovledBy;
+		this.description = description;
+		this.reciept = reciept;
+	}
 	public int getReimbId() {
 		return reimbId;
 	}
@@ -88,19 +106,6 @@ public class Reimburstment {
 	}
 	public void setAmount(double amount) {
 		this.amount = amount;
-	}
-	
-	public User getSubmitted() {
-		return submitted;
-	}
-	public void setSubmitted(User submitted) {
-		this.submitted = submitted;
-	}
-	public User getResovled() {
-		return resovled;
-	}
-	public void setResovled(User resovled) {
-		this.resovled = resovled;
 	}
 	public String getDescription() {
 		return description;
@@ -114,7 +119,50 @@ public class Reimburstment {
 	public void setReciept(String reciept) {
 		this.reciept = reciept;
 	}
+	public LocalDateTime getSubmitted() {
+		return submitted;
+	}
+	public void setSubmitted(LocalDateTime submitted) {
+		this.submitted = submitted;
+	}
+	public LocalDateTime getResovled() {
+		return resovled;
+	}
+	public void setResovled(LocalDateTime resovled) {
+		this.resovled = resovled;
+	}
+	public User getSubmittedBy() {
+		return submittedBy;
+	}
+	public void setSubmittedBy(User submittedBy) {
+		this.submittedBy = submittedBy;
+	}
+	public User getResovledBy() {
+		return resovledBy;
+	}
+	public void setResovledBy(User resovledBy) {
+		this.resovledBy = resovledBy;
+	}
+	public ReimBType getType() {
+		return type;
+	}
+	public void setType(ReimBType type) {
+		this.type = type;
+	}
+	public ReimBStatus getStatus() {
+		return status;
+	}
+	public void setStatus(ReimBStatus status) {
+		this.status = status;
+	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Reimburstment [reimbId=" + reimbId + ", amount=" + amount + ", description=" + description
+				+ ", submittedBy="+ submittedBy.getUsername() + ", type=" + type.getReimBType() + ", status=" + status.getReimBStatusId() + "]";
+	}
 	
 	
 }

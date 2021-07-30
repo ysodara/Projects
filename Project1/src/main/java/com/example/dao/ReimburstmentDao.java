@@ -1,5 +1,80 @@
 package com.example.dao;
 
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.example.models.Reimburstment;
+import com.example.models.User;
+import com.example.utils.HibernateUtil;
+
 public class ReimburstmentDao {
 	
+	
+	public ReimburstmentDao() {}
+	
+	public void insert(Reimburstment rb) {
+		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.beginTransaction();
+		ses.save(rb);
+		tx.commit();
+	}
+	
+	public void update(Reimburstment rb) {
+		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.beginTransaction();
+		ses.update(rb);
+		tx.commit();
+	}
+	
+	public List<Reimburstment> selectPendingTickets(int employeeId) {
+		Session ses = HibernateUtil.getSession();
+		//If you are using ses.get(), you must use the id
+		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 2 and employee_submit_fk=" + employeeId, Reimburstment.class).list();
+		if(reimbList.size() == 0) {
+			return null;
+		}
+		return reimbList;
+	}
+	
+	public List<Reimburstment> selectResovledTickets(int employeeId) {
+		Session ses = HibernateUtil.getSession();
+		//If you are using ses.get(), you must use the id
+		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 1 and employee_submit_fk=" + employeeId, Reimburstment.class).list();
+		if(reimbList.size() == 0) {
+			return null;
+		}
+		return reimbList;
+	}
+	
+	public List<Reimburstment> selectEmployeeResovledTickets() {
+		Session ses = HibernateUtil.getSession();
+		//If you are using ses.get(), you must use the id
+		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 1", Reimburstment.class).list();
+		if(reimbList.size() == 0) {
+			return null;
+		}
+		return reimbList;
+	}
+	
+	public List<Reimburstment> selectEmployeePendingTickets() {
+		Session ses = HibernateUtil.getSession();
+		//If you are using ses.get(), you must use the id
+		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 2", Reimburstment.class).list();
+		if(reimbList.size() == 0) {
+			return null;
+		}
+		return reimbList;
+	}
+	
+	public List<Reimburstment> selectEmployeeTickets(int employeeId) {
+		Session ses = HibernateUtil.getSession();
+		//If you are using ses.get(), you must use the id
+		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where employee_submit_fk=" + employeeId, Reimburstment.class).list();
+		if(reimbList.size() == 0) {
+			return null;
+		}
+		return reimbList;
+	}
 }

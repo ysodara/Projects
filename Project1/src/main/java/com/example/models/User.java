@@ -19,6 +19,8 @@ import javax.persistence.Table;
 @Table(name="users")
 public class User {
 	
+	
+
 	@Id
 	@Column(name="user_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -69,7 +71,7 @@ public class User {
 	}
 	
 	//User to get user info from the database
-	public User(int id, String firstName, String lastName, String username, String email, String password,UserRole userRole) {
+	public User(int id, String firstName, String lastName, String username, String email, String password, UserRole userRole) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -139,6 +141,10 @@ public class User {
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", email=" + email + ", password=" + password + ", userRole=" + userRole.getUserRole() + "]";
+	}
 	
 }
