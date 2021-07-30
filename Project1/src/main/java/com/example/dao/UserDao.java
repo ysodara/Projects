@@ -1,4 +1,4 @@
-package com.example.Dao;
+package com.example.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
