@@ -23,7 +23,7 @@
 	-->
 
 	<property name="hibernate.connection.pool_size">10</property>
-	<property name="hibernate.hbm2ddl.auto">validate</property>	
+	<property name="hibernate.hbm2ddl.auto">validate</property>
 	
 	 
 	<mapping class="com.example.models.ReimBStatus"/>

@@ -1,23 +1,32 @@
+import java.io.IOException;
 import java.util.List;
 
+import com.example.controllers.LoginController;
 import com.example.dao.ReimburstmentDao;
 import com.example.dao.UserDao;
+import com.example.exceptions.InvalidCredentialsException;
+import com.example.exceptions.UserDoesNotExistException;
 import com.example.models.ReimBType;
 import com.example.models.Reimburstment;
 import com.example.models.User;
 import com.example.models.UserRole;
+import com.example.services.UserService;
 
 import jdk.javadoc.internal.doclets.formats.html.markup.HtmlAttr.Role;
 import com.example.models.UserRole;
 import com.example.utils.HibernateUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 
 public class ReimBDriver {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws JsonProcessingException, IOException, UserDoesNotExistException, InvalidCredentialsException {
 		UserDao uDao = new UserDao();
 		ReimburstmentDao rDao = new ReimburstmentDao();
+		UserService userv = new UserService(uDao);
 		
+		User u = userv.signIn("JJ12", "passwords");
+		System.out.println(u.toString());
 //		UserRole employeeRole = new UserRole();
 //		employeeRole.setUserRole("MANAGER");
 //		employeeRole.setUserRoleId(2);
