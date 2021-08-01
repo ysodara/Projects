@@ -46,20 +46,22 @@ public class EmployeeController {
 
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode parsedObj = mapper.readTree(data);
+		HttpSession session = req.getSession(true);
+		
+		int employeeId = (int)session.getAttribute("id");
 		
 		
-		//double amount, String description, int employeeId, int typeId, String type
 		
 		double amount = parsedObj.get("amount").asDouble();
 		String description = parsedObj.get("description").asText();
-		int employeeId = parsedObj.get("employeeId").asInt();
+//		int employeeId = parsedObj.get("employeeId").asInt();
 		int typeId = parsedObj.get("typeId").asInt();
 		String type = parsedObj.get("type").asText();
 		
 		
 		try {
 			//We will keep track of if the user is logged in by storing their id in the session
-			//req.getSession().setAttribute("id", u.getId());
+			req.getSession().setAttribute("id", employeeId);
 			Reimburstment r = eServ.submit(amount, description, employeeId, typeId, type);
 			res.setStatus(HttpServletResponse.SC_OK);
 			

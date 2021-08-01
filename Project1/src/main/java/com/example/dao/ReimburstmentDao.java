@@ -17,7 +17,7 @@ public class ReimburstmentDao {
 		Session ses = HibernateUtil.getSession();
 		//If you are using ses.get(), you must use the id
 		Reimburstment rb = ses.get(Reimburstment.class, id);
-		ses.close();
+		//ses.close();
 		return rb;
 	}
 	
@@ -35,14 +35,16 @@ public class ReimburstmentDao {
 	}
 	
 	public void update(Reimburstment rb) {
+		Reimburstment rToUpdate = rb;
 		Session ses = HibernateUtil.getSession();
 		Transaction tx = ses.getTransaction();
 		
 		if(!tx.isActive()) {
 			tx = ses.beginTransaction();
 		} 
-		ses.update(rb);
+		ses.update(rToUpdate);
 		tx.commit();
+		ses.evict(rToUpdate);
 	}
 	
 	public List<Reimburstment> selectPendingTickets(int employeeId) {
@@ -68,7 +70,7 @@ public class ReimburstmentDao {
 	public List<Reimburstment> selectEmployeeResovledTickets() {
 		Session ses = HibernateUtil.getSession();
 		//If you are using ses.get(), you must use the id
-		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 1", Reimburstment.class).list();
+		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 2", Reimburstment.class).list();
 		if(reimbList.size() == 0) {
 			return null;
 		}
