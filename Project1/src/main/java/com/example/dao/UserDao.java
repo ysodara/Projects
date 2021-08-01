@@ -18,13 +18,16 @@ public class UserDao {
 	public void insert(User u) {
 		//Opening up a session in Hibernate
 		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.getTransaction();
 		
-		//We must start a transaction
-		Transaction tx=ses.beginTransaction();
+		if(!tx.isActive()) {
+			tx = ses.beginTransaction();
+		} 
 		
 		ses.save(u);
 		
 		tx.commit();
+		ses.clear();
 		
 	}
 	
@@ -53,6 +56,27 @@ public class UserDao {
 		//Hibernate translates this HQL into native SQL
 		List<User> uList = ses.createQuery("from User", User.class).list();
 		return uList;
+	}
+	
+	public List<User> selectAllEmployee(){
+		Session ses = HibernateUtil.getSession();
+		//This is how we select all entries in a table with HQL
+		//HQL is based off of our Java objects, not the table in the db, 
+		//Hibernate translates this HQL into native SQL
+		List<User> uList = ses.createQuery("from User where user_role_fk = 1", User.class).list();
+		return uList;
+	}
+	
+	public void update(User u) {
+		Session ses = HibernateUtil.getSession();
+		Transaction tx = ses.getTransaction();
+		
+		if(!tx.isActive()) {
+			tx = ses.beginTransaction();
+		} 
+		ses.update(u);
+		tx.commit();
+		
 	}
 	
 }

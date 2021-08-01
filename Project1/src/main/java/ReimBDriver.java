@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.List;
 
+import org.hibernate.Session;
+
 import com.example.controllers.LoginController;
 import com.example.dao.ReimburstmentDao;
 import com.example.dao.UserDao;
@@ -10,6 +12,8 @@ import com.example.models.ReimBType;
 import com.example.models.Reimburstment;
 import com.example.models.User;
 import com.example.models.UserRole;
+import com.example.services.EmployeeService;
+import com.example.services.ManagerService;
 import com.example.services.UserService;
 
 import jdk.javadoc.internal.doclets.formats.html.markup.HtmlAttr.Role;
@@ -21,17 +25,45 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class ReimBDriver {
 	
 	public static void main(String[] args) throws JsonProcessingException, IOException, UserDoesNotExistException, InvalidCredentialsException {
-		UserDao uDao = new UserDao();
-		ReimburstmentDao rDao = new ReimburstmentDao();
-		UserService userv = new UserService(uDao);
+//		UserDao uDao = new UserDao();
+//		ReimburstmentDao rDao = new ReimburstmentDao();
+//		UserService userv = new UserService(uDao);
+//		EmployeeService eServ = new EmployeeService(uDao, rDao);
+//		ManagerService mServ = new ManagerService(uDao, rDao);
+//		User u1= new User();
 		
-		User u = userv.signIn("JJ12", "passwords");
-		System.out.println(u.toString());
+		
+		
+		//Reimburstment r = mServ.approveRequest(2, 2);
+//		Reimburstment r = mServ.denyRequest(2, 2);
+//		System.out.println(r);
+//		List <Reimburstment> rbl = mServ.viewAllPendingAllEmployee();
+//		rbl = mServ.viewAllResovledAllEmployee();
+//		rbl = mServ.viewAllRequestOfEmployee(1);
+//		List<User> ul = mServ.viewAllEmployee();
+//		
+//		public List<User> viewAllEmployee() {
+//			List<User> allEmployee = uDao.selectAllEmployee();
+//			return allEmployee;
+//		}
+		
+		//User updatedUser = eServ.updateAccountInfo(3, null, "Trying Update", null, null, null);
+		//System.out.println(updatedUser);
+		//uDao.update(u1);
+		//User u = userv.signIn("JJ12", "passwords");
+		//System.out.println(u.toString());
 //		UserRole employeeRole = new UserRole();
 //		employeeRole.setUserRole("MANAGER");
 //		employeeRole.setUserRoleId(2);
 		//String firstName, String lastName, String email, String password, UserRole userRole
-		//User u1= new User("firstname","lastname", "email@", "password", employeeRole);
+		//User u1= new User("firstname","lastname", "email12@", "password", employeeRole);
+		//double amount, String description, int employeeId, int typeId, String type, int statusId, String Status
+		//Reimburstment r = eServ.submit(100, "Lodgin", 1, 1 , "LODGING");
+		
+//		System.out.println(r.getReimbId());
+//		System.out.println(r.getDescription());
+//		System.out.println(r.getStatus().getReimBStatus());
+		
 		//uDao.insert(u1);
 		
 //		List<User> ulist = uDao.selectAll();
@@ -84,8 +116,8 @@ public class ReimBDriver {
 //		System.out.println(r4.toString());
 //		System.out.println("-------------------------------------------------------------");
 		
+		//Session ses = HibernateUtil.getSession();
 		
-		//HibernateUtil.closeSession();
 	}
 
 }

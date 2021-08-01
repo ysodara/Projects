@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="user_roles")
+@JsonIgnoreProperties (value = {"hibernateLazyInitializer", "handler"})
 public class UserRole {
 	@Id
 	@Column(name="user_role_id")
@@ -18,7 +21,13 @@ public class UserRole {
 	@Column(name="user_role", unique=true, nullable=false)
 	private String userRole;
 	
-	public UserRole () {		
+	
+	public UserRole () {
+		
+	}
+	public UserRole (int id, String r) {
+		this.userRole =r;
+		this.userRoleId=id;
 	}
 
 	public int getUserRoleId() {

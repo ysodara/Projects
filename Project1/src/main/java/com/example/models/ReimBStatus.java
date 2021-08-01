@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="reimburstment_statuses")
+@JsonIgnoreProperties (value = {"hibernateLazyInitializer", "handler"})
 public class ReimBStatus {
 	
 	@Id
@@ -22,8 +25,9 @@ public class ReimBStatus {
 	public ReimBStatus () {	
 	}
 	
-	public ReimBStatus (String status) {
+	public ReimBStatus (int id,String status) {
 		this.reimBStatus=status;
+		this.reimBStatusId=id;
 	}
 	
 	public int getReimBStatusId() {

@@ -20,15 +20,16 @@ async function login(e){
 			},
 			body: JSON.stringify(user)
 		});
-		let res = await req.json();
-		console.log(res);
+		var res = await req.json();
+		
+		//location.href='resources/html/' + res +'.html';
 	}catch (e){
 		console.log('Username or password was incorrect.')
 		return
 	}
-	
+	console.log(res);
 	//This is how we can Redirect to other page
-	//location.href='resources/html/employee.html'
+	location.href='resources/html/' + res +'.html';
 	
 }
 

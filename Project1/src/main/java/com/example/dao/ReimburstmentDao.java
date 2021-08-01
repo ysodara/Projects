@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.example.models.Reimburstment;
-import com.example.models.User;
 import com.example.utils.HibernateUtil;
 
 public class ReimburstmentDao {
@@ -14,16 +13,34 @@ public class ReimburstmentDao {
 	
 	public ReimburstmentDao() {}
 	
+	public Reimburstment selectRB(int id) {
+		Session ses = HibernateUtil.getSession();
+		//If you are using ses.get(), you must use the id
+		Reimburstment rb = ses.get(Reimburstment.class, id);
+		ses.close();
+		return rb;
+	}
+	
 	public void insert(Reimburstment rb) {
 		Session ses = HibernateUtil.getSession();
-		Transaction tx = ses.beginTransaction();
+		Transaction tx = ses.getTransaction();
+		
+		if(!tx.isActive()) {
+			tx = ses.beginTransaction();
+		} 
+		
 		ses.save(rb);
 		tx.commit();
+		ses.clear();
 	}
 	
 	public void update(Reimburstment rb) {
 		Session ses = HibernateUtil.getSession();
-		Transaction tx = ses.beginTransaction();
+		Transaction tx = ses.getTransaction();
+		
+		if(!tx.isActive()) {
+			tx = ses.beginTransaction();
+		} 
 		ses.update(rb);
 		tx.commit();
 	}
@@ -68,7 +85,7 @@ public class ReimburstmentDao {
 		return reimbList;
 	}
 	
-	public List<Reimburstment> selectEmployeeTickets(int employeeId) {
+	public List<Reimburstment> selectEmployeeAllTickets(int employeeId) {
 		Session ses = HibernateUtil.getSession();
 		//If you are using ses.get(), you must use the id
 		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where employee_submit_fk=" + employeeId, Reimburstment.class).list();
@@ -77,4 +94,5 @@ public class ReimburstmentDao {
 		}
 		return reimbList;
 	}
+	
 }

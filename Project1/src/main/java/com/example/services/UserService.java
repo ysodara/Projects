@@ -9,7 +9,9 @@ import com.example.models.User;
 public class UserService {
 	private UserDao uDao;
 	
-	
+	public UserService() {
+		
+	}
 	public UserService(UserDao udao) {
 		this.uDao = udao;
 	}
