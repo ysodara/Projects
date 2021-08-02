@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -8,6 +9,7 @@ import com.example.dao.ReimburstmentDao;
 import com.example.dao.UserDao;
 import com.example.exceptions.InvalidCredentialsException;
 import com.example.exceptions.UserDoesNotExistException;
+import com.example.exceptions.UserNameAlreadyExistsException;
 import com.example.models.ReimBType;
 import com.example.models.Reimburstment;
 import com.example.models.User;
@@ -24,10 +26,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class ReimBDriver {
 	
-	public static void main(String[] args) throws JsonProcessingException, IOException, UserDoesNotExistException, InvalidCredentialsException {
-//		UserDao uDao = new UserDao();
-//		ReimburstmentDao rDao = new ReimburstmentDao();
-//		UserService userv = new UserService(uDao);
+	public static void main(String[] args) throws JsonProcessingException, IOException, UserDoesNotExistException, InvalidCredentialsException, UserNameAlreadyExistsException, SQLException {
+		UserDao uDao = new UserDao();
+		ReimburstmentDao rDao = new ReimburstmentDao();
+		UserService uServ = new UserService(uDao);
+		
+		User u = uServ.signUp("Dean", "Winchester", "DW@", "password");
+		
+		
 //		EmployeeService eServ = new EmployeeService(uDao, rDao);
 //		ManagerService mServ = new ManagerService(uDao, rDao);
 //		User u1= new User();

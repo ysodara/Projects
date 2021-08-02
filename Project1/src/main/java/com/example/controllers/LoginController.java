@@ -6,12 +6,15 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+
 import com.example.dao.UserDao;
 import com.example.exceptions.InvalidCredentialsException;
 import com.example.exceptions.UserDoesNotExistException;
 import com.example.models.User;
 import com.example.models.UserRole;
 import com.example.services.UserService;
+import com.example.utils.HibernateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,8 +51,12 @@ public class LoginController {
 			req.getSession().setAttribute("id", u.getId());
 			res.setStatus(HttpServletResponse.SC_OK);
 			if (u.getUserRole().getUserRoleId() == 1) {
+				Session ses = HibernateUtil.getSession();
+				ses.clear();
 				res.getWriter().write(new ObjectMapper().writeValueAsString("employee"));
 			} else if (u.getUserRole().getUserRoleId() == 2){
+				Session ses = HibernateUtil.getSession();
+				ses.clear();
 				res.getWriter().write(new ObjectMapper().writeValueAsString("manager"));
 			}
 			//res.getWriter().write(new ObjectMapper().writeValueAsString(u));

@@ -54,9 +54,22 @@ public class EmployeeController {
 		
 		double amount = parsedObj.get("amount").asDouble();
 		String description = parsedObj.get("description").asText();
-//		int employeeId = parsedObj.get("employeeId").asInt();
 		int typeId = parsedObj.get("typeId").asInt();
-		String type = parsedObj.get("type").asText();
+		String type = "";
+		switch (typeId) {
+		case 1: 
+			type = "LODGING";
+			break;
+		case 2:	
+			type = "TRAVEL";
+			break;
+		case 3:	
+			type = "FOOD";
+			break;
+		case 4:	
+			type = "OTHER";
+			break;
+		}
 		
 		
 		try {

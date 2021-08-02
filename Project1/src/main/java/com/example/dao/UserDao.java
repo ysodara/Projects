@@ -23,11 +23,8 @@ public class UserDao {
 		if(!tx.isActive()) {
 			tx = ses.beginTransaction();
 		} 
-		
 		ses.save(u);
-		
 		tx.commit();
-		ses.clear();
 		
 	}
 	
@@ -43,6 +40,16 @@ public class UserDao {
 		Session ses = HibernateUtil.getSession();
 		//If you are using ses.get(), you must use the id
 		List<User> u = ses.createQuery("from User where username= '" + username + "'", User.class).list();
+		if(u.size() == 0) {
+			return null;
+		}
+		return u.get(0);
+	}
+	
+	public User selectUserByEmail(String email) {
+		Session ses = HibernateUtil.getSession();
+		//If you are using ses.get(), you must use the id
+		List<User> u = ses.createQuery("from User where email= '" + email + "'", User.class).list();
 		if(u.size() == 0) {
 			return null;
 		}

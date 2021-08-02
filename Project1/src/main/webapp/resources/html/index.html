@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+		<h1>Welcome to Expense Reimburstment</h1>
+        <h3>Please sign-in</h3>
+
+        <!-- You can include the method and action attributes to tell the form where to send the inforation-->
+        <!-- And how it should be sent -->
+        <div id = "loginDiv">
+        <form id='login' action='login' method='post'>
+            <label for='username'>Username: </label>
+            <input type='text' name='username' maxlength='50' required id='username'/>
+            <label for='password'>Password: </label>
+            <input type='password' name='password' id='password' minlength='8' required/>
+            <input type='submit' value='Login' />
+        </form>
+        </div>
+ 	<br>
+        <div id = "signupDiv">
+        <form id='signup' action='login' method='post'>
+            
+            <label for='first'>First Name: </label>
+            <input type='text' name='first' maxlength='50' required id='first'/>
+            
+            <label for='last'>Last Name: </label>
+            <input type='text' name='last' maxlength='50' required id='last'/>
+            
+            <label for='email'>Email: </label>
+            <input type='email' name='email' pattern=".+@revature\.com" maxlength='50' required id='email'/>
+            
+            <label for='password'>Password: </label>
+            <input type='password' name='password' id='password' minlength='8' required/>
+            <input type='submit' value='Sign up' />
+        </form>
+        </div>
+        
+        <script src='resources/js/login.js'></script>
+</body>
+</html>

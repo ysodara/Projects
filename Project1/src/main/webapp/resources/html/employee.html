@@ -2,12 +2,42 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Employee Page</title>
+
+<link href="../css/Style.css" rel="stylesheet"/>
 </head>
 <body>
-
-	<h1>Welcome to Expense Reimburstment</h1>
+<!--  
+Submit a reimbursement request
+View pending reimbursement requests
+View resolved reimbursement requests
+View my account information
+Update account information
+-->
+		<h1>Welcome to Expense Reimburstment</h1>
         <h3>Employee Page</h3>
+        
+        <form id='submitReimburstment' action='login' method='post'>
+            <label for='amount'>Amount: </label>
+            <input type='number' name='amount' maxlength='50' required id='amount'/>
+            
+            <label for='description'>Description: </label>
+            <input type='text' name='description' maxlength='50' required id='description'/>
+            
+            
+            <select id="type">
+				<option value="1">LODGING</option>
+				<option value="2">TRAVEL</option>
+				<option value="3">FOOD</option>
+				<option value="4">OTHER</option>
+			</select>
+            <input type='submit' value='Submit' />
+        </form>
+        <br>
+        
+        <button onclick="retrievePendingRequest(event)">View Pending Requests</button>
 
+
+<script src='../js/employee.js'></script>
 </body>
 </html>

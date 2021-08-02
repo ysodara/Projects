@@ -22,6 +22,10 @@ public class ServeletJSONHelper {
 				LoginController.login(req,res);
 				break;
 			}
+			case "/Project1/api/signup": {
+				SignUpController.signup(req, res);
+				break;
+			}
 			case "/Project1/api/employee/submit": {
 				EmployeeController.submit(req, res);
 				break;

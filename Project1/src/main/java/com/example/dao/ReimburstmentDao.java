@@ -70,7 +70,7 @@ public class ReimburstmentDao {
 	public List<Reimburstment> selectEmployeeResovledTickets() {
 		Session ses = HibernateUtil.getSession();
 		//If you are using ses.get(), you must use the id
-		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 2", Reimburstment.class).list();
+		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 1", Reimburstment.class).list();
 		if(reimbList.size() == 0) {
 			return null;
 		}

@@ -1,10 +1,14 @@
 package com.example.services;
 
+import java.sql.SQLException;
+
 import com.example.dao.UserDao;
 import com.example.exceptions.InvalidCredentialsException;
 import com.example.exceptions.UserDoesNotExistException;
+import com.example.exceptions.UserNameAlreadyExistsException;
 import com.example.logging.Logging;
 import com.example.models.User;
+import com.example.models.UserRole;
 
 public class UserService {
 	private UserDao uDao;
@@ -30,5 +34,24 @@ public class UserService {
 			Logging.logger.info("User was logged in");
 			return u;
 		}
+	}
+	
+	public User signUp(String first, String last, String email, String password) throws UserNameAlreadyExistsException, SQLException{
+		
+		UserRole role = new UserRole(1, "EMPLOYEE");
+		
+		User u = new User(first, last, email, password, role);
+		
+		User newUser = uDao.selectUserByEmail(u.getEmail());	
+		
+		if (newUser == null) {
+			uDao.insert(u);
+			newUser = uDao.selectUserByUsername(u.getUsername());
+			Logging.logger.info("New user has registered");
+		} else {
+			Logging.logger.info("User already exists with current email");
+		}
+		
+		return newUser;
 	}
 }

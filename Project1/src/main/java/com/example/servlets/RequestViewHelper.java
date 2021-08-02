@@ -11,10 +11,16 @@ public class RequestViewHelper {
 
 	public static String process(HttpServletRequest req) throws ServletException, IOException {
 		switch(req.getRequestURI()) {
-		case "/Project1/home":
-			return LoginViewController.fetchHomePage(req);
+		case "/Project1/home": 	
+			return RequestViewController.fetchHomePage(req);		
+		case "/Project1/login":	
+			return RequestViewController.fetchLoginPage(req);		
+		case "/Project1/signup": 
+			return RequestViewController.fetchSignupPage(req);
 		}
-	return "/Project1/error";
+		return "/Project1/error";
 	}
-
 }
+
+	
+
