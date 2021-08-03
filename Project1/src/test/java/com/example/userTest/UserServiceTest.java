@@ -2,6 +2,7 @@ package com.example.userTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -20,6 +21,7 @@ import com.example.exceptions.UserDoesNotExistException;
 import com.example.exceptions.UserNameAlreadyExistsException;
 import com.example.models.User;
 import com.example.models.UserRole;
+import com.example.services.ManagerService;
 import com.example.services.UserService;
 
 public class UserServiceTest {
@@ -82,5 +84,11 @@ public class UserServiceTest {
 		User loggedIn = uServ.signUp("firstName", "lastName", "email", "password");
 		
 		assertFalse(newUser.getId()==loggedIn.getId());
+	}
+	
+	@Test
+	public void testDefaultConstructor () {
+		UserService dUServ = new UserService();;
+		assertFalse(dUServ == uServ);
 	}
 }

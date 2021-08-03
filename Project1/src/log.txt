@@ -1804,3 +1804,96 @@ org.hibernate.HibernateException: Use of DefaultSchemaNameResolver requires Dial
 2021-08-02 20:54:13 INFO  Logging:52 - User already exists with current email
 2021-08-02 20:54:13 INFO  Logging:34 - User was logged in
 2021-08-02 20:54:13 INFO  Logging:50 - New user has registered
+2021-08-03 07:37:40 INFO  Logging:52 - User already exists with current email
+2021-08-03 07:37:40 INFO  Logging:34 - User was logged in
+2021-08-03 07:37:40 INFO  Logging:50 - New user has registered
+2021-08-03 07:37:51 INFO  Logging:52 - User already exists with current email
+2021-08-03 07:37:51 INFO  Logging:34 - User was logged in
+2021-08-03 07:37:51 INFO  Logging:50 - New user has registered
+2021-08-03 07:38:53 INFO  Logging:52 - User already exists with current email
+2021-08-03 07:38:53 INFO  Logging:34 - User was logged in
+2021-08-03 07:38:53 INFO  Logging:50 - New user has registered
+2021-08-03 07:39:21 INFO  Logging:52 - User already exists with current email
+2021-08-03 07:39:21 INFO  Logging:34 - User was logged in
+2021-08-03 07:39:21 INFO  Logging:50 - New user has registered
+2021-08-03 07:40:00 INFO  Logging:52 - User already exists with current email
+2021-08-03 07:40:00 INFO  Logging:34 - User was logged in
+2021-08-03 07:40:00 INFO  Logging:50 - New user has registered
+2021-08-03 07:41:31 INFO  Logging:52 - User already exists with current email
+2021-08-03 07:41:31 INFO  Logging:34 - User was logged in
+2021-08-03 07:41:31 INFO  Logging:50 - New user has registered
+2021-08-03 07:43:21 INFO  Logging:52 - User already exists with current email
+2021-08-03 07:43:21 INFO  Logging:34 - User was logged in
+2021-08-03 07:43:21 INFO  Logging:50 - New user has registered
+2021-08-03 07:44:03 INFO  Logging:52 - User already exists with current email
+2021-08-03 07:44:03 INFO  Logging:34 - User was logged in
+2021-08-03 07:44:03 INFO  Logging:50 - New user has registered
+2021-08-03 07:44:14 INFO  Logging:52 - User already exists with current email
+2021-08-03 07:44:14 INFO  Logging:34 - User was logged in
+2021-08-03 07:44:14 INFO  Logging:50 - New user has registered
+2021-08-03 07:45:31 INFO  Logging:52 - User already exists with current email
+2021-08-03 07:45:31 INFO  Logging:34 - User was logged in
+2021-08-03 07:45:31 INFO  Logging:50 - New user has registered
+2021-08-03 08:02:08 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:02:08 INFO  Logging:34 - User was logged in
+2021-08-03 08:02:08 INFO  Logging:50 - New user has registered
+2021-08-03 08:03:04 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:03:04 INFO  Logging:34 - User was logged in
+2021-08-03 08:03:04 INFO  Logging:50 - New user has registered
+2021-08-03 08:03:15 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:03:15 INFO  Logging:34 - User was logged in
+2021-08-03 08:03:15 INFO  Logging:50 - New user has registered
+2021-08-03 08:04:28 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:04:28 INFO  Logging:34 - User was logged in
+2021-08-03 08:04:28 INFO  Logging:50 - New user has registered
+2021-08-03 08:05:23 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:05:23 INFO  Logging:34 - User was logged in
+2021-08-03 08:05:23 INFO  Logging:50 - New user has registered
+2021-08-03 08:23:21 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:23:21 INFO  Logging:34 - User was logged in
+2021-08-03 08:23:21 INFO  Logging:50 - New user has registered
+2021-08-03 08:24:29 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:24:29 INFO  Logging:34 - User was logged in
+2021-08-03 08:24:29 INFO  Logging:50 - New user has registered
+2021-08-03 08:26:55 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:26:55 INFO  Logging:34 - User was logged in
+2021-08-03 08:26:55 INFO  Logging:50 - New user has registered
+2021-08-03 08:30:26 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:30:26 INFO  Logging:34 - User was logged in
+2021-08-03 08:30:26 INFO  Logging:50 - New user has registered
+2021-08-03 08:31:29 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:31:29 INFO  Logging:34 - User was logged in
+2021-08-03 08:31:29 INFO  Logging:50 - New user has registered
+2021-08-03 08:35:35 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:35:35 INFO  Logging:34 - User was logged in
+2021-08-03 08:35:35 INFO  Logging:50 - New user has registered
+2021-08-03 08:37:06 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:37:06 INFO  Logging:34 - User was logged in
+2021-08-03 08:37:06 INFO  Logging:50 - New user has registered
+2021-08-03 08:41:02 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:41:02 INFO  Logging:34 - User was logged in
+2021-08-03 08:41:02 INFO  Logging:50 - New user has registered
+2021-08-03 08:42:32 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:42:32 INFO  Logging:34 - User was logged in
+2021-08-03 08:42:32 INFO  Logging:50 - New user has registered
+2021-08-03 08:42:42 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:42:42 INFO  Logging:34 - User was logged in
+2021-08-03 08:42:42 INFO  Logging:50 - New user has registered
+2021-08-03 08:43:45 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:43:45 INFO  Logging:34 - User was logged in
+2021-08-03 08:43:45 INFO  Logging:50 - New user has registered
+2021-08-03 08:45:34 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:45:34 INFO  Logging:34 - User was logged in
+2021-08-03 08:45:34 INFO  Logging:50 - New user has registered
+2021-08-03 08:47:42 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:47:42 INFO  Logging:34 - User was logged in
+2021-08-03 08:47:42 INFO  Logging:50 - New user has registered
+2021-08-03 08:48:45 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:48:45 INFO  Logging:34 - User was logged in
+2021-08-03 08:48:45 INFO  Logging:50 - New user has registered
+2021-08-03 08:49:03 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:49:03 INFO  Logging:34 - User was logged in
+2021-08-03 08:49:03 INFO  Logging:50 - New user has registered
+2021-08-03 08:49:50 INFO  Logging:52 - User already exists with current email
+2021-08-03 08:49:50 INFO  Logging:34 - User was logged in
+2021-08-03 08:49:50 INFO  Logging:50 - New user has registered

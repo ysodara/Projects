@@ -82,6 +82,18 @@ public class Reimburstment {
 		this.submitted = submitted;
 	}
 	
+	public Reimburstment (int reimId, double amount, String description, String reciept, User submittedBy,User resovledBy, ReimBType type, LocalDateTime submitted,  ReimBStatus status) {
+		this.reimbId = reimId;
+		this.amount = amount;
+		this.submittedBy = submittedBy;
+		this.description = description;
+		this.reciept = reciept;
+		this.type = type;
+		this.status = status;
+		this.resovledBy = resovledBy;
+		this.submitted = submitted;
+	}
+	
 	
 	public void setReiemburstmentEmployee (int reimId, double amount, User submittedBy, String description, String reciept, ReimBType type, LocalDateTime submitted,  ReimBStatus status) {
 		this.reimbId = reimId;
