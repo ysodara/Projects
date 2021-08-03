@@ -1781,3 +1781,26 @@ org.hibernate.HibernateException: Use of DefaultSchemaNameResolver requires Dial
 2021-08-01 14:43:30 DEBUG TwoPhaseLoad:288 - Done materializing entity [com.example.models.User#5]
 2021-08-01 14:43:30 DEBUG LogicalConnectionManagedImpl:161 - Initiating JDBC connection release from afterTransaction
 2021-08-01 14:43:30 INFO  Logging:52 - User already exists with current email
+2021-08-02 18:48:18 INFO  Logging:34 - User was logged in
+2021-08-02 18:56:42 INFO  Logging:34 - User was logged in
+2021-08-02 18:56:42 INFO  Logging:34 - User was logged in
+2021-08-02 18:59:13 INFO  Logging:34 - User was logged in
+2021-08-02 18:59:13 INFO  Logging:52 - User already exists with current email
+2021-08-02 19:01:31 INFO  Logging:34 - User was logged in
+2021-08-02 19:01:31 INFO  Logging:52 - User already exists with current email
+2021-08-02 19:07:09 INFO  Logging:34 - User was logged in
+2021-08-02 19:07:09 INFO  Logging:52 - User already exists with current email
+2021-08-02 20:45:38 INFO  Logging:34 - User was logged in
+2021-08-02 20:45:38 INFO  Logging:52 - User already exists with current email
+2021-08-02 20:46:36 INFO  Logging:34 - User was logged in
+2021-08-02 20:46:36 INFO  Logging:52 - User already exists with current email
+2021-08-02 20:49:32 INFO  Logging:34 - User was logged in
+2021-08-02 20:49:32 INFO  Logging:50 - New user has registered
+2021-08-02 20:49:37 INFO  Logging:34 - User was logged in
+2021-08-02 20:49:37 INFO  Logging:50 - New user has registered
+2021-08-02 20:52:18 INFO  Logging:52 - User already exists with current email
+2021-08-02 20:52:18 INFO  Logging:34 - User was logged in
+2021-08-02 20:52:18 INFO  Logging:50 - New user has registered
+2021-08-02 20:54:13 INFO  Logging:52 - User already exists with current email
+2021-08-02 20:54:13 INFO  Logging:34 - User was logged in
+2021-08-02 20:54:13 INFO  Logging:50 - New user has registered

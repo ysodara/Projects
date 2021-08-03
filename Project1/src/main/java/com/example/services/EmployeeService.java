@@ -57,7 +57,8 @@ public class EmployeeService {
 	}
 	
 	public User viewAccountInfo (int id) {
-		return uDao.selectUser(id);
+		User u = uDao.selectUser(id);
+		return u;
 	}
 	
 	public User updateAccountInfo (int id, String email, String firstName, String LastName, String password, String username) {
