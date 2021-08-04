@@ -28,9 +28,11 @@ async function retrievePendingRequest(e){
 }
 
 function populatePendingRequest(data){
-	$("td").empty();
-    $("tr").empty();
+	$("#columnP").empty();
+    $("#rowP").empty();
     $("#pending").empty();
+    $('#header').empty();
+    $('#ADTable').empty();
 
 	$("#pending").append($('<h2>All Pending Requests</h2>'));
 	
@@ -44,8 +46,8 @@ function populatePendingRequest(data){
 	for (rbObj of data) {
 		let date = rbObj.submitted.month + ` ` +rbObj.submitted.dayOfMonth +`, ` + rbObj.submitted.year;
 		
-        $('#ADTable').append($('<tr><td>'+ rbObj.amount +'</td><td>' + rbObj.description + '</td><td>' 
-        + rbObj.status.reimBStatus + '</td><td>'+ date + '</td><td>' + rbObj.type.reimBType  + '</td></tr>'));                               
+        $('#ADTable').append($('<tr id="rowP"><td id="columnP">'+ rbObj.amount +'</td><td id="columnP">' + rbObj.description + '</td><td id="columnP">' 
+        + rbObj.status.reimBStatus + '</td><td id="columnP">'+ date + '</td><td id="columnP">' + rbObj.type.reimBType  + '</td></tr>'));                               
     }
 
 }
@@ -55,7 +57,32 @@ async function retrieveResolvedRequest(){
 	let res = await fetch('http://localhost:8080/Project1/api/employee/viewresolved');
 	let data = await res.json();
 	console.log(data);
-	//populateRequest(data);
+	populateResolvedRequest(data);
+}
+
+
+function populateResolvedRequest(data){
+	$("#column").empty();
+    $("#row").empty();
+    $("#resolved").empty();
+	$('#headerR').empty();
+	$('#RTable').empty();
+	$("#resolved").append($('<h2>All Resolved Requests</h2>'));
+	
+    $('#headerR').append($('<th>Amount</th>'));
+    $('#headerR').append($('<th>Description</th>'));
+    $('#headerR').append($('<th>Status</th>'));
+    $('#headerR').append($('<th>Submitted On</th>'));
+    $('#headerR').append($('<th>Type</th>'));
+	
+
+	for (rbObj of data) {
+		let date = rbObj.submitted.month + ` ` +rbObj.submitted.dayOfMonth +`, ` + rbObj.submitted.year;
+		
+        $('#RTable').append($('<tr id="row"><td id="column">'+ rbObj.amount +'</td><td id="column">' + rbObj.description + '</td><td id="column">' 
+        + rbObj.status.reimBStatus + '</td><td id="column">'+ date + '</td><td id="column">' + rbObj.type.reimBType  + '</td></tr>'));                               
+    }
+
 }
 
 
@@ -65,12 +92,7 @@ async function viewAccountInfo(){
 	console.log(data);
 	//populateRequest(data);
 }
-async function updateAccountInfo(){
-	let res = await fetch('http://localhost:8080/Project1/api/employee/updateaccount');
-	let data = await res.json();
-	console.log(data);
-	//populateRequest(data);
-}
+
 
 async function logout(e){
 	let res = await fetch('http://localhost:8080/Project1/api/logout');
