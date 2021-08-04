@@ -1,50 +1,10 @@
-let form = document.getElementById('submitReimburstment').addEventListener('submit', login);
 
-async function login(e){
-	e.preventDefault();
-	
-	let amount = document.getElementById('amount').value;
-	let description= document.getElementById('description').value;
-	let select = document.getElementById('type');
-	let typeId = select.options[select.selectedIndex].value;
-	
-	let rbRequest ={
-		amount,
-		description,
-		typeId
-	}
-	console.log(rbRequest);
-	try{
-		let req = await fetch ('http://localhost:8080/Project1/api/employee/submit', {
-			method: 'POST',
-			headers: {
-				'Content-Type' : 'application/json'
-				
-			},
-			body: JSON.stringify(rbRequest)
-		});
-		var res = await req.json();
-		
-		
-	}catch (e){
-		console.log('Username or password was incorrect.')
-		return
-	}
-	console.log(res);
-	//This is how we can Redirect to other page
-	//location.href='resources/html/' + res +'.html';
-	
-}
+
+
 
 async function retrievePendingRequest(e){
 	e.preventDefault();
-	
-	
-	
-	let rbRequest ={
-		
-	}
-	//console.log(rbRequest);
+
 	try{
 		let req = await fetch ('http://localhost:8080/Project1/api/employee/viewpending', {
 			method: 'POST',
@@ -61,30 +21,62 @@ async function retrievePendingRequest(e){
 		console.log('Username or password was incorrect.')
 		return
 	}
+	populatePendingRequest(res);
 	console.log(res);
-	//This is how we can Redirect to other page
-	//location.href='resources/html/' + res +'.html';
+	
 	
 }
 
+function populatePendingRequest(data){
+	$("td").empty();
+    $("tr").empty();
+    $("#pending").empty();
 
+	$("#pending").append($('<h2>All Pending Requests</h2>'));
+	
+    $('#header').append($('<th>Amount</th>'));
+    $('#header').append($('<th>Description</th>'));
+    $('#header').append($('<th>Status</th>'));
+    $('#header').append($('<th>Submitted On</th>'));
+    $('#header').append($('<th>Type</th>'));
+	
 
-let container = document.getElementById('post-container');
-
-async function getPosts(){
-	let res = await fetch('http://localhost:8080/SocialHubWeek3/api/posts');
-	let data = await res.json();
-	populatePosts(data);
-}
-
-function populatePosts(data){
-	for (postObj of data) {
-        let post = document.createElement('div');
-        post.innerHTML = `<h2>${postObj.username}</h2>
-                      <p>${postObj.content}</p>`;
-        console.log(postObj);
-        container.append(post);
+	for (rbObj of data) {
+		let date = rbObj.submitted.month + ` ` +rbObj.submitted.dayOfMonth +`, ` + rbObj.submitted.year;
+		
+        $('#ADTable').append($('<tr><td>'+ rbObj.amount +'</td><td>' + rbObj.description + '</td><td>' 
+        + rbObj.status.reimBStatus + '</td><td>'+ date + '</td><td>' + rbObj.type.reimBType  + '</td></tr>'));                               
     }
+
 }
 
-getPosts();
+
+async function retrieveResolvedRequest(){
+	let res = await fetch('http://localhost:8080/Project1/api/employee/viewresolved');
+	let data = await res.json();
+	console.log(data);
+	//populateRequest(data);
+}
+
+
+async function viewAccountInfo(){
+	let res = await fetch('http://localhost:8080/Project1/api/employee/viewaccount');
+	let data = await res.json();
+	console.log(data);
+	//populateRequest(data);
+}
+async function updateAccountInfo(){
+	let res = await fetch('http://localhost:8080/Project1/api/employee/updateaccount');
+	let data = await res.json();
+	console.log(data);
+	//populateRequest(data);
+}
+
+async function logout(e){
+	let res = await fetch('http://localhost:8080/Project1/api/logout');
+	location.href='http://localhost:8080/Project1/home';
+	location.reload();
+}
+
+
+

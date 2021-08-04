@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserRole {
 	@Id
 	@Column(name="user_role_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userRoleId;
 	
 	@Column(name="user_role", unique=true, nullable=false)

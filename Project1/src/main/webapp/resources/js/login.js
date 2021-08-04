@@ -20,16 +20,18 @@ async function login(e){
 			},
 			body: JSON.stringify(user)
 		});
-		var res = await req.json();
+		//var res = await req.json();
 		
 		
 	}catch (e){
 		console.log('Username or password was incorrect.')
 		return
 	}
-	console.log(res);
+	
 	//This is how we can Redirect to other page
-	location.href='resources/html/' + res +'.html';
+	location.href='http://localhost:8080/Project1/home';
+	location.reload();
+	
 	
 }
 
@@ -68,7 +70,8 @@ async function signup(e){
 	}
 	//console.log(res);
 	//This is how we can Redirect to other page
-	location.href='resources/html/employee.html';
+	location.href='http://localhost:8080/Project1/home';
+	location.reload();
 	
 }
 

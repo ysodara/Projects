@@ -8,11 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+
 import com.example.dao.ReimburstmentDao;
 import com.example.dao.UserDao;
 import com.example.models.Reimburstment;
 import com.example.models.User;
 import com.example.services.ManagerService;
+import com.example.utils.HibernateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,6 +52,8 @@ public class ManagerController {
 			res.setStatus(HttpServletResponse.SC_OK);
 			
 			res.getWriter().write(new ObjectMapper().writeValueAsString("Reiemburstment successfully Update."));
+			Session ses = HibernateUtil.getSession();
+			ses.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -66,6 +71,8 @@ public class ManagerController {
 			res.setStatus(HttpServletResponse.SC_OK);
 			
 			res.getWriter().write(new ObjectMapper().writeValueAsString(rList));
+			Session ses = HibernateUtil.getSession();
+			ses.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -83,6 +90,8 @@ public class ManagerController {
 			res.setStatus(HttpServletResponse.SC_OK);
 			
 			res.getWriter().write(new ObjectMapper().writeValueAsString(rList));
+			Session ses = HibernateUtil.getSession();
+			ses.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -106,6 +115,8 @@ public class ManagerController {
 			res.setStatus(HttpServletResponse.SC_OK);
 			
 			res.getWriter().write(new ObjectMapper().writeValueAsString(rList));
+			Session ses = HibernateUtil.getSession();
+			ses.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -122,6 +133,8 @@ public class ManagerController {
 			res.setStatus(HttpServletResponse.SC_OK);
 			
 			res.getWriter().write(new ObjectMapper().writeValueAsString(uList));
+			Session ses = HibernateUtil.getSession();
+			ses.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();

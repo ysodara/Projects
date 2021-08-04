@@ -16,7 +16,7 @@ public class ReimBType {
 	
 	@Id
 	@Column(name="reimb_type_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int reimBTypeId;
 	
 	@Column(name="reimb_type", unique=true, nullable=false)

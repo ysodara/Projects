@@ -24,11 +24,13 @@ public class UserService {
 		User u = uDao.selectUserByUsername(username);
 		if(u.getId() == 0) {
 			Logging.logger.warn("User tried logging in that does not exist");
-			throw new UserDoesNotExistException();
+			u=null;
+			return u;
 		}
 		if(!u.getPassword().equals(password)) {
 			Logging.logger.warn("User tried to login with invalid credentials");
-			throw new InvalidCredentialsException();
+			u=null;
+			return u;
 		}
 		else {
 			Logging.logger.info("User was logged in");

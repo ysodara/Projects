@@ -46,20 +46,27 @@ public class LoginController {
 		try {
 			System.out.println("In the post handler");
 			User u = uServ.signIn(username, password);
-			System.out.println("inside try: "+u);
 			//We will keep track of if the user is logged in by storing their id in the session
-			req.getSession().setAttribute("id", u.getId());
-			res.setStatus(HttpServletResponse.SC_OK);
-			if (u.getUserRole().getUserRoleId() == 1) {
-				Session ses = HibernateUtil.getSession();
-				ses.clear();
-				res.getWriter().write(new ObjectMapper().writeValueAsString("employee"));
-			} else if (u.getUserRole().getUserRoleId() == 2){
-				Session ses = HibernateUtil.getSession();
-				ses.clear();
-				res.getWriter().write(new ObjectMapper().writeValueAsString("manager"));
-			}
+			if(u != null) {
+				req.getSession().setAttribute("id", u.getId());
+				res.setStatus(HttpServletResponse.SC_OK);
+				req.getSession().setAttribute("role", u.getUserRole().getUserRole());
+				if (u.getUserRole().getUserRoleId() == 1) {
+					Session ses = HibernateUtil.getSession();
+					ses.clear();
+					//res.getWriter().write(new ObjectMapper().writeValueAsString("employee"));
+					
+				} else if (u.getUserRole().getUserRoleId() == 2){
+					Session ses = HibernateUtil.getSession();
+					ses.clear();
+					//res.getWriter().write(new ObjectMapper().writeValueAsString("manager"));
+					
+				}
 			//res.getWriter().write(new ObjectMapper().writeValueAsString(u));
+			}
+			else {
+				System.out.println("User not signed in.");
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();

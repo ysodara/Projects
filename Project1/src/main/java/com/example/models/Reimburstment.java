@@ -22,7 +22,7 @@ public class Reimburstment {
 	
 	@Id
 	@Column(name="reimb_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int reimbId;
 	
 	@Column(name="amount", nullable =false)

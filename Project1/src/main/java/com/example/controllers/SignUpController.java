@@ -6,9 +6,12 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+
 import com.example.dao.UserDao;
 import com.example.models.User;
 import com.example.services.UserService;
+import com.example.utils.HibernateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,8 +45,11 @@ public class SignUpController {
 			User u = uServ.signUp(first, last, email, password);
 			//We will keep track of if the user is logged in by storing their id in the session
 			req.getSession().setAttribute("id", u.getId());
+			req.getSession().setAttribute("role", "EMPLOYEE");
 			res.setStatus(HttpServletResponse.SC_OK);
 			res.getWriter().write(new ObjectMapper().writeValueAsString(u));
+			Session ses = HibernateUtil.getSession();
+			ses.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();

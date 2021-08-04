@@ -24,4 +24,12 @@ public class RequestViewController {
 	public static String fetchSignupPage(HttpServletRequest req) {
 		return "resources/html/signup.html";
 	}
+
+	public static String fetchEmployeePage(HttpServletRequest req) {
+		return "resources/html/employee.html";
+	}
+
+	public static String fetchManagerPage(HttpServletRequest req) {
+		return "resources/html/manager.html";
+	}
 }

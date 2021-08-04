@@ -3,41 +3,38 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Employee Page</title>
-
-<link href="../css/Style.css" rel="stylesheet"/>
+<link href="resources/css/bootstrap.css" rel="stylesheet"/>
+<link href="resources/css/Style.css" rel="stylesheet"/>
 </head>
-<body>
-<!--  
-Submit a reimbursement request
-View pending reimbursement requests
-View resolved reimbursement requests
-View my account information
-Update account information
--->
-		<h1>Welcome to Expense Reimburstment</h1>
+<body class="container">
+<br>
+		<h1>Welcome to Expense Reimbursement</h1>
         <h3>Employee Page</h3>
+        <br>
+        <div id="pending"></div>
+		<table class="table table-hover" id="ADTable">
+			<tr id="header">
+        	</tr>
+		</table>
         
-        <form id='submitReimburstment' action='login' method='post'>
-            <label for='amount'>Amount: </label>
-            <input type='number' name='amount' maxlength='50' required id='amount'/>
-            
-            <label for='description'>Description: </label>
-            <input type='text' name='description' maxlength='50' required id='description'/>
-            
-            
-            <select id="type">
-				<option value="1">LODGING</option>
-				<option value="2">TRAVEL</option>
-				<option value="3">FOOD</option>
-				<option value="4">OTHER</option>
-			</select>
-            <input type='submit' value='Submit' />
-        </form>
         <br>
         
         <button onclick="retrievePendingRequest(event)">View Pending Requests</button>
+        
+        <button onclick="retrieveResolvedRequest(event)">View Resolved Requests</button>
+        
+       
+        
+        <button onclick="viewAccountInfo(event)">View Account Info</button>
+        <button onclick="window.location.href='resources/html/submitForm.html';">Go to Submit RB</button>
+        <br><br><br>
+        <button onclick="window.location.href='resources/html/edit.html';">Edit Account</button>
+         <button onclick="logout(event)">logout</button>
+        
 
 
-<script src='../js/employee.js'></script>
+		<script src='resources/js/employee.js'></script>
+		
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 </body>
 </html>

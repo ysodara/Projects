@@ -10,10 +10,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <error-page>
-  <error-code>404</error-code>
-  <location>/error</location>
-  </error-page>
+
   
   <servlet>
   <servlet-name>ErrorServlet</servlet-name>
@@ -25,10 +22,6 @@
   <servlet-class>com.example.servlets.MasterViewServlet</servlet-class>
   </servlet>
   
-  <servlet-mapping>
-  <servlet-name>MainServlet</servlet-name>
-  <url-pattern>/home</url-pattern>
-  </servlet-mapping>
   
   <servlet-mapping>
   <servlet-name>ErrorServlet</servlet-name>
@@ -40,6 +33,11 @@
   <servlet-class>com.example.servlets.MasterJSONServlet</servlet-class>
   <load-on-startup>1</load-on-startup>
   </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>MainServlet</servlet-name>
+  <url-pattern>/home</url-pattern>
+  </servlet-mapping>
   
   <servlet-mapping>
   <servlet-name>MasterJsonServlet</servlet-name>

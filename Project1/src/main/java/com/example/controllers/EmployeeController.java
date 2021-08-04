@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+
 import com.example.dao.ReimburstmentDao;
 import com.example.dao.UserDao;
 import com.example.models.Reimburstment;
 import com.example.models.User;
 import com.example.services.EmployeeService;
 import com.example.services.UserService;
+import com.example.utils.HibernateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -98,6 +101,8 @@ public class EmployeeController {
 			res.setStatus(HttpServletResponse.SC_OK);
 			List<Reimburstment> lRB = eServ.viewPendingRequests(employeeId);
 			res.getWriter().write(new ObjectMapper().writeValueAsString(lRB));
+			Session ses = HibernateUtil.getSession();
+			ses.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -117,6 +122,8 @@ public class EmployeeController {
 			res.setStatus(HttpServletResponse.SC_OK);
 			List<Reimburstment> lRB = eServ.viewResolvedRequests(employeeId);
 			res.getWriter().write(new ObjectMapper().writeValueAsString(lRB));
+			Session ses = HibernateUtil.getSession();
+			ses.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -136,6 +143,8 @@ public class EmployeeController {
 			res.setStatus(HttpServletResponse.SC_OK);
 			User u = eServ.viewAccountInfo(employeeId);
 			res.getWriter().write(new ObjectMapper().writeValueAsString(u));
+			Session ses = HibernateUtil.getSession();
+			ses.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -147,22 +156,45 @@ public class EmployeeController {
 	
 	
 	public static void updateAccount(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException{
-		//HttpSession session = req.getSession(true);
+		HttpSession session = req.getSession(true);
 		String data = dataHelper(req);
-		//int employeeId = (int)session.getAttribute("id");
+		
 		
 		
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode parsedObj = mapper.readTree(data);
 		
 		
-		//int id, String email, String firstName, String LastName, String password, String username
-		int employeeId = parsedObj.get("employeeId").asInt();
-		String email = parsedObj.get("email").asText();
-		String firstName = parsedObj.get("firstName").asText();
-		String lastName = parsedObj.get("lastName").asText();
-		String password = parsedObj.get("password").asText();
-		String username = parsedObj.get("username").asText();
+		String email="";
+		String firstName ="";
+		String lastName =""; 
+		String password =""; 
+		String username =""; 
+		
+		int employeeId = (int)session.getAttribute("id");
+		//int employeeId = parsedObj.get("employeeId").asInt();
+		if (parsedObj != null) {
+			if(parsedObj.has("email")) {
+				email = parsedObj.get("email").asText();
+			}
+			if(parsedObj.has("firstName")) {
+				firstName = parsedObj.get("firstName").asText();
+			}
+			if(parsedObj.has("lastName")) {
+				lastName = parsedObj.get("lastName").asText();
+			}
+			
+			if(parsedObj.has("password")) {
+				password = parsedObj.get("password").asText();
+			}
+			if(parsedObj.has("username")) {
+				username = parsedObj.get("username").asText();
+			}
+		}
+		
+		
+		 
+		
 		
 		try {
 			//We will keep track of if the user is logged in by storing their id in the session
@@ -170,6 +202,8 @@ public class EmployeeController {
 			res.setStatus(HttpServletResponse.SC_OK);
 			User u = eServ.updateAccountInfo(employeeId, email, firstName, lastName, password, username);
 			res.getWriter().write(new ObjectMapper().writeValueAsString(u));
+			Session ses = HibernateUtil.getSession();
+			ses.clear();
 		}
 		catch(Exception e) {
 			e.printStackTrace();

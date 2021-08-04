@@ -10,15 +10,41 @@ import com.example.controllers.*;
 public class RequestViewHelper {
 
 	public static String process(HttpServletRequest req) throws ServletException, IOException {
-		switch(req.getRequestURI()) {
-		case "/Project1/home": 	
-			return RequestViewController.fetchHomePage(req);		
-		case "/Project1/login":	
-			return RequestViewController.fetchLoginPage(req);		
-		case "/Project1/signup": 
-			return RequestViewController.fetchSignupPage(req);
+		
+		int userId = 0;
+		String role = "";
+		
+		if (req.getSession() != null) {
+			
+			if ((req.getSession().getAttribute("id")) != null) {
+				userId = (int)req.getSession().getAttribute("id");
+			}
+			
+			if ((req.getSession().getAttribute("role")) != null) {
+				role = (String)req.getSession().getAttribute("role");
+			}
+			
+		} 
+		
+		String url = req.getRequestURI();
+		System.out.println("URL AFTER FROM API: " + req.getRequestURI());
+				
+		if (userId == 0) {
+			System.out.println(userId);
+			System.out.println("Role is empty.");
+			return RequestViewController.fetchHomePage(req);
+		} else {
+			System.out.println(userId);
+			System.out.println(role);
+			if (role.equals("EMPLOYEE")) {
+				return RequestViewController.fetchEmployeePage(req);
+			}
+			else if (role.equals("MANAGER")) {
+				return RequestViewController.fetchManagerPage(req);
+			}
+			else {return RequestViewController.fetchHomePage(req);}
 		}
-		return "/Project1/error";
+		
 	}
 }
 
