@@ -29,6 +29,6 @@ public class SessionController {
 		
 		sesInfo.put("userId", session.getAttribute("id").toString());
 		
-		res.getWriter().write( new ObjectMapper().writeValueAsString(sesInfo) );
+		res.getWriter().write( new ObjectMapper().writeValueAsString(sesInfo));
 	}
 }

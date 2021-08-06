@@ -73,6 +73,11 @@ public class ServeletJSONHelper {
 				break;
 			}
 			
+			case "/Project1/api/getsession": {
+				SessionController.getSession(req, res);
+				break;
+			}
+			
 			
 			case "/Project1/api/logout": {
 				LogoutController.logout(req,res);

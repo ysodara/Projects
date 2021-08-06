@@ -3,11 +3,34 @@
 <head>
 <link href="../css/bootstrap.css" rel="stylesheet"/>
 <meta charset="ISO-8859-1">
+<link href="../css/bootstrap.css" rel="stylesheet"/>
+<link href="../css/site.css" rel="stylesheet"/>
 <title>Submit Reimbursement</title>
 </head>
-<body class="container">       
+<body class="container">   
+<div class="navbar navbar-inverse navbar-fixed-top">      
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                	<li><a class="" href="http://localhost:8080/Project1/home">Home</a></li>
+                    <li><a class="" href="../../resources/html/submitForm.html">Add New Reimbursement</a></li>
+                    <li><a class="" href="../../resources/html/edit.html">Edit Account</a></li>
+                    
+                </ul>
+                 <ul class="nav navbar-nav navbar-right" style="padding-right: 30px;">
+			        <li><a class="logout" href="#" onclick="logout(event)">Log Out</a></li>
+      			</ul>
+            </div> 
+    </div>        
         <h1>Submit a Reimbursement</h1>
-	<form class="form-horizontal" id='submitReimburstment' method='post' action='signup'>
+	<form class="form-horizontal" id='submitReimburstment' method='post'>
 
 
 			  <div class="form-group">
@@ -41,5 +64,6 @@
 		</form>
 		
 		<script src='../js/submit.js'></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 </body>
 </html>

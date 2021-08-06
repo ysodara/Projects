@@ -1,8 +1,28 @@
 
-window.onload = function() {
-  selectListEmployees();
+
+window.onload = function(e) {
+  retrieveSesstion(e);
 };
 
+async function retrieveSesstion(e){
+	e.preventDefault();
+	try{
+		let req = await fetch ('http://localhost:8080/Project1/api/getsession', {
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json'
+				
+			},
+		});
+		var res = await req.json();
+		selectListEmployees();
+			
+	}catch (e){
+		location.reload();
+		return
+	}
+	
+}
 async function selectListEmployees(){
 let res = await fetch('http://localhost:8080/Project1/api/manager/allemployees');
 	let data = await res.json();
@@ -28,7 +48,7 @@ function populateRequest(data){
     $("#allEmployees").empty();
 
 	$("#pending").append($('<h2>All Pending Requests of All Employees</h2>'));
-	
+	$("#specificEmployeeH2").empty();
     $('#header').append($('<th>Amount</th>'));
     $('#header').append($('<th>Description</th>'));
     $('#header').append($('<th>Status</th>'));
@@ -40,7 +60,7 @@ function populateRequest(data){
 	for (rbObj of data) {
 		let date = rbObj.submitted.month + ` ` +rbObj.submitted.dayOfMonth +`, ` + rbObj.submitted.year;
         $('#ADTable').append($('<tr><td>'+ rbObj.amount +'</td><td>' + rbObj.description + '</td><td>' 
-        + rbObj.status.reimBStatus + '</td><td>' + rbObj.submittedBy.firstName + rbObj.submittedBy.lastName 
+        + rbObj.status.reimBStatus + '</td><td>' + rbObj.submittedBy.firstName + ' ' + rbObj.submittedBy.lastName 
         + '</td><td>'+ date + '</td><td>' + rbObj.type.reimBType 
         + '</td><td>' + '<button type="button" onclick="return approve(' + rbObj.reimbId + ')">Approve</button>'
         + '</td><td>' + '<button type="button" onclick="return deny(event,' + rbObj.reimbId + ')">Deny</button>' + '</td></tr>'));                               
@@ -62,7 +82,7 @@ function populateResolvedRequest(data){
     $("#headerResolved").empty();
     $("#allEmployees").empty();
     
-    
+    $("#specificEmployeeH2").empty();
 	$("#resolved").append($('<h2>All Resolved Requests of All Employees</h2>'));
 	
     $('#headerResolved').append($('<th>Amount</th>'));
@@ -76,7 +96,7 @@ function populateResolvedRequest(data){
 	for (rbObj of data) {
 		let date = rbObj.submitted.month + ` ` +rbObj.submitted.dayOfMonth +`, ` + rbObj.submitted.year;
         $('#Resolved').append($('<tr><td>'+ rbObj.amount +'</td><td>' + rbObj.description + '</td><td>' 
-        + rbObj.status.reimBStatus + '</td><td>' + rbObj.submittedBy.firstName + rbObj.submittedBy.lastName 
+        + rbObj.status.reimBStatus + '</td><td>' + rbObj.submittedBy.firstName + ' ' + rbObj.submittedBy.lastName 
         + '</td><td>'+ date + '</td><td>' + rbObj.type.reimBType + '</td></tr>'));                               
     }
 
@@ -159,7 +179,7 @@ function populateAllEmoloyee(data){
     $("#allEmployees").empty();
     $("#headerEmployees").empty();
     
-    
+    $("#specificEmployeeH2").empty();
 	$("#allEmployees").append($('<h2>All Employees</h2>'));
 	
     $('#headerEmployees').append($('<th>First Name</th>'));
@@ -179,10 +199,12 @@ function populateAllEmoloyee(data){
 
 
 function populateAllEmoloyeeSelectList(data){
+	var i = 1 ;
 	$('#employee').empty();
 	for (user of data) {
 		
-        $('#employee').append($('<option value="'+ user.id +'">'+ user.firstName +' ' +user.lastName + '</option>' ));                               
+        $('#employee').append($('<option value="'+ user.id +'">'+ i +'. '+ user.firstName +' ' +user.lastName + '</option>' ));    
+        i++;                           
     }
 
 }
@@ -193,6 +215,7 @@ async function view(e){
 	e.preventDefault();
 	let select = document.getElementById('employee');
 	let employeeId = select.options[select.selectedIndex].value;
+	let username = select.options[select.selectedIndex].text;
 	
 	
 	let user ={
@@ -215,13 +238,72 @@ async function view(e){
 		console.log('Username or password was incorrect.')
 		return
 	}
-	console.log(res);	
+	populateRBEmployee(res, username);
 }
 
+function populateRBEmployee(data, name){
+	console.log(name);
+	if (data != null) {
+		$("td").empty();
+	    $("tr").empty();
+	    $("#specificEmployeeH2").empty();
+	    $("#pending").empty();
+	    $("#rowHeaderRB").empty();
+	    $("#allEmployees").empty();
+	    
+	    
+		$("#specificEmployeeH2").append($('<h2>'+ data[0].submittedBy.firstName +' ' + data[0].submittedBy.lastName+' Reimbursements</h2>'));
+		
+	    $('#rowHeaderRB').append($('<th>Amount</th>'));
+	    $('#rowHeaderRB').append($('<th>Description</th>'));
+	    $('#rowHeaderRB').append($('<th>Status</th>'));
+	    $('#rowHeaderRB').append($('<th>Submit By</th>'));
+	    $('#rowHeaderRB').append($('<th>Submitted On</th>'));
+	    $('#rowHeaderRB').append($('<th>Type</th>'));
+		
+	
+		for (rbObj of data) {
+			let date = rbObj.submitted.month + ` ` +rbObj.submitted.dayOfMonth +`, ` + rbObj.submitted.year;
+	        $('#specificEmployeeRBTable').append($('<tr><td>'+ rbObj.amount +'</td><td>' + rbObj.description + '</td><td>' 
+	        + rbObj.status.reimBStatus + '</td><td>' + rbObj.submittedBy.firstName + ' ' + rbObj.submittedBy.lastName 
+	        + '</td><td>'+ date + '</td><td>' + rbObj.type.reimBType + '</td></tr>'));                               
+	    }
+    } else {
+	$("td").empty();
+    $("tr").empty();
+    
+    $("#pending").empty();
+    $("#rowHeaderRB").empty();
+    $("#allEmployees").empty();
+	$("#specificEmployeeH2").append($('<h2>'+name +' dose not have any requests</h2>'));
+	
+	}
+}
+
+function showForm(e){
+	
+	var formid = document.getElementById('allemployees');
+	if (formid.style.display == "none"){
+		formid.style.display = "block";
+	}
+}
 
 async function logout(e){
-	let res = await fetch('http://localhost:8080/Project1/api/logout');
-	location.href='http://localhost:8080/Project1/home';
-	location.reload();
+	location.href='http://localhost:8080/Project1/logout';
+	e.preventDefault();
+	try{
+		let req = await fetch ('http://localhost:8080/Project1/api/logout', {
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json'
+				
+			},
+		});
+		var res = await req.json();		
+	}catch (e){
+		location.href='http://localhost:8080/Project1/logout';
+		return
+	}
+	location.href='http://localhost:8080/Project1/logout';
 }
 

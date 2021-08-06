@@ -76,6 +76,26 @@ async function signup(e){
 	location.reload();
 	
 }
+function showregister(e){
+	var loginformid = document.getElementById('loginDiv');
+	var registerformid = document.getElementById('signupDiv');
+	
+	if (registerformid.style.display == "none"){
+		registerformid.style.display = "block";
+		loginformid.style.display = "none";
+	}
+}
+function showlogin(e){
+	
+	var loginformid = document.getElementById('loginDiv');
+	var registerformid = document.getElementById('signupDiv');
+	
+	if (loginformid.style.display == "none"){
+		loginformid.style.display = "block";
+		registerformid.style.display = "none";
+	}
+	
+}
 
 
 

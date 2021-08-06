@@ -3,11 +3,35 @@
 <head>
 <meta charset="ISO-8859-1">
 <link href="resources/css/bootstrap.css" rel="stylesheet"/>
-
-<link href="resources/css/Style.css" rel="stylesheet"/>
+<link href="resources/css/site.css" rel="stylesheet"/>
 <title>Manager</title>
 </head>
-<body class="container">
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">      
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                	<li><a class="" href="http://localhost:8080/Project1/home">Home</a></li>
+                    <li><a class="" href="#" onclick="retrievePendingRequest(event)">Pending Requests</a></li>
+                    <li><a class="" href="#" onclick="retrieveResolvedRequest(event)">Resolved Requests</a></li>
+                    <li><a class="" href="#" onclick="retrieveAllEmployee(event)">All Employees</a></li>
+                    <li><a class="" href="#" onclick="showForm(event)">Specific Employee Reimbursement</a></li>
+                    
+                </ul>
+                 <ul class="nav navbar-nav navbar-right" style="padding-right: 30px;">
+			        <li><a class="logout" href="resources/html/logout.html" onclick="logout(event)">Log Out</a></li>
+      			</ul>
+            </div> 
+    </div>
+ <div class="container"> 
 <div id="pending"></div>
 <table class="table table-hover" id="ADTable">
 		<tr id="header">
@@ -32,14 +56,17 @@
     
 </table>
 
-	<button onclick="retrievePendingRequest(event)">Retrieve Pending Request</button>
-	<button onclick="retrieveResolvedRequest(event)">Retrieve Resolved Request</button>
-<button onclick="retrieveAllEmployee(event)">All Employees</button>
-	<button onclick="logout(event)">logout</button>
+<div id="specificEmployeeH2">
+</div>
 
-<br><br><br><br><br><br>
+<table class="table table-hover" id ="specificEmployeeRBTable">
+		<tr id="rowHeaderRB">
+        </tr>
+    
+</table>
 
-	<form class="form-horizontal" id='allemployees' method='post' action='l'>
+
+	<form class="form-horizontal" id='allemployees' method='post' action='l' style="display:none;">
 			  <div class="form-group">
 			    <label for="username" class="col-sm-2 control-label" style="margin-right:18px;">Name</label>
 				      <select id="employee" class="form-control">
@@ -52,8 +79,10 @@
 			    </div>
 			  </div>
 		</form>
-
+</div>  
 		<script src='resources/js/manager.js'></script>
+		<script src='resources/js/bootstrap.js'></script>
+		<script src='resources/js/jquery-3.4.1.js'></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 </body>
 </html>

@@ -5265,3 +5265,8 @@ org.hibernate.HibernateException: Use of DefaultSchemaNameResolver requires Dial
 2021-08-06 11:39:04 WARN  Logging:26 - User tried logging in that does not exist
 2021-08-06 11:39:04 WARN  Logging:31 - User tried to login with invalid credentials
 2021-08-06 11:39:04 INFO  Logging:52 - New user has registered
+2021-08-06 13:43:09 INFO  Logging:54 - User already exists with current email
+2021-08-06 13:43:09 INFO  Logging:36 - User was logged in
+2021-08-06 13:43:09 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 13:43:09 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 13:43:09 INFO  Logging:52 - New user has registered

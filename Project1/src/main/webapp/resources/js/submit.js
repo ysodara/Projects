@@ -1,6 +1,6 @@
-let form = document.getElementById('submitReimburstment').addEventListener('submit', submit);
+let form11 = document.getElementById('submitReimburstment').addEventListener('submit', submitRB);
 
-async function submit(e){
+async function submitRB(e){
 	e.preventDefault();
 	
 	let amount = document.getElementById('amount').value;
@@ -37,7 +37,19 @@ async function submit(e){
 }
 
 async function logout(e){
-	let res = await fetch('http://localhost:8080/Project1/api/logout');
-	location.href='http://localhost:8080/Project1/home';
-	location.reload();
+	e.preventDefault();
+	try{
+		let req = await fetch ('http://localhost:8080/Project1/api/logout', {
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json'
+				
+			},
+		});
+		var res = await req.json();		
+	}catch (e){
+		location.href='http://localhost:8080/Project1/logout';
+		return
+	}
+	location.href='http://localhost:8080/Project1/logout';
 }

@@ -1,13 +1,26 @@
-window.onload = function() {
-  reload ();
+window.onload = function(e) {
+  retrieveSesstion(e);
 };
-function reload (){
-	var c=true;
-	if(c){
-	location.reload();
-	c=false;
+
+async function retrieveSesstion(e){
+	e.preventDefault();
+	try{
+		let req = await fetch ('http://localhost:8080/Project1/api/getsession', {
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json'
+				
+			},
+		});
+		var res = await req.json();
+			
+	}catch (e){
+		location.reload();
+		return
 	}
+	
 }
+
 async function retrievePendingRequest(e){
 	e.preventDefault();
 
@@ -129,10 +142,98 @@ function populateAccountInfo(data){
 
 }
 
+let form5 = document.getElementById('updateAccount').addEventListener('submit', update);
+
+async function update(e){
+	e.preventDefault();
+	
+	let firstName = document.getElementById('firstName').value;
+	let lastName = document.getElementById('lastName').value;
+	let username = document.getElementById('username').value;
+	let password = document.getElementById('password').value;
+	let email = document.getElementById('email').value;
+	
+	let update ={
+		firstName,
+		lastName,
+		username,
+		password,
+		email
+	}
+	console.log(update);
+	try{
+		let req = await fetch ('http://localhost:8080/Project1/api/employee/updateaccount', {
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json'
+				
+			},
+			body: JSON.stringify(update)
+		});
+		var res = await req.json();
+		
+		
+	}catch (e){
+		console.log('Username or password was incorrect.')
+		return
+	}
+	console.log(res);
+	location.href='http://localhost:8080/Project1/home';
+}
+
+let form11 = document.getElementById('submitReimburstment').addEventListener('submit', submitRB);
+
+async function submitRB(e){
+	e.preventDefault();
+	
+	let amount = document.getElementById('amount').value;
+	let description= document.getElementById('description').value;
+	let select = document.getElementById('type');
+	let typeId = select.options[select.selectedIndex].value;
+	
+	let rbRequest ={
+		amount,
+		description,
+		typeId
+	}
+	console.log(rbRequest);
+	try{
+		let req = await fetch ('http://localhost:8080/Project1/api/employee/submit', {
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json'
+				
+			},
+			body: JSON.stringify(rbRequest)
+		});
+		var res = await req.json();
+		
+		
+	}catch (e){
+		console.log('Username or password was incorrect.')
+		return
+	}
+	console.log(res);
+	location.href='http://localhost:8080/Project1/home';
+	
+
+}
 
 async function logout(e){
 	e.preventDefault();
-	let res = await fetch('http://localhost:8080/Project1/api/logout');
+	try{
+		let req = await fetch ('http://localhost:8080/Project1/api/logout', {
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json'
+				
+			},
+		});
+		var res = await req.json();		
+	}catch (e){
+		location.href='http://localhost:8080/Project1/logout';
+		return
+	}
 	location.href='http://localhost:8080/Project1/logout';
 }
 
