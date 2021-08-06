@@ -64,7 +64,7 @@ public class EmployeeService {
 	public User updateAccountInfo (int id, String email, String firstName, String LastName, String password, String username) {
 		User currentUser = uDao.selectUser(id);
 		
-		if (email==null | email == "") {
+		if (email == null | email == "") {
 			
 		} else {
 			currentUser.setEmail(email);

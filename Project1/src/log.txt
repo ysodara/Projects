@@ -5183,3 +5183,85 @@ org.hibernate.HibernateException: Use of DefaultSchemaNameResolver requires Dial
 2021-08-05 13:58:15 DEBUG SessionFactoryRegistry:74 - Registering SessionFactory: 38adf6d7-de1d-46c8-8c97-57a5a2e9a4d7 (<unnamed>)
 2021-08-05 13:58:15 DEBUG SessionFactoryRegistry:81 - Not binding SessionFactory to JNDI, no JNDI name configured
 2021-08-05 13:58:15 DEBUG StatisticsInitiator:101 - Statistics initialized [enabled=false]
+2021-08-06 11:07:38 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:07:38 INFO  Logging:36 - User was logged in
+2021-08-06 11:07:38 INFO  Logging:52 - New user has registered
+2021-08-06 11:15:36 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:15:36 INFO  Logging:36 - User was logged in
+2021-08-06 11:15:36 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:15:36 INFO  Logging:52 - New user has registered
+2021-08-06 11:16:30 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:16:30 INFO  Logging:36 - User was logged in
+2021-08-06 11:16:30 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:16:30 INFO  Logging:52 - New user has registered
+2021-08-06 11:19:10 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:19:10 INFO  Logging:36 - User was logged in
+2021-08-06 11:19:10 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:19:10 INFO  Logging:52 - New user has registered
+2021-08-06 11:20:16 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:20:16 INFO  Logging:36 - User was logged in
+2021-08-06 11:20:16 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:20:16 INFO  Logging:52 - New user has registered
+2021-08-06 11:21:00 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:21:00 INFO  Logging:36 - User was logged in
+2021-08-06 11:21:00 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:21:00 INFO  Logging:52 - New user has registered
+2021-08-06 11:21:18 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:21:18 INFO  Logging:36 - User was logged in
+2021-08-06 11:21:18 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:21:18 INFO  Logging:52 - New user has registered
+2021-08-06 11:23:14 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:23:14 INFO  Logging:36 - User was logged in
+2021-08-06 11:23:14 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:23:14 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:23:14 INFO  Logging:52 - New user has registered
+2021-08-06 11:30:50 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:30:50 INFO  Logging:36 - User was logged in
+2021-08-06 11:30:50 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:30:50 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:30:50 INFO  Logging:52 - New user has registered
+2021-08-06 11:30:56 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:30:56 INFO  Logging:36 - User was logged in
+2021-08-06 11:30:56 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:30:56 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:30:56 INFO  Logging:52 - New user has registered
+2021-08-06 11:31:03 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:31:03 INFO  Logging:36 - User was logged in
+2021-08-06 11:31:03 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:31:03 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:31:03 INFO  Logging:52 - New user has registered
+2021-08-06 11:33:00 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:33:00 INFO  Logging:36 - User was logged in
+2021-08-06 11:33:00 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:33:00 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:33:00 INFO  Logging:52 - New user has registered
+2021-08-06 11:33:14 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:33:14 INFO  Logging:36 - User was logged in
+2021-08-06 11:33:14 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:33:14 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:33:14 INFO  Logging:52 - New user has registered
+2021-08-06 11:33:22 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:33:22 INFO  Logging:36 - User was logged in
+2021-08-06 11:33:22 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:33:22 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:33:22 INFO  Logging:52 - New user has registered
+2021-08-06 11:34:58 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:34:58 INFO  Logging:36 - User was logged in
+2021-08-06 11:34:58 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:34:58 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:34:58 INFO  Logging:52 - New user has registered
+2021-08-06 11:36:42 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:36:42 INFO  Logging:36 - User was logged in
+2021-08-06 11:36:42 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:36:42 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:36:42 INFO  Logging:52 - New user has registered
+2021-08-06 11:37:39 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:37:39 INFO  Logging:36 - User was logged in
+2021-08-06 11:37:39 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:37:39 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:37:39 INFO  Logging:52 - New user has registered
+2021-08-06 11:39:04 INFO  Logging:54 - User already exists with current email
+2021-08-06 11:39:04 INFO  Logging:36 - User was logged in
+2021-08-06 11:39:04 WARN  Logging:26 - User tried logging in that does not exist
+2021-08-06 11:39:04 WARN  Logging:31 - User tried to login with invalid credentials
+2021-08-06 11:39:04 INFO  Logging:52 - New user has registered

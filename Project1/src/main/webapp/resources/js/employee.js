@@ -1,4 +1,13 @@
-
+window.onload = function() {
+  reload ();
+};
+function reload (){
+	var c=true;
+	if(c){
+	location.reload();
+	c=false;
+	}
+}
 async function retrievePendingRequest(e){
 	e.preventDefault();
 
@@ -122,9 +131,9 @@ function populateAccountInfo(data){
 
 
 async function logout(e){
+	e.preventDefault();
 	let res = await fetch('http://localhost:8080/Project1/api/logout');
-	location.href='http://localhost:8080/Project1/home';
-	location.reload();
+	location.href='http://localhost:8080/Project1/logout';
 }
 
 

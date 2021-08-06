@@ -49,7 +49,34 @@ public class UserServiceTest {
 		
 		assertEquals(user1.getId(), loggedIn.getId());
 	}
+	
+	@Test
+	public void testLoginUserNotExists() throws UserDoesNotExistException, InvalidCredentialsException {
+		UserRole role = new UserRole(1,"EMPLOYEE");
+		User user1 = new User(1,"firstName", "lastName", "email", "username", "password", role);
+		User not = new User(0,"firstName", "lastName", "email","username", "passwords", role);
+		
+		when(uDao.selectUserByUsername(anyString())).thenReturn(not);
+		
+		User loggedIn = uServ.signIn("username", "password");
+		
+		assertTrue(loggedIn == null);
+	}
 
+	
+	@Test
+	public void testLoginWrongPassword() throws UserDoesNotExistException, InvalidCredentialsException {
+		UserRole role = new UserRole(1,"EMPLOYEE");
+		User user1 = new User(1,"firstName", "lastName", "email", "username", "password", role);
+		User not = new User(1,"firstName", "lastName", "email","username", "passwords", role);
+		
+		when(uDao.selectUserByUsername(anyString())).thenReturn(not);
+		
+		User loggedIn = uServ.signIn("username", "password");
+		
+		assertTrue(loggedIn == null);
+	}
+	
 	@Test
 	public void testValidSignup() throws UserDoesNotExistException, InvalidCredentialsException, UserNameAlreadyExistsException, SQLException {
 		UserRole role = new UserRole(1,"EMPLOYEE");

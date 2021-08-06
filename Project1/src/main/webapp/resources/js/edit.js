@@ -36,3 +36,15 @@ async function update(e){
 	console.log(res);
 	location.href='http://localhost:8080/Project1/home';
 }
+
+async function logout(e){
+	e.preventDefault();
+	
+	let res = await fetch('http://localhost:8080/Project1/api/logout');
+	
+	location.href='http://localhost:8080/Project1/home';
+	location.reload();
+	location.reload();
+	location.reload();
+	
+}

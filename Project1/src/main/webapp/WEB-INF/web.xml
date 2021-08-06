@@ -33,10 +33,16 @@
   <servlet-class>com.example.servlets.MasterJSONServlet</servlet-class>
   <load-on-startup>1</load-on-startup>
   </servlet>
+ 
   
   <servlet-mapping>
   <servlet-name>MainServlet</servlet-name>
   <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+  <servlet-name>MainServlet</servlet-name>
+  <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>

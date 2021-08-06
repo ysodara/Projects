@@ -21,8 +21,8 @@ public class RequestViewController {
 	
 	}
 
-	public static String fetchSignupPage(HttpServletRequest req) {
-		return "resources/html/signup.html";
+	public static String fetchLogoutPage(HttpServletRequest req) {
+		return "resources/html/logout.html";
 	}
 
 	public static String fetchEmployeePage(HttpServletRequest req) {

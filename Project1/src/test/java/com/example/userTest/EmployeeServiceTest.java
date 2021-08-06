@@ -141,6 +141,38 @@ public class EmployeeServiceTest {
 	}
 	
 	@Test
+	public void testNullUpdateAccount() {
+		UserRole role = new UserRole(1,"EMPLOYEE");
+		User user = new User(1,"firstName", "lastName", "email", "username", "password", role);
+		User not = new User(1,"", "", "", "", "", role);
+		
+		String firstNameToUpdate = "John";
+		
+		when(uDao.selectUser(user.getId())).thenReturn(not);
+		
+		User updatedUser = eServ.updateAccountInfo(1,null, null, null, null, null);
+		
+		assertEquals(user.getId(), updatedUser.getId());
+		
+	}
+	
+	@Test
+	public void testEmptyUpdateAccount() {
+		UserRole role = new UserRole(1,"EMPLOYEE");
+		User user = new User(1,"firstName", "lastName", "email", "username", "password", role);
+		User not = new User(1,"", "", "", "", "", role);
+		
+		String firstNameToUpdate = "John";
+		
+		when(uDao.selectUser(user.getId())).thenReturn(not);
+		
+		User updatedUser = eServ.updateAccountInfo(1,"", "",  "", "", "");
+		
+		assertEquals(user.getId(), updatedUser.getId());
+		
+	}
+	
+	@Test
 	public void testDefaultConstructor () {
 		EmployeeService dEServ = new EmployeeService();
 		assertFalse(dEServ == eServ);

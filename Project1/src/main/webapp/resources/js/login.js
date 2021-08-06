@@ -20,6 +20,7 @@ async function login(e){
 			},
 			body: JSON.stringify(user)
 		});
+		
 		var res = await req.json();
 		
 		
@@ -75,6 +76,8 @@ async function signup(e){
 	location.reload();
 	
 }
+
+
 
 
 
