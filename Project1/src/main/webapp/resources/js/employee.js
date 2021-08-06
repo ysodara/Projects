@@ -1,7 +1,4 @@
 
-
-
-
 async function retrievePendingRequest(e){
 	e.preventDefault();
 
@@ -28,19 +25,23 @@ async function retrievePendingRequest(e){
 }
 
 function populatePendingRequest(data){
-	$("#columnP").empty();
-    $("#rowP").empty();
-    $("#pending").empty();
-    $('#header').empty();
-    $('#ADTable').empty();
+	
+   
+    $("tr").empty();
+    $("td").empty();
+    $("#headerP").empty();
 
+	$("#resolved").empty();
+	$("#pending").empty();
+	$("#accountInfoHeader").empty();
 	$("#pending").append($('<h2>All Pending Requests</h2>'));
 	
-    $('#header').append($('<th>Amount</th>'));
-    $('#header').append($('<th>Description</th>'));
-    $('#header').append($('<th>Status</th>'));
-    $('#header').append($('<th>Submitted On</th>'));
-    $('#header').append($('<th>Type</th>'));
+	
+    $('#headerP').append($('<th>Amount</th>'));
+    $('#headerP').append($('<th>Description</th>'));
+    $('#headerP').append($('<th>Status</th>'));
+    $('#headerP').append($('<th>Submitted On</th>'));
+    $('#headerP').append($('<th>Type</th>'));
 	
 
 	for (rbObj of data) {
@@ -62,13 +63,14 @@ async function retrieveResolvedRequest(){
 
 
 function populateResolvedRequest(data){
-	$("#column").empty();
-    $("#row").empty();
+	$("tr").empty();
+    $("td").empty();
     $("#resolved").empty();
 	$('#headerR').empty();
-	$('#RTable').empty();
 	$("#resolved").append($('<h2>All Resolved Requests</h2>'));
 	
+	$("#accountInfoHeader").empty();
+	$("#pending").empty();
     $('#headerR').append($('<th>Amount</th>'));
     $('#headerR').append($('<th>Description</th>'));
     $('#headerR').append($('<th>Status</th>'));
@@ -90,7 +92,32 @@ async function viewAccountInfo(){
 	let res = await fetch('http://localhost:8080/Project1/api/employee/viewaccount');
 	let data = await res.json();
 	console.log(data);
-	//populateRequest(data);
+	populateAccountInfo(data);
+}
+
+function populateAccountInfo(data){
+	$("tr").empty();
+    $("td").empty();
+    
+    $("#pending").empty();
+    $("#accountInfoHeader").empty();
+	$('#tableHeaderInfo').empty();
+	$("#resolved").empty();
+	
+	$("#accountInfoHeader").append($('<h2>Account Information</h2>'));
+	
+	
+	
+    $('#tableHeaderInfo').append($('<th>First Name</th>'));
+    $('#tableHeaderInfo').append($('<th>Last Name</th>'));
+    $('#tableHeaderInfo').append($('<th>Username</th>'));
+    $('#tableHeaderInfo').append($('<th>Email On</th>'));
+    $('#tableHeaderInfo').append($('<th>Password</th>'));
+	
+	$('#accountInfoTable').append($('<tr id="row"><td id="column">'+ data.firstName +'</td><td id="column">' + data.lastName + '</td><td id="column">' 
+        + data.username + '</td><td id="column">'+ data.email + '</td><td id="column">' + data.password + '</td></tr>'));                               
+   
+
 }
 
 

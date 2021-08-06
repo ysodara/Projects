@@ -11,8 +11,8 @@
 	<property name="hibernate.connection.url">jdbc:postgresql://java-uta-sy.cbl5il2pac4q.us-east-2.rds.amazonaws.com:5432/expensehibernate</property>
 	<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 	<property name="hibernate.connection.dialect">org.hibernate.PostgreSQLDialect</property>
-	<property name="hibernate.show_sql">true</property>
-	<property name="hibernate.format_sql">true</property>	
+	<property name="hibernate.show_sql">false</property>
+	<property name="hibernate.format_sql">false</property>	
 	
 	
 	<!-- Connection Pool, a method of speeding up DB calls, Hibernate will open up the number of connections specified in the tag below 
@@ -23,7 +23,7 @@
 	-->
 
 	<property name="hibernate.connection.pool_size">10</property>
-	<property name="hibernate.hbm2ddl.auto">validate</property>
+	<property name="hibernate.hbm2ddl.auto">update</property>
 	
 	 
 	<mapping class="com.example.models.ReimBStatus"/>

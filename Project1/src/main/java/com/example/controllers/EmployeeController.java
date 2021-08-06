@@ -142,7 +142,9 @@ public class EmployeeController {
 			req.getSession().setAttribute("id", employeeId);
 			res.setStatus(HttpServletResponse.SC_OK);
 			User u = eServ.viewAccountInfo(employeeId);
-			res.getWriter().write(new ObjectMapper().writeValueAsString(u));
+			
+			User resU = new User(u.getFirstName(), u.getLastName(), u.getUsername(), u.getEmail(), u.getPassword());
+			res.getWriter().write(new ObjectMapper().writeValueAsString(resU));
 			Session ses = HibernateUtil.getSession();
 			ses.clear();
 		}

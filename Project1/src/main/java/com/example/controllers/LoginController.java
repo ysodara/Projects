@@ -51,20 +51,13 @@ public class LoginController {
 				req.getSession().setAttribute("id", u.getId());
 				res.setStatus(HttpServletResponse.SC_OK);
 				req.getSession().setAttribute("role", u.getUserRole().getUserRole());
-				if (u.getUserRole().getUserRoleId() == 1) {
-					Session ses = HibernateUtil.getSession();
-					ses.clear();
-					//res.getWriter().write(new ObjectMapper().writeValueAsString("employee"));
-					
-				} else if (u.getUserRole().getUserRoleId() == 2){
-					Session ses = HibernateUtil.getSession();
-					ses.clear();
-					//res.getWriter().write(new ObjectMapper().writeValueAsString("manager"));
-					
-				}
-			//res.getWriter().write(new ObjectMapper().writeValueAsString(u));
+				res.getWriter().write(new ObjectMapper().writeValueAsString(u));
+				Session ses = HibernateUtil.getSession();
+				ses.clear();
 			}
 			else {
+				res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+				res.getWriter().println("Username or password incorrect from Login Controller");
 				System.out.println("User not signed in.");
 			}
 		}

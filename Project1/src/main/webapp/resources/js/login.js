@@ -20,10 +20,11 @@ async function login(e){
 			},
 			body: JSON.stringify(user)
 		});
-		//var res = await req.json();
+		var res = await req.json();
 		
 		
 	}catch (e){
+		alert('Username or password was incorrect.');
 		console.log('Username or password was incorrect.')
 		return
 	}

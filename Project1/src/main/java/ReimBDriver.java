@@ -122,7 +122,7 @@ public class ReimBDriver {
 //		System.out.println(r4.toString());
 //		System.out.println("-------------------------------------------------------------");
 		
-		//Session ses = HibernateUtil.getSession();
+		Session ses = HibernateUtil.getSession();
 		
 	}
 
