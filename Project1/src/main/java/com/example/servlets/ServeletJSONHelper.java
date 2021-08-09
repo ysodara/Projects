@@ -15,7 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class ServeletJSONHelper {
 
 	public static void process(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException, ServletException{
-		System.out.println("In the ServletJSONHelper with URI: " + req.getRequestURI());
+		
 		String uri = req.getRequestURI();
 		switch (uri) {
 			case "/Project1/api/login": {

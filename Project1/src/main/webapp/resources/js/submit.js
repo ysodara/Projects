@@ -1,3 +1,29 @@
+window.onload = function(e) {
+  retrieveSesstion(e);
+};
+
+async function retrieveSesstion(e){
+	e.preventDefault();
+	
+	try{
+		let req = await fetch ('http://localhost:8080/Project1/api/getsession', {
+			method: 'POST',
+			headers: {
+				'Content-Type' : 'application/json'
+				
+			},
+		});
+		var res = await req.json();
+			
+	}
+	
+	catch (e){
+		location.href='http://localhost:8080/Project1/home';
+		return
+	}
+	
+}
+
 let form11 = document.getElementById('submitReimburstment').addEventListener('submit', submitRB);
 
 async function submitRB(e){
@@ -13,7 +39,7 @@ async function submitRB(e){
 		description,
 		typeId
 	}
-	console.log(rbRequest);
+	
 	try{
 		let req = await fetch ('http://localhost:8080/Project1/api/employee/submit', {
 			method: 'POST',
@@ -27,10 +53,8 @@ async function submitRB(e){
 		
 		
 	}catch (e){
-		console.log('Username or password was incorrect.')
 		return
 	}
-	console.log(res);
 	location.href='http://localhost:8080/Project1/home';
 	
 
@@ -48,8 +72,8 @@ async function logout(e){
 		});
 		var res = await req.json();		
 	}catch (e){
-		location.href='http://localhost:8080/Project1/logout';
+		location.href='http://localhost:8080/Project1/home';
 		return
 	}
-	location.href='http://localhost:8080/Project1/logout';
+	location.href='http://localhost:8080/Project1/home';
 }

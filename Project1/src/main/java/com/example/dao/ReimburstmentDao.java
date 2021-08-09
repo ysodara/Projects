@@ -60,7 +60,7 @@ public class ReimburstmentDao {
 	public List<Reimburstment> selectResovledTickets(int employeeId) {
 		Session ses = HibernateUtil.getSession();
 		//If you are using ses.get(), you must use the id
-		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 1 and employee_submit_fk=" + employeeId, Reimburstment.class).list();
+		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where (status_fk = 1 or status_fk = 3) and employee_submit_fk=" + employeeId, Reimburstment.class).list();
 		if(reimbList.size() == 0) {
 			return null;
 		}
@@ -70,7 +70,7 @@ public class ReimburstmentDao {
 	public List<Reimburstment> selectEmployeeResovledTickets() {
 		Session ses = HibernateUtil.getSession();
 		//If you are using ses.get(), you must use the id
-		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 1", Reimburstment.class).list();
+		List<Reimburstment> reimbList = ses.createQuery("from Reimburstment where status_fk = 1 or status_fk = 3", Reimburstment.class).list();
 		if(reimbList.size() == 0) {
 			return null;
 		}

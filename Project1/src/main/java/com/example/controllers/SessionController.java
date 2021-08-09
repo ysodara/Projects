@@ -25,7 +25,7 @@ public class SessionController {
 			return;
 		}
 		
-		System.out.println(session.getAttribute("id"));
+		//System.out.println(session.getAttribute("id"));
 		
 		sesInfo.put("userId", session.getAttribute("id").toString());
 		

@@ -36,7 +36,7 @@ public class LoginController {
 			buffer.append(System.lineSeparator());
 		}
 		String data = buffer.toString();
-		System.out.println(data);
+		
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode parsedObj = mapper.readTree(data);
 		

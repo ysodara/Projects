@@ -10,7 +10,6 @@ async function login(e){
 		username,
 		password
 	}
-	console.log(user);
 	try{
 		let req = await fetch ('http://localhost:8080/Project1/api/login', {
 			method: 'POST',
@@ -53,7 +52,7 @@ async function signup(e){
 		email,
 		password
 	}
-	console.log(user);
+	
 	try{
 		let req = await fetch ('http://localhost:8080/Project1/api/signup', {
 			method: 'POST',

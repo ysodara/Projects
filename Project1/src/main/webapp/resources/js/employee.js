@@ -14,7 +14,10 @@ async function retrieveSesstion(e){
 		});
 		var res = await req.json();
 			
-	}catch (e){
+	}
+	
+	catch (e){
+		console.log('Catch Block');
 		location.reload();
 		return
 	}
@@ -37,17 +40,17 @@ async function retrievePendingRequest(e){
 		
 		
 	}catch (e){
-		console.log('Username or password was incorrect.')
+		console.log('Bad Request')
 		return
 	}
 	populatePendingRequest(res);
-	console.log(res);
+	
 	
 	
 }
 
 function populatePendingRequest(data){
-	
+	if (data != null) {
    
     $("tr").empty();
     $("td").empty();
@@ -72,6 +75,9 @@ function populatePendingRequest(data){
         $('#ADTable').append($('<tr id="rowP"><td id="columnP">'+ rbObj.amount +'</td><td id="columnP">' + rbObj.description + '</td><td id="columnP">' 
         + rbObj.status.reimBStatus + '</td><td id="columnP">'+ date + '</td><td id="columnP">' + rbObj.type.reimBType  + '</td></tr>'));                               
     }
+    }else {
+	alert('No Pending Reimbursement Request is found on the database!');
+}
 
 }
 
@@ -79,12 +85,13 @@ function populatePendingRequest(data){
 async function retrieveResolvedRequest(){
 	let res = await fetch('http://localhost:8080/Project1/api/employee/viewresolved');
 	let data = await res.json();
-	console.log(data);
+	
 	populateResolvedRequest(data);
 }
 
 
 function populateResolvedRequest(data){
+	if (data != null) {
 	$("tr").empty();
     $("td").empty();
     $("#resolved").empty();
@@ -106,6 +113,10 @@ function populateResolvedRequest(data){
         $('#RTable').append($('<tr id="row"><td id="column">'+ rbObj.amount +'</td><td id="column">' + rbObj.description + '</td><td id="column">' 
         + rbObj.status.reimBStatus + '</td><td id="column">'+ date + '</td><td id="column">' + rbObj.type.reimBType  + '</td></tr>'));                               
     }
+    }
+    else {
+	alert('No Resolved Reimbursement Request is found on the database!');
+}
 
 }
 
@@ -113,11 +124,12 @@ function populateResolvedRequest(data){
 async function viewAccountInfo(){
 	let res = await fetch('http://localhost:8080/Project1/api/employee/viewaccount');
 	let data = await res.json();
-	console.log(data);
+	
 	populateAccountInfo(data);
 }
 
 function populateAccountInfo(data){
+	if (data != null) {
 	$("tr").empty();
     $("td").empty();
     
@@ -139,47 +151,14 @@ function populateAccountInfo(data){
 	$('#accountInfoTable').append($('<tr id="row"><td id="column">'+ data.firstName +'</td><td id="column">' + data.lastName + '</td><td id="column">' 
         + data.username + '</td><td id="column">'+ data.email + '</td><td id="column">' + data.password + '</td></tr>'));                               
    
+   }
+   else {
+	alert('No Pending Reimbursement Request is found on the database!');
+}
 
 }
 
-let form5 = document.getElementById('updateAccount').addEventListener('submit', update);
 
-async function update(e){
-	e.preventDefault();
-	
-	let firstName = document.getElementById('firstName').value;
-	let lastName = document.getElementById('lastName').value;
-	let username = document.getElementById('username').value;
-	let password = document.getElementById('password').value;
-	let email = document.getElementById('email').value;
-	
-	let update ={
-		firstName,
-		lastName,
-		username,
-		password,
-		email
-	}
-	console.log(update);
-	try{
-		let req = await fetch ('http://localhost:8080/Project1/api/employee/updateaccount', {
-			method: 'POST',
-			headers: {
-				'Content-Type' : 'application/json'
-				
-			},
-			body: JSON.stringify(update)
-		});
-		var res = await req.json();
-		
-		
-	}catch (e){
-		console.log('Username or password was incorrect.')
-		return
-	}
-	console.log(res);
-	location.href='http://localhost:8080/Project1/home';
-}
 
 let form11 = document.getElementById('submitReimburstment').addEventListener('submit', submitRB);
 
@@ -196,7 +175,7 @@ async function submitRB(e){
 		description,
 		typeId
 	}
-	console.log(rbRequest);
+	
 	try{
 		let req = await fetch ('http://localhost:8080/Project1/api/employee/submit', {
 			method: 'POST',
@@ -210,10 +189,10 @@ async function submitRB(e){
 		
 		
 	}catch (e){
-		console.log('Username or password was incorrect.')
+		console.log('Bad Request')
 		return
 	}
-	console.log(res);
+	
 	location.href='http://localhost:8080/Project1/home';
 	
 
@@ -231,10 +210,10 @@ async function logout(e){
 		});
 		var res = await req.json();		
 	}catch (e){
-		location.href='http://localhost:8080/Project1/logout';
+		location.href='http://localhost:8080/Project1/home';
 		return
 	}
-	location.href='http://localhost:8080/Project1/logout';
+	location.href='http://localhost:8080/Project1/home';
 }
 
 

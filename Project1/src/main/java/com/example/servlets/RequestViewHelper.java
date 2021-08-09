@@ -31,22 +31,23 @@ public class RequestViewHelper {
 				} 
 				
 				
-				System.out.println("URL AFTER FROM API: " + req.getRequestURI());
+				
 						
 				if (userId == 0) {
-					System.out.println(userId);
-					System.out.println("Role is empty.");
+					
 					return RequestViewController.fetchHomePage(req);
-				} else {
-					System.out.println(userId);
-					System.out.println(role);
+				} else if (!role.equals(null)){
+					
+					
 					if (role.equals("EMPLOYEE")) {
 						return RequestViewController.fetchEmployeePage(req);
 					}
 					else if (role.equals("MANAGER")) {
 						return RequestViewController.fetchManagerPage(req);
 					}
-					else {return RequestViewController.fetchHomePage(req);}
+					else {
+						return RequestViewController.fetchHomePage(req);
+					}
 				}
 			}
 			

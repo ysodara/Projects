@@ -26,7 +26,7 @@ async function retrieveSesstion(e){
 async function selectListEmployees(){
 let res = await fetch('http://localhost:8080/Project1/api/manager/allemployees');
 	let data = await res.json();
-	console.log(data);
+	
 	populateAllEmoloyeeSelectList(data);
 }
 
@@ -35,18 +35,19 @@ let container = document.getElementById('ADTable');
 async function retrievePendingRequest(){
 	let res = await fetch('http://localhost:8080/Project1/api/manager/pending');
 	let data = await res.json();
-	console.log(data);
+	
 	populateRequest(data);
 }
 
 function populateRequest(data){
+	if (data != null) {
 	$("td").empty();
     $("tr").empty();
     $("#pending").empty();
     $("#resolved").empty();
     $("#header").empty();
     $("#allEmployees").empty();
-
+	$("h2").empty();
 	$("#pending").append($('<h2>All Pending Requests of All Employees</h2>'));
 	$("#specificEmployeeH2").empty();
     $('#header').append($('<th>Amount</th>'));
@@ -65,23 +66,29 @@ function populateRequest(data){
         + '</td><td>' + '<button type="button" onclick="return approve(' + rbObj.reimbId + ')">Approve</button>'
         + '</td><td>' + '<button type="button" onclick="return deny(event,' + rbObj.reimbId + ')">Deny</button>' + '</td></tr>'));                               
     }
+    }
+    else {
+	alert('No Pending Reimbursement Request is found on the database!');
+	location.reload();
+}
 
 }
 async function retrieveResolvedRequest(){
 	let res = await fetch('http://localhost:8080/Project1/api/manager/resolved');
 	let data = await res.json();
-	console.log(data);
+	
 	populateResolvedRequest(data);
 }
 
 function populateResolvedRequest(data){
+	if (data != null) {
 	$("td").empty();
     $("tr").empty();
     $("#resolved").empty();
     $("#pending").empty();
     $("#headerResolved").empty();
     $("#allEmployees").empty();
-    
+    $("h2").empty();
     $("#specificEmployeeH2").empty();
 	$("#resolved").append($('<h2>All Resolved Requests of All Employees</h2>'));
 	
@@ -99,6 +106,11 @@ function populateResolvedRequest(data){
         + rbObj.status.reimBStatus + '</td><td>' + rbObj.submittedBy.firstName + ' ' + rbObj.submittedBy.lastName 
         + '</td><td>'+ date + '</td><td>' + rbObj.type.reimBType + '</td></tr>'));                               
     }
+    }
+    else {
+	alert('No Resolved Reimbursement Request is found on the database!');
+	location.reload();
+}
 
 }
 
@@ -115,7 +127,7 @@ async function approve(rbidIn){
 		option,
 		rbId
 	}
-	console.log(update);
+	
 	
 		let req = await fetch ('http://localhost:8080/Project1/api/manager/approve', {
 			method: 'POST',
@@ -126,7 +138,8 @@ async function approve(rbidIn){
 			body: JSON.stringify(update)
 		});
 		var res = await req.json();
-		console.log(res);
+		
+		retrievePendingRequest();
 }
 
 async function deny(e, rbidIn){
@@ -140,7 +153,7 @@ async function deny(e, rbidIn){
 		option,
 		rbId
 	}
-	console.log(update);
+	
 	try{
 		let req = await fetch ('http://localhost:8080/Project1/api/manager/approve', {
 			method: 'POST',
@@ -154,17 +167,18 @@ async function deny(e, rbidIn){
 		
 		
 	}catch (e){
-		console.log('Username or password was incorrect.')
+		console.log('Bad Request')
 		return
 	}
-	console.log(res);	
+	
+	retrievePendingRequest();
 }
 
 
 async function retrieveAllEmployee(){
 	let res = await fetch('http://localhost:8080/Project1/api/manager/allemployees');
 	let data = await res.json();
-	console.log(data);
+	
 	populateAllEmoloyee(data);
 }
 
@@ -172,13 +186,14 @@ async function retrieveAllEmployee(){
 
 
 function populateAllEmoloyee(data){
+	if (data != null) {
 	$("tr").empty();
     $("td").empty();
     $("#resolved").empty();
     $("#pending").empty();
     $("#allEmployees").empty();
     $("#headerEmployees").empty();
-    
+    $("h2").empty();
     $("#specificEmployeeH2").empty();
 	$("#allEmployees").append($('<h2>All Employees</h2>'));
 	
@@ -194,11 +209,15 @@ function populateAllEmoloyee(data){
         $('#employees').append($('<tr><td>'+ eObj.firstName +'</td><td>' + eObj.lastName + '</td><td>' 
         + eObj.email + '</td><td>' + eObj.username + '</td></tr>'));                               
     }
+    }else {
+	alert('No employee is found on the database!');
+}
 
 }
 
 
 function populateAllEmoloyeeSelectList(data){
+	if (data != null) {
 	var i = 1 ;
 	$('#employee').empty();
 	for (user of data) {
@@ -206,6 +225,9 @@ function populateAllEmoloyeeSelectList(data){
         $('#employee').append($('<option value="'+ user.id +'">'+ i +'. '+ user.firstName +' ' +user.lastName + '</option>' ));    
         i++;                           
     }
+    }else {
+	alert('No employee is found on the database!');
+}
 
 }
 
@@ -221,7 +243,7 @@ async function view(e){
 	let user ={
 		employeeId
 	}
-	console.log(user);
+	
 	try{
 		let req = await fetch ('http://localhost:8080/Project1/api/manager/specific', {
 			method: 'POST',
@@ -235,14 +257,14 @@ async function view(e){
 		
 		
 	}catch (e){
-		console.log('Username or password was incorrect.')
+		console.log('Bad Request')
 		return
 	}
 	populateRBEmployee(res, username);
 }
 
 function populateRBEmployee(data, name){
-	console.log(name);
+	
 	if (data != null) {
 		$("td").empty();
 	    $("tr").empty();
@@ -250,7 +272,7 @@ function populateRBEmployee(data, name){
 	    $("#pending").empty();
 	    $("#rowHeaderRB").empty();
 	    $("#allEmployees").empty();
-	    
+	    $("#resolved").empty();
 	    
 		$("#specificEmployeeH2").append($('<h2>'+ data[0].submittedBy.firstName +' ' + data[0].submittedBy.lastName+' Reimbursements</h2>'));
 		
@@ -272,10 +294,13 @@ function populateRBEmployee(data, name){
 	$("td").empty();
     $("tr").empty();
     
+    
+    $("#resolved").empty();
     $("#pending").empty();
     $("#rowHeaderRB").empty();
     $("#allEmployees").empty();
-	$("#specificEmployeeH2").append($('<h2>'+name +' dose not have any requests</h2>'));
+    
+	$("#specificEmployeeH2None").append($('<h2>'+name +' dose not have any requests</h2>'));
 	
 	}
 }
@@ -289,7 +314,7 @@ function showForm(e){
 }
 
 async function logout(e){
-	location.href='http://localhost:8080/Project1/logout';
+	
 	e.preventDefault();
 	try{
 		let req = await fetch ('http://localhost:8080/Project1/api/logout', {
@@ -301,9 +326,9 @@ async function logout(e){
 		});
 		var res = await req.json();		
 	}catch (e){
-		location.href='http://localhost:8080/Project1/logout';
+		location.href='http://localhost:8080/Project1/home';
 		return
 	}
-	location.href='http://localhost:8080/Project1/logout';
+	location.href='http://localhost:8080/Project1/home';
 }
 
