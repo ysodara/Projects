@@ -1,16 +1,16 @@
-# Employee Reimbursment System (ERS)
-## Project Description
+#Employee Reimbursment System (ERS)
+##Project Description
 A reimbursement system for a company's employees. Employees can request reimbursements and managers can approve or deny those requests.
 
-## Technologies Used
-- Java
-- JDBC
-- Jackson Data-bind
-- JUnit
-- Log4J
-- Maven
-- Tomcat
-- PostgreSQL
+##Technologies Used
+-Java
+-JDBC
+-Jackson Data-bind
+-JUnit
+-Log4J
+-Maven
+-Tomcat
+-PostgreSQL
 - Angular
 ## Features
 List of features ready and TODOs for future development
