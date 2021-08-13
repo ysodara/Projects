@@ -32,7 +32,7 @@ To-do list:
 
 - Users can upload an image of their receipt when submitting reimbursement requests.
 - The application will send an email to employees letting them know that they have been registered as a new user, giving them their temporary password.
-- 
+
 ## Getting Started
 
 git clone https://github.com/ysodara/Projects.git
